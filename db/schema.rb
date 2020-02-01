@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 2020_02_01_225147) do
   create_table "bookings", force: :cascade do |t|
     t.bigint "course_id", null: false
     t.bigint "room_id", null: false
-    t.string "status", default: "f"
+    t.boolean "status", default: false
     t.datetime "time_slot"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(version: 2020_02_01_225147) do
   create_table "enrollments", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "course_id", null: false
-    t.string "status", default: "f"
+    t.boolean "status", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["course_id"], name: "index_enrollments_on_course_id"
