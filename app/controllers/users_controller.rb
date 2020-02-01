@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
     before_action :find_user, only: [:edit, :update]
-    
+    before_action :authenticate!, only: [:edit, :update]
+
     def new
         @user = User.new 
     end
@@ -44,4 +45,11 @@ class UsersController < ApplicationController
         @user = User.find params[:id]
     end
 
+    def authenticate!
+        find_user
+        unless session[:user_id] === @user.id
+            flash[:danger] = "You can't edit other user's profile"
+            redirect_to root_path
+        end
+    end
 end
