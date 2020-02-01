@@ -1,2 +1,7 @@
+<% if current_user.present? === false %>
 <h1>Please sign up</h1>
 <%= render 'form' %>
+
+<% else %>
+<h1>Made account / Logged in / Root Page</h1>
+<% end %>

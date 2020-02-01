@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-    before_action :find_user, only: [:edit, :update]
-    before_action :authenticate!, only: [:edit, :update]
+    before_action :authenticate!, except: [:new, :create]
+    before_action :find_user, only: [:edit, :update, :destroy, :password_edit, :password_update]
 
     def new
         @user = User.new 
@@ -34,11 +34,8 @@ class UsersController < ApplicationController
 
     def user_params
         params.require(:user).permit(
-            :first_name,
-            :last_name,
-            :email.
-            :password,
-            )
+            :first_name, :last_name, :email, :password, :password_confirmation
+        )
     end
 
     def find_user
