@@ -6,6 +6,9 @@ class Room < ApplicationRecord
 
     has_many :searches, dependent: :destroy
     has_many :features, through: :searches
+    has_many :bookings, dependent: :destroy
+    has_many :courses, dependent: :nullify
+    has_many :booker, through: :booking, source: :course
 
     validates :name, presence: true#, uniqueness: { scope: :user_id }
     validates :address, presence: true
