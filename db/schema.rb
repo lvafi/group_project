@@ -15,6 +15,18 @@ ActiveRecord::Schema.define(version: 2020_02_01_221348) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "courses", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.float "price"
+    t.datetime "range_start_date"
+    t.datetime "range_end_date"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_courses_on_user_id"
+  end
+
   create_table "availabilities", force: :cascade do |t|
     t.datetime "start"
     t.datetime "end"
@@ -62,6 +74,7 @@ ActiveRecord::Schema.define(version: 2020_02_01_221348) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "courses", "users"
   add_foreign_key "availabilities", "rooms"
   add_foreign_key "rooms", "users"
   add_foreign_key "searches", "features"
