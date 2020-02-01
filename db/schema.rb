@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_01_215334) do
+ActiveRecord::Schema.define(version: 2020_02_01_221348) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(version: 2020_02_01_215334) do
     t.boolean "is_available", default: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "room_id", null: false
+    t.index ["room_id"], name: "index_availabilities_on_room_id"
   end
 
   create_table "features", force: :cascade do |t|
@@ -37,11 +39,17 @@ ActiveRecord::Schema.define(version: 2020_02_01_215334) do
     t.text "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_rooms_on_user_id"
   end
 
   create_table "searches", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "feature_id", null: false
+    t.bigint "room_id", null: false
+    t.index ["feature_id"], name: "index_searches_on_feature_id"
+    t.index ["room_id"], name: "index_searches_on_room_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -54,4 +62,8 @@ ActiveRecord::Schema.define(version: 2020_02_01_215334) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "availabilities", "rooms"
+  add_foreign_key "rooms", "users"
+  add_foreign_key "searches", "features"
+  add_foreign_key "searches", "rooms"
 end
