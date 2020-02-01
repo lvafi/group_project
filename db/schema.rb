@@ -24,7 +24,8 @@ ActiveRecord::Schema.define(version: 2020_02_01_034819) do
     t.boolean "is_admin?"
     t.string "email"
     t.string "password_digest"
-
+  end
+  
   create_table "rooms", force: :cascade do |t|
     t.string "name"
     t.string "address"
