@@ -1,13 +1,14 @@
 class Room < ApplicationRecord
-    # belongs_to :user
+    belongs_to :user
     
-    # has_many :bookings, dependent: :destroy
-    # ha_many :courses, dependent: :nullify
+    has_many :bookings, dependent: :destroy
+    ha_many :courses, dependent: :nullify
 
     has_many :searches, dependent: :destroy
     has_many :features, through: :searches
+    has_many :availabilities, dependent: :destroy
 
-    validates :name, presence: true#, uniqueness: { scope: :user_id }
+    validates :name, presence: true, uniqueness: { scope: :user_id }
     validates :address, presence: true
     validates :price, presence: true, numericality: { greater_than: 0 
     validates :capacity, presence: true, numericality: { greater_than: 0 }
