@@ -9,7 +9,7 @@ class UsersController < ApplicationController
         @user = User.new user_params
         if @user.save
             flash[:success] = "User created"
-            sessions[:user_id] = @user.id
+            session[:user_id] = @user.id
             redirect_to root_path
         else
             flash[:alert] = @user.errors.full_messages.join(", ")
