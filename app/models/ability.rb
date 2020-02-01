@@ -11,7 +11,6 @@ class Ability
 
     if user.is_admin?
       can :manage, :all
-      can :crud, School
     end
 
     can(:crud, Course) do |course|
