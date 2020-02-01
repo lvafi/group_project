@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   root "users#new"
 
   resource :courses
-
+  
   resources :rooms do
     resources :bookings
   end
