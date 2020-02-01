@@ -10,11 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< Updated upstream
 ActiveRecord::Schema.define(version: 2020_02_01_034819) do
+=======
+ActiveRecord::Schema.define(version: 0) do
+>>>>>>> Stashed changes
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+<<<<<<< Updated upstream
   create_table "features", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -48,4 +53,6 @@ ActiveRecord::Schema.define(version: 2020_02_01_034819) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+=======
+>>>>>>> Stashed changes
 end
