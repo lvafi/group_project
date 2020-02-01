@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resource :session, only: [:new, :create, :destroy]
   root "users#new"
 
-  resource :courses, only: [:new, :create, :edit, :update]
+  resource :courses
   
   resources :rooms do
     resources :bookings
