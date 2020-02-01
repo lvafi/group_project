@@ -25,6 +25,9 @@ ActiveRecord::Schema.define(version: 2020_02_01_034819) do
     t.string "email"
     t.string "password_digest"
 
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
   create_table "rooms", force: :cascade do |t|
     t.string "name"
     t.string "address"
