@@ -10,24 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_01_034819) do
+ActiveRecord::Schema.define(version: 2020_02_01_214244) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "features", force: :cascade do |t|
-    t.string "name"
+  create_table "courses", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.float "price"
+    t.datetime "range_start_date"
+    t.datetime "range_end_date"
+    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_courses_on_user_id"
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.boolean "is_admin?"
-    t.string "email"
-    t.string "password_digest"
-
+  create_table "features", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -38,7 +39,6 @@ ActiveRecord::Schema.define(version: 2020_02_01_034819) do
     t.integer "capacity"
     t.float "price"
     t.text "description"
-
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -48,4 +48,15 @@ ActiveRecord::Schema.define(version: 2020_02_01_034819) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "users", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.boolean "is_admin?"
+    t.string "email"
+    t.string "password_digest"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  add_foreign_key "courses", "users"
 end
