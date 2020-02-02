@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-    before_action :find_user, only: [:edit, :update]
-    before_action :authenticate!, only: [:edit, :update]
+    before_action :authenticate!, except: [:new, :create]
+    before_action :find_user, only: [:edit, :update, :destroy, :edit_password, :update_password]
 
     def new
         @user = User.new 
@@ -30,15 +30,29 @@ class UsersController < ApplicationController
         end
     end
 
+    def update_password
+        if @user&.authenticate params[:current_password]
+            user_params[:password] = params[:id][:new_password] 
+            if @user.update user_params
+                redirect_to root_path
+            else
+                render :edit_password
+            end
+        else
+            render :edit_password, alert: "Current password has to be matched"
+        end
+    end
+    
+    def edit_password
+        find_params
+    end
+
     private
 
     def user_params
         params.require(:user).permit(
-            :first_name,
-            :last_name,
-            :email.
-            :password,
-            )
+            :first_name, :last_name, :email, :password, :password_confirmation
+        )
     end
 
     def find_user
@@ -48,8 +62,9 @@ class UsersController < ApplicationController
     def authenticate!
         find_user
         unless session[:user_id] === @user.id
-            flash[:danger] = "You can't edit other user's profile"
+            flash[:danger] = "Not Authorized"
             redirect_to root_path
         end
     end
+
 end
