@@ -36,7 +36,7 @@ class RoomsController < ApplicationController
             @feature = Feature.find_or_initialize_by(name: params[:feature])
             @rooms = @feature.rooms.order(created_at: :desc)
         else
-            @rooms = Rooms.all.order(created_at: :desc)
+            @rooms = Room.all.order(created_at: :desc)
         end
     end
 
