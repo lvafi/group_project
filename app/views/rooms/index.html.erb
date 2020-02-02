@@ -5,7 +5,7 @@
     <% if @feature.present? %>
     <h6>
         Showing rooms with:
-        <span>
+        <span class="ui label">
             <%= @feature.name %>
         </span>
     </h6>
@@ -13,8 +13,9 @@
     <% elsif @location.present? %>
     <h6>
         Showing rooms in:
-        <span>
-            <%= @location %>
+</a>
+        <span class="ui label">
+            <%= location %>
         </span>
     </h6>
     <% end %>

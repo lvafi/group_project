@@ -1,7 +1,13 @@
 <div class="container">
     <div class="room_book">
         <div class="room_info">
-            <h5 class="new user"><%= @room.name %></h5>
+            <h5 class="new user"><%= @room.name %>
+              <%= link_to(rooms_path(location: @room.location)) do %>
+                    <div class="ui blue basic label">
+                      <i class="map marker alternate icon"></i><%= @room.location %>
+                    </div>
+                <% end %>
+            </h5>
 
             <% if can? :crud, @room %>
             <div class="post-buttons">
@@ -11,22 +17,22 @@
             <% end %>
 
             <p>Address: <%= @room.address %></p>
-            <p>Location: <%= link_to(
-                    @room.location, rooms_path(location: @room.location)
-                ) %></p>
-            <p><%= @room.capacity %></p>
-            <p>$<%= @room.price %></p>
-            <p><%= @room.description %></p>
+            <p>Capacity: <%= @room.capacity %></p>
+            <p>Rental Price: $<%= @room.price %>/hr</p>
+            <p>Description:<br><%= @room.description %></p>
 
             <% if @room.features.count > 0 %>
-            <h6>Features</h6>
-            <ul>
-                <% @room.features.each do |feature| %>
-                <li><%= link_to(
-                    feature.name, rooms_path(feature: feature.name)
-                ) %></li>
-                <% end %>
-            </ul>
+              <ul>
+                  <% @room.features.each do |feature| %>
+                  <li><%= link_to(rooms_path(feature: feature.name)) do %>
+                      <div class="ui blue basic label">
+                        <%= feature.name %> 
+                        <i class="<%= featureCheck feature.name %> icon"></i>
+                      </div>
+                      <%end%>
+                  </li>
+                  <% end %>
+              </ul>
             <% end %>
         </div>
         <div class="booking_room">
