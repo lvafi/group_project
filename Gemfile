@@ -21,6 +21,9 @@ gem 'jbuilder', '~> 2.7'
 gem 'bcrypt', '~> 3.1.7'
 gem 'semantic-ui-sass'
 
+# Semantic UI
+gem 'semantic-ui-sass'
+
 # Authorization
 gem 'cancancan'
 
