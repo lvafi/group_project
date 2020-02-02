@@ -24,10 +24,6 @@ gem 'semantic-ui-sass'
 # Authorization
 gem 'cancancan'
 
-# Model Diagram
-gem 'rails-erd'
-gem 'erd'
-
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
