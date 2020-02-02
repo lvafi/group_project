@@ -21,13 +21,13 @@ class Ability
       room.user == user 
     end
 
-    can(:crud, Booking) do |booking|
-      booking.user == user || booking.room.user == user
-    end
+    # can(:crud, Booking) do |booking|
+    #   booking.user == user || booking.room.user == user
+    # end
 
-    can(crud, Enrollment) do |enrollment|
-      enrollment.user == user || enrollment.course.user == user
-    end
+    # can(crud, Enrollment) do |enrollment|
+    #   enrollment.user == user || enrollment.course.user == user
+    # end
 
   end
 end

@@ -3,6 +3,7 @@ class BookingsController < ApplicationController
     before_action :find_booking, only: [:update, :destroy]
     before_action :authenticate!, only: [:update, :destroy]
 
+
     def create
         @booking = Booking.new booking_params
         if @booking.save
@@ -35,7 +36,7 @@ class BookingsController < ApplicationController
 
     def authenticate!
         find_booking
-        unless can?(:crud @booking)
+        unless can?(:crud, @booking)
             flash[:danger] = "Not Authorized"
             redirect_to room_path(@booking.room)
         end

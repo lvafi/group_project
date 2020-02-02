@@ -1,54 +1,78 @@
-<h5><%= @room.name %></h5>
-<p>Address: <%= @room.address %></p>
-<p>Location: <%= link_to(
+<div class="container">
+    <div class="room_book">
+        <div class="room_info">
+            <h5 class="new user"><%= @room.name %></h5>
+
+            <% if can? :crud, @room %>
+            <div class="post-buttons">
+                <%= link_to('Edit Room', edit_room_path(@room.id), class: "sign_up_button") %>
+                <%= link_to("Delete Room", room_path(@room), method: :delete, data:{confirm:'Are you sure?'}, class: "sign_up_button") %>
+            </div>
+            <% end %>
+
+            <p>Address: <%= @room.address %></p>
+            <p>Location: <%= link_to(
                     @room.location, rooms_path(location: @room.location)
                 ) %></p>
-<p><%= @room.capacity %></p>
-<p>$<%= @room.price %></p>
-<p><%= @room.description %></p>
+            <p><%= @room.capacity %></p>
+            <p>$<%= @room.price %></p>
+            <p><%= @room.description %></p>
 
-<% if @room.features.count > 0 %>
-    <h6>Features</h6>
-    <ul>
-        <% @room.features.each do |feature| %>
-        <li><%= link_to(
+            <% if @room.features.count > 0 %>
+            <h6>Features</h6>
+            <ul>
+                <% @room.features.each do |feature| %>
+                <li><%= link_to(
                     feature.name, rooms_path(feature: feature.name)
                 ) %></li>
-        <% end %>
-    </ul>
-<% end %>
+                <% end %>
+            </ul>
+            <% end %>
+        </div>
+        <div class="booking_room">
+            <h1 class="new user">Add Booking Form</user>
+        </div>
+    </div>
+    <hr>
 
-<hr>
+    <h5>Availabilities</h5>
+    <%= month_calendar events: @bookings do |date, bookings| %>
+    <span class="day_number"><%= use_day_only date %></span class="day_number">
+    <% bookings.each do |booking| %>
+    <div>
+        <%= booking.title %>
+    </div>
+    <% end %>
+    <% end %>
 
-<h5>Availabilities</h5>
 
-<ul class="availability-list">
-    <% @availabilities.each do |availability| %>
+    <ul class="availability-list">
+        <% @availabilities.each do |availability| %>
 
-    <li>
-        Start: <%= availability.start %> <br>
-        End: <%= availability.end %>
+        <li>
+            Start: <%= availability.start %> <br>
+            End: <%= availability.end %>
 
-        <% if can? :crud, review %>
+
             <small>
                 <%= link_to(
                     "Edit",
-                    edit_review_path(@product, review)
-                ) %> | 
+                    edit_booking_path(@room, booking)
+                ) %> |
             </small>
             <small>
                 <%= link_to(
                     "Delete",
-                    review_path(@product, review),
+                    booking_path(@room, booking),
                     method: :delete,
                     data: {
                         confirm: "Are you sure?"
                     }
-                ) %> | 
+                ) %> |
             </small>
-        <% end %>
-        
-    </li>
-    <% end %>
 
-</ul>
+        </li>
+        <% end %>
+
+    </ul>
+</div>

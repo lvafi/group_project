@@ -31,6 +31,7 @@ gem 'cancancan'
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'factory_bot_rails'
 gem 'faker'
+gem "simple_calendar", "~> 2.0"
 
 
 group :development, :test do
