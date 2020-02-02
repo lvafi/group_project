@@ -8,7 +8,7 @@ class BookingsController < ApplicationController
         @booking = Booking.new booking_params
         @booking.room = @room
         if @booking.save
-            flash[:success] = "Booked successfully"
+            flash[:success] = "Congratulations! You have booked a room."
             redirect_to room_path(@room)
         else
             puts @booking.errors.full_messages 
@@ -23,6 +23,7 @@ class BookingsController < ApplicationController
 
     def destroy
         @booking.destroy
+        flash[:notice] = 'The booking has been deleted.'
         redirect_to room_path(@booking.room)
     end
 

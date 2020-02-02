@@ -8,7 +8,7 @@ class ReviewsController < ApplicationController
     @review.user = current_user
 
     if @review.save
-      flash[:success] = "Review created successfully"
+      flash[:success] = "Thanks for your review!"
       redirect_to @course
     else
       @reviews = @course.reviews.order(created_at: :desc)
@@ -21,7 +21,7 @@ class ReviewsController < ApplicationController
     @review = Review.find params[:id]
     if can? :crud, @review
         @review.destroy
-        flash[:alert] = "Review deleted successfully"
+        flash[:alert] = "The review has been deleted."
         redirect_to @review.course
     end
   end
