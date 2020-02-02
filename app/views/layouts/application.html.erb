@@ -4,31 +4,33 @@
     <title>GroupProject</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= javascript_pack_tag 'application' %>
   </head>
 
   <body>
     <nav>
-      <div>
-        <% if user_signed_in? %>
-          Hello <strong><%#= current_user.full_name %></strong>,
-          <%= link_to "Logout", session_path, method: :delete,
-            data: {confirm: "Are you sure you want to log out?"} %>
-            |
-        <% else %>
-          <%= link_to "Login", new_session_path %> |
-          <%= link_to "Sign Up", new_user_path %>
-        <% end %>
-      </div>
-      <div>
-        <%=link_to('Home', root_path)%>
-        |
-        <%=link_to('new course', new_course_path)%>
-        |
-        <%=link_to('link 2', root_path)%>
-      </div>
+      <div class="the-menu  ui top fixed menu">
+        <div class="item"><img src="/logo.svg"></div>
+        <div class="login-menu item">
+          <% if user_signed_in? %>
+            Hello <strong><%= current_user.full_name %></strong>,
+            <%= link_to "Logout", session_path, method: :delete,
+              data: {confirm: "Are you sure you want to log out?"} %>
+              
+          <% else %>
+            <%= link_to "Login", new_session_path %> 
+            <%= link_to "Sign Up", new_user_path %>
+          <% end %>
+        
+          <%=link_to('Home', root_path)%>
+          
+          <%=link_to('link 1', root_path)%>
+          
+          <%=link_to('link 2', root_path)%>
+        </div>
+       </div> 
       </nav>
     <%= yield %>
   </body>

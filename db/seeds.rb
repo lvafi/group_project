@@ -87,14 +87,32 @@ features = Feature.all
         updated_at: random_date,
         user: users.sample
     )
-
     if r.valid?
         r.features = features.shuffle.slice(0..rand(features.count))
     end
 
 end
 
+courses = Course.all
+rooms = Room.all
+
+10.times do
+    random_date = Faker::Date.backward(days:365 * 5)
+    start_date = Faker::Date.between(from: 1.month.ago, to: 1.month.from_now)
+    end_date = Faker::Date.between(from: start_date, to: 1.month.from_now)
+    b = Booking.create(
+        course_id: courses.map{|course|course.id}.sample,
+        room_id: rooms.map{|room|room.id}.sample,
+        status: false,
+        start_time: start_date,
+        end_time: end_date,
+        created_at: random_date,
+        updated_at: random_date
+    )
+end
+
 puts Cowsay.say("Generated #{User.count} users.", :frogs)
 puts Cowsay.say("Generated #{Course.count} questions", :frogs)
 puts Cowsay.say("Generated #{Room.count} rooms.", :tux)
-puts Cowsay.say("Generated #{Feature.count} features.", :dragon)
+puts Cowsay.say("Generated #{Feature.count} features", :dragon)
+puts Cowsay.say("Generated #{Booking.count} bookings", :tux)
