@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   resources :courses do
     resources :enrollments
+    resources :bookings
   end
 
 end
