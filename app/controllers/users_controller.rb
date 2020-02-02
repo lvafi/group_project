@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-    before_action :authenticate!, except: [:new, :create]
-    before_action :find_user, only: [:edit, :update, :destroy, :password_edit, :password_update]
+    before_action :authenticate_user!, except: [:new, :create]
+    before_action :find_user, only: [:edit, :update, :destroy, :password_edit, :password_update, :show]
 
     def new
         @user = User.new 
@@ -28,6 +28,9 @@ class UsersController < ApplicationController
         else
             render :edit
         end
+    end
+
+    def show
     end
 
     private
