@@ -1,3 +1,32 @@
 // Place all the styles related to the users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+.home-hero {
+   background-image :linear-gradient(to bottom, rgba(0, 0, 0, .35) 0%, rgba(0, 0, 0, .35) 100%), url("group_project_hero.jpg");
+   background-size: cover,cover;
+   background-position: center, center;
+   height: 85vh;
+   display: block;
+}
+.the-menu {
+  display: flex;
+  justify-content: flex-end;
+}
+.the-menu.ui.top.fixed.menu {
+  background-color: transparent;
+}
+
+.description-text-area{
+  background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 8px 15px 0 hsla(0,0%,48%,.1);
+    line-height: 2rem;
+    padding: 3rem 5rem;
+    position: absolute;
+    right: 10%;
+    top: 30%;
+    width: 55%;
+}
+.login-menu{
+  
+}

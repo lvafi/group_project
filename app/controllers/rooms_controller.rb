@@ -1,7 +1,7 @@
 class RoomsController < ApplicationController
-    # before_action :authenticate_user!, except: [:index, :show]
+    before_action :authenticate_user!, except: [:index, :show]
     before_action :find_room, only: [:edit,:update,:show, :destroy]
-    # before_action :authorize!, only: [:edit, :update, :destroy]
+    before_action :authorize!, only: [:edit, :update, :destroy]
 
     def new
         @room = Room.new
@@ -9,7 +9,11 @@ class RoomsController < ApplicationController
 
     def create
         @room = Room.new room_params
-        # @room.user = current_user
+        @room.user = current_user
+        @room.features = params[:features].map do |feature|
+            Feature.find_or_initialize_by(name: feature)
+        end
+
         if @room.save
             flash[:notice] = 'Room created successfully'
             redirect_to room_path(@room.id)
@@ -35,12 +39,19 @@ class RoomsController < ApplicationController
         if params[:feature]
             @feature = Feature.find_or_initialize_by(name: params[:feature])
             @rooms = @feature.rooms.order(created_at: :desc)
+        elsif params[:location]
+            @rooms = Room.all.filter { |room| room.location == params[:location] }
+            @location = params[:location]
         else
-            @rooms = Rooms.all.order(created_at: :desc)
+            @rooms = Room.all.order(created_at: :desc)
         end
     end
 
     def show
+        @availability = Availability.new
+        @availabilities = @room.availabilities.order(created_at: :desc)
+        @booking = Booking.new
+        @bookings = Booking.all.order(created_at: :desc)
     end
 
     def destroy
@@ -58,10 +69,13 @@ class RoomsController < ApplicationController
         params.require(:room).permit(:name, :address, :capacity, :price, :description, :features)
     end
 
-    # def authorize!
-    #     unless can?(:crud, @room)
-    #         redirect_to root_path, alert: 'Not Authorized'
-    #     end
-    # end
+    def new_params
+    end
+
+    def authorize!
+        unless can?(:crud, @room)
+            redirect_to root_path, alert: 'Not Authorized'
+        end
+    end
 
 end
