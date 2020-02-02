@@ -1,0 +1,54 @@
+<h5><%= @room.name %></h5>
+<p>Address: <%= @room.address %></p>
+<p>Location: <%= link_to(
+                    @room.location, rooms_path(location: @room.location)
+                ) %></p>
+<p><%= @room.capacity %></p>
+<p>$<%= @room.price %></p>
+<p><%= @room.description %></p>
+
+<% if @room.features.count > 0 %>
+    <h6>Features</h6>
+    <ul>
+        <% @room.features.each do |feature| %>
+        <li><%= link_to(
+                    feature.name, rooms_path(feature: feature.name)
+                ) %></li>
+        <% end %>
+    </ul>
+<% end %>
+
+<hr>
+
+<h5>Availabilities</h5>
+
+<ul class="availability-list">
+    <% @availabilities.each do |availability| %>
+
+    <li>
+        Start: <%= availability.start %> <br>
+        End: <%= availability.end %>
+
+        <% if can? :crud, review %>
+            <small>
+                <%= link_to(
+                    "Edit",
+                    edit_review_path(@product, review)
+                ) %> | 
+            </small>
+            <small>
+                <%= link_to(
+                    "Delete",
+                    review_path(@product, review),
+                    method: :delete,
+                    data: {
+                        confirm: "Are you sure?"
+                    }
+                ) %> | 
+            </small>
+        <% end %>
+        
+    </li>
+    <% end %>
+
+</ul>
