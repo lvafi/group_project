@@ -42,6 +42,8 @@ class RoomsController < ApplicationController
     end
 
     def show
+        @booking = Booking.new
+        @bookings = Booking.all.order(created_at: :desc)
     end
 
     def destroy

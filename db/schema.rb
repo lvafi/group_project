@@ -31,7 +31,8 @@ ActiveRecord::Schema.define(version: 2020_02_02_005528) do
     t.bigint "room_id", null: false
 
     t.boolean "status", default: false
-    t.datetime "time_slot"
+    t.datetime "start_time"
+    t.datetime "end_time"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["course_id"], name: "index_bookings_on_course_id"
