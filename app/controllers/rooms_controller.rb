@@ -50,6 +50,8 @@ class RoomsController < ApplicationController
     def show
         @availability = Availability.new
         @availabilities = @room.availabilities.order(created_at: :desc)
+        @booking = Booking.new
+        @bookings = Booking.all.order(created_at: :desc)
     end
 
     def destroy

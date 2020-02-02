@@ -10,6 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema.define(version: 2020_02_02_005528) do
 
   # These are extensions that must be enabled in order to support this database
@@ -28,8 +29,10 @@ ActiveRecord::Schema.define(version: 2020_02_02_005528) do
   create_table "bookings", force: :cascade do |t|
     t.bigint "course_id", null: false
     t.bigint "room_id", null: false
+
     t.boolean "status", default: false
-    t.datetime "time_slot"
+    t.datetime "start_time"
+    t.datetime "end_time"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["course_id"], name: "index_bookings_on_course_id"
@@ -51,7 +54,6 @@ ActiveRecord::Schema.define(version: 2020_02_02_005528) do
   create_table "enrollments", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "course_id", null: false
-    t.boolean "status", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["course_id"], name: "index_enrollments_on_course_id"
