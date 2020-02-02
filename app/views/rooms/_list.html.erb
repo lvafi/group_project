@@ -2,7 +2,10 @@
 
     <div>
         <h5><%= link_to(room.name, room_path(room.id)) %></h5>
-        <p><%= room.location %></p>
+        <p><%= link_to(
+                    room.location, rooms_path(location: room.location)
+                ) %>
+            </p>
         <p><%= room.capacity %></p>
 
         <% unless room.features.empty? %>
