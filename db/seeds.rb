@@ -61,6 +61,7 @@ puts Cowsay.say("Created #{users.count} users", :tux)
         updated_at: Faker::Date.backward(days:365 * 5),
         user_id: user.id
     )
+  
 end
  
 features_array = ["WiFi", "Free Parking", "Paid Parking", "Open Floor Plan", "Whiteboard", "ADA Accessible", "Audio/Visual Equipment", "Desks"]
@@ -111,8 +112,35 @@ rooms = Room.all
     )
 end
 
+#Enrollments to be generated manually via the user, not via seeding
+# 10.times do
+#     user = users.sample 
+#     random_date = Faker::Date.backward(days:365 * 5)
+#     e = Enrollment.create(
+#         course_id: courses.map{|course|course.id}.sample,
+#         user_id: user.id,
+#         created_at: random_date,
+#         updated_at: random_date
+#     )
+# end
+
+10.times do
+    random_date = Faker::Date.backward(days:365 * 5)
+    start_date = Faker::Date.between(from: 1.month.ago, to: 1.month.from_now)
+    end_date = Faker::Date.between(from: start_date, to: 1.month.from_now)
+    a = Availability.create(
+        room_id: rooms.map{|room|room.id}.sample,
+        start: start_date,
+        end: end_date,
+        created_at: random_date,
+        updated_at: random_date
+    )
+end
+
 puts Cowsay.say("Generated #{User.count} users.", :frogs)
 puts Cowsay.say("Generated #{Course.count} questions", :frogs)
 puts Cowsay.say("Generated #{Room.count} rooms.", :tux)
 puts Cowsay.say("Generated #{Feature.count} features", :dragon)
 puts Cowsay.say("Generated #{Booking.count} bookings", :tux)
+puts Cowsay.say("Enrollments #{Enrollment.count} enrollments", :frogs)
+puts Cowsay.say("Availabilities #{Availability.count} availabilities", :tux)
