@@ -3,6 +3,8 @@ class Course < ApplicationRecord
   #associations
   belongs_to :user
   has_many :bookings, dependent: :destroy
+  has_many :booked_rooms, through: :booking, source: :room
+  has_many :students, through: :enrollment, source: :user
 
   #validations
   validates(:title, presence: true, uniqueness: true, case_sensitive: false)
