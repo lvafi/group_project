@@ -1,6 +1,6 @@
 class CoursesController < ApplicationController
 
-    before_action :authenticate_user!, except: [:show, ;index]
+    before_action :authenticate_user!, except: [:show, :index]
     before_action :find_course, only: [:show, :edit, :udpate, :destory]
 
     before_save :capitalize_course_title
