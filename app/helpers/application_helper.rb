@@ -11,4 +11,17 @@ module ApplicationHelper
         return date.day
     end
 
+    def featureCheck name
+        if name == "WiFi"
+            "wifi"
+        elsif name == "ADA Accessible"
+            "wheelchair"
+        elsif name == "Free Parking"
+            "car"
+        elsif name == "Paid Parking"
+            "dollar sign"
+        else
+            ""
+        end
+    end
 end
