@@ -23,10 +23,6 @@ gem 'bcrypt', '~> 3.1.7'
 # Authorization
 gem 'cancancan'
 
-# Model Diagram
-gem 'rails-erd'
-gem 'erd'
-
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
