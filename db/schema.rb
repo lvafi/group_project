@@ -104,4 +104,5 @@ ActiveRecord::Schema.define(version: 2020_02_01_225147) do
   add_foreign_key "rooms", "users"
   add_foreign_key "searches", "features"
   add_foreign_key "searches", "rooms"
+
 end

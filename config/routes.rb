@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
 
+  root 'users#new'
+
   resources :users , only: [:new, :create, :edit, :update]
-
   resource :session, only: [:new, :create, :destroy]
-  root "users#new"
 
-  resource :courses, only: [:new, :create, :edit, :update]
+  resource :courses
   
   resources :rooms do
     resources :bookings
@@ -14,5 +14,4 @@ Rails.application.routes.draw do
   resources :courses do
     resources :enrollments
   end
-
 end
