@@ -1,3 +1,25 @@
+<h5><%= @room.name %></h5>
+<p>Address: <%= @room.address %></p>
+<p>Location: <%= link_to(
+                    @room.location, rooms_path(location: @room.location)
+                ) %></p>
+<p><%= @room.capacity %></p>
+<p>$<%= @room.price %></p>
+<p><%= @room.description %></p>
+
+<% if @room.features.count > 0 %>
+    <h6>Features</h6>
+    <ul>
+        <% @room.features.each do |feature| %>
+        <li><%= link_to(
+                    feature.name, rooms_path(feature: feature.name)
+                ) %></li>
+        <% end %>
+    </ul>
+<% end %>
+
+<br>
+
 <%= month_calendar events: @bookings do |date, bookings| %>
   <%= date %>
   <% bookings.each do |booking| %>
