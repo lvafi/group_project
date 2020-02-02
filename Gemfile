@@ -23,18 +23,12 @@ gem 'bcrypt', '~> 3.1.7'
 # Authorization
 gem 'cancancan'
 
-# Model Diagram
-gem 'rails-erd'
-gem 'erd'
-
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'factory_bot_rails'
-gem 'faker'
-
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
