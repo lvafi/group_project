@@ -2,10 +2,15 @@
 <% if current_user.present? === false %>
 
 
-<section class="home-hero">
-    <h1>Please sign up</h1>
+
+<section class="home-hero transparent">
+  
+  <div class="description-text-area">
+    <h1>Please sign up</h1>  
     <%= render 'users/form' %>
-</section>
+    
+  </div>
+
   
     <h1>Made account / Logged in / Root Page</h1>
     <p>Populer Courses</p>
