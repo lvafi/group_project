@@ -1,16 +1,20 @@
 class BookingsController < ApplicationController
     before_action :authenticate_user!, only: [:create, :update, :destroy]
     before_action :find_booking, only: [:update, :destroy]
-    before_action :authenticate!, only: [:update, :destroy]
+    before_action :authorize!, only: [:update, :destroy]
 
 
     def create
+        @room = Room.find(params[:room_id])
         @booking = Booking.new booking_params
+        @booking.user = current_user
+        @booking.room = @room
         if @booking.save
-            flash[:success] = "Booked successfully"
-            redirect_to room_path(@booking.room)
+            flash[:success] = "Congratulations! You have booked a room."
+            redirect_to room_path(@room)
         else
-            render room_path(@booking.room)
+            @bookings = @room.bookings.order(created_at: :desc)
+            render 'room/show.html.erb'
         end
     end
 
@@ -21,6 +25,7 @@ class BookingsController < ApplicationController
 
     def destroy
         @booking.destroy
+        flash[:notice] = 'The booking has been deleted.'
         redirect_to room_path(@booking.room)
     end
 
@@ -34,7 +39,7 @@ class BookingsController < ApplicationController
         @booking = Booking.find params[:id]
     end
 
-    def authenticate!
+    def authorize!
         find_booking
         unless can?(:crud, @booking)
             flash[:danger] = "Not Authorized"

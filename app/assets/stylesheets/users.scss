@@ -137,8 +137,11 @@ div.login-menu.item {
 }
 
 .booking_room {
-  background-color: green;
+  display: flex;
+  justify-content: center;
+  align-content: space-around;
   padding: 1em;
+  border: 1px solid black;
 }
 
 

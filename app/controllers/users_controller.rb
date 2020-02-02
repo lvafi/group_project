@@ -40,17 +40,18 @@ class UsersController < ApplicationController
         if @user&.authenticate params[:current_password]
             user_params[:password] = params[:id][:new_password] 
             if @user.update user_params
+                flash[:notice] = "You have updated your password."
                 redirect_to root_path
             else
+                flash[:alert] = "Password update failed. Please make sure your new password matches its confirmation."
                 render :edit_password
             end
         else
-            render :edit_password, alert: "Current password has to be matched"
+            render :edit_password, alert: "Your current password does not match our records."
         end
     end
     
     def edit_password
-#         find_params
     end
 
     private

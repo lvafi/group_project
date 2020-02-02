@@ -18,7 +18,7 @@ class RoomsController < ApplicationController
         end
 
         if @room.save
-            flash[:notice] = 'Room created successfully'
+            flash[:notice] = 'Congratulations! You have created a room.'
             redirect_to room_path(@room.id)
         else
             render :new
@@ -31,7 +31,7 @@ class RoomsController < ApplicationController
 
     def update
         if @room.update room_params
-            flash[:notice] = 'Room updated Successfully'
+            flash[:notice] = 'Room updated successfully'
             redirect_to room_path(@room.id)
         else
             render :edit
@@ -54,11 +54,12 @@ class RoomsController < ApplicationController
         @availability = Availability.new
         @availabilities = @room.availabilities.order(created_at: :desc)
         @booking = Booking.new
-        @bookings = Booking.all.order(created_at: :desc)
+        @bookings = @room.bookings.order(created_at: :desc)
     end
 
     def destroy
         @room.destroy
+        flash[:notice] = 'The room was successfully deleted.'
         redirect_to rooms_path
     end
 
