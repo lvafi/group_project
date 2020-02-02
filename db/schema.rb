@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_01_221348) do
+ActiveRecord::Schema.define(version: 2020_02_01_225147) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,18 @@ ActiveRecord::Schema.define(version: 2020_02_01_221348) do
     t.index ["room_id"], name: "index_availabilities_on_room_id"
   end
 
+  create_table "bookings", force: :cascade do |t|
+    t.bigint "course_id", null: false
+    t.bigint "room_id", null: false
+    t.boolean "status", default: false
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["course_id"], name: "index_bookings_on_course_id"
+    t.index ["room_id"], name: "index_bookings_on_room_id"
+  end
+
   create_table "courses", force: :cascade do |t|
     t.string "title"
     t.text "description"
@@ -35,6 +47,16 @@ ActiveRecord::Schema.define(version: 2020_02_01_221348) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_courses_on_user_id"
+  end
+
+  create_table "enrollments", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "course_id", null: false
+    t.boolean "status", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["course_id"], name: "index_enrollments_on_course_id"
+    t.index ["user_id"], name: "index_enrollments_on_user_id"
   end
 
   create_table "features", force: :cascade do |t|
@@ -75,7 +97,11 @@ ActiveRecord::Schema.define(version: 2020_02_01_221348) do
   end
 
   add_foreign_key "availabilities", "rooms"
+  add_foreign_key "bookings", "courses"
+  add_foreign_key "bookings", "rooms"
   add_foreign_key "courses", "users"
+  add_foreign_key "enrollments", "courses"
+  add_foreign_key "enrollments", "users"
   add_foreign_key "rooms", "users"
   add_foreign_key "searches", "features"
   add_foreign_key "searches", "rooms"
