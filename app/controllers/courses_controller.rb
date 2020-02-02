@@ -1,10 +1,9 @@
 class CoursesController < ApplicationController
 
     before_action :authenticate_user!, except: [:show, :index]
-    before_action :find_course, only: [:show, :edit, :update, :destroy]
+    before_action :find_course, only: [:show, :edit, :udpate, :destroy]
     before_action :authorize!, only: [:edit, :update, :destroy]
 
-    before_save :capitalize_course_title
     
     def new
         @course = Course.new
@@ -15,7 +14,7 @@ class CoursesController < ApplicationController
         @course.user = current_user #setting the default owner of the course to be a teacher 
 
         if @course.save
-            redirect to course_path(@course)
+            redirect_to courses_path(@course)
         else
             render :new
         end
