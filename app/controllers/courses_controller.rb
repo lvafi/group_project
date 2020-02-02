@@ -3,7 +3,6 @@ class CoursesController < ApplicationController
     before_action :authenticate_user!, except: [:show, :index]
     before_action :find_course, only: [:show, :edit, :udpate, :destroy]
     before_action :authorize!, only: [:edit, :update, :destroy]
-
     
     def new
         @course = Course.new
