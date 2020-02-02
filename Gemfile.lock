@@ -196,6 +196,7 @@ DEPENDENCIES
   byebug
   cancancan
   cowsay
+  erd
   factory_bot_rails
   faker
   jbuilder (~> 2.7)

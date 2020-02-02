@@ -9,10 +9,6 @@ class User < ApplicationRecord
     has_many :courses, dependent: :nullify 
     has_many :enrolled_courses, through: :enrollment, source: :course     
 
-<<<<<<< HEAD
-
-=======
->>>>>>> b817e379ebc7fae4c55822426b1e49bace5f9c88
     def full_name
         "#{first_name} #{last_name}".strip.squeeze       
     end
