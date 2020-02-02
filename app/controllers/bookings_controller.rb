@@ -1,7 +1,8 @@
 class BookingsController < ApplicationController
     before_action :authenticate_user!, only: [:create, :update, :destroy]
     before_action :find_booking, only: [:update, :destroy]
-    before_action :authenticate!, only: [:update, :destroy]
+    before_action :authorize!, only: [:update, :destroy]
+
 
     def create
         @room = Room.find(params[:room_id])
@@ -37,9 +38,9 @@ class BookingsController < ApplicationController
         @booking = Booking.find params[:id]
     end
 
-    def authenticate!
+    def authorize!
         find_booking
-        unless can?(:crud ,@booking)
+        unless can?(:crud, @booking)
             flash[:danger] = "Not Authorized"
             redirect_to room_path(@booking.room)
         end

@@ -1,0 +1,16 @@
+<div class="container">
+    <h1 class="new user">All Courses</h1><br />
+    <a href="<%= new_course_path%>" class="sign_up_button">New Class</a>
+    <hr />
+    <div class="room_list">
+        <% @courses.each do |course| %>
+        <div class="single_room">
+            <h2 class="new user"><%= link_to(course.title,course_path(course.id)) %></h2>
+            <p><%= course.description %></p>
+            <p><%= course.price %></p>
+            <p><%= course.range_start_date %></p>
+            <p><%= course.range_end_date %></p>
+        </div>
+        <% end %>
+    </div>
+</div>

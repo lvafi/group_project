@@ -1,7 +1,6 @@
 class CoursesController < ApplicationController
-
-    before_action :authenticate_user!, except: [:show, :index]
-    before_action :find_course, only: [:show, :edit, :udpate, :destroy]
+    before_action :authenticate_user!, except: [:index, :show]
+    before_action :find_course, only: [:show, :edit, :update, :destroy]
     before_action :authorize!, only: [:edit, :update, :destroy]
     
     def new
@@ -50,7 +49,8 @@ class CoursesController < ApplicationController
 
     def update 
         if @course.update course_params
-            redirect_to course_path(@course)
+            flash[:notice] = 'Course updated Successfully'
+            redirect_to course_path(@course.id)
         else
             render :edit
         end
@@ -69,11 +69,16 @@ class CoursesController < ApplicationController
     end
    
     def find_course
-        @course = Course.find params[:id]
+        @course = Course.find_by id:params[:id]
+        if @course === nil
+            redirect_to root_path, notice: "Course Does Not Exist"
+        end
     end
 
     def authorize!
-        redirect_to root_path, alert: "Not Authorized" unless can? :crud, @course
+        unless can? :crud, @course
+            redirect_to root_path, alert: "Not Authorized" 
+        end
     end
 
 end
