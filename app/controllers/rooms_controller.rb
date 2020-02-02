@@ -8,6 +8,7 @@ class RoomsController < ApplicationController
     end
 
     def create
+        byebug
         @room = Room.new room_params
         @room.user = current_user
         if @room.save
@@ -36,7 +37,7 @@ class RoomsController < ApplicationController
             @feature = Feature.find_or_initialize_by(name: params[:feature])
             @rooms = @feature.rooms.order(created_at: :desc)
         else
-            @rooms = Rooms.all.order(created_at: :desc)
+            @rooms = Room.all.order(created_at: :desc)
         end
     end
 
@@ -56,6 +57,9 @@ class RoomsController < ApplicationController
     
     def room_params
         params.require(:room).permit(:name, :address, :capacity, :price, :description, :features)
+    end
+
+    def new_params
     end
 
     def authorize!
