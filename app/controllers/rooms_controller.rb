@@ -8,7 +8,6 @@ class RoomsController < ApplicationController
     end
 
     def create
-        byebug
         @room = Room.new room_params
         @room.user = current_user
         if @room.save

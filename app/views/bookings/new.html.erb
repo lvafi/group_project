@@ -1,13 +1,4 @@
-<%= month_calendar events: @bookings do |date, bookings| %>
-  <%= date %>
-  <% bookings.each do |booking| %>
-    <div>
-      <%= booking.course.title %>
-    </div>
-  <% end %>
-<% end %>
-
-<%= form_with(model: [@room, @booking], local: true) do |form| %>
+<%= form_with(model: @booking, local: true) do |form| %>
   <% if @booking.errors.any? %>
     <div id=“error_explanation”>
       <h2><%= pluralize(@booking.errors.count, “error”) %> prohibited this @booking from being saved:</h2>
@@ -26,17 +17,7 @@
     <%= form.label :end_time %>
     <%= form.datetime_select :end_time %>
   </div>
-
-    <%= form.label :course_id %>
-    <%= form.text_field :course_id %>
-
   <div class=“actions”>
     <%= form.submit %>
   </div>
 <% end %>
-
-
-    <% @bookings.each do |booking| %>
-        <div><%= booking.start_time %></div>
-        <div><%= booking.end_time %></div>
-    <% end %>

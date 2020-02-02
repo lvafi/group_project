@@ -33,10 +33,10 @@ class CoursesController < ApplicationController
         if @course.user == current_user 
             if can? :crud, @course
                 @bookings = @course.bookings.order(created_at: :desc)
-                @enrollments = @course.enrollments.order(created_at:desc)
+                @enrollments = @course.enrollments.order(created_at: :desc)
             else
                 @bookings = @course.bookings.where(hidden: false).order(created_at: :desc)
-                @enrollments = @course.enrollments.where(hidden: false).order(created_at:desc)
+                @enrollments = @course.enrollments.where(hidden: false).order(created_at: :desc)
             end
         else #else its a student-user or room-mananger-user
             @bookings = @course.bookings.order(created_at: :desc)   
