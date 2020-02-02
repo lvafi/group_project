@@ -1,4 +1,5 @@
 class BookingsController < ApplicationController
+    before_action :authenticate_user!, only: [:create, :update, :destroy]
     before_action :find_booking, only: [:update, :destroy]
     before_action :authenticate!, only: [:update, :destroy]
 
