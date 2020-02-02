@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 2020_02_01_042124) do
-=======
 ActiveRecord::Schema.define(version: 2020_02_01_225147) do
->>>>>>> b9a1549ddcef8da69f8023362684cb6efdf1accc
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,8 +25,6 @@ ActiveRecord::Schema.define(version: 2020_02_01_225147) do
     t.index ["room_id"], name: "index_availabilities_on_room_id"
   end
 
-<<<<<<< HEAD
-=======
   create_table "bookings", force: :cascade do |t|
     t.bigint "course_id", null: false
     t.bigint "room_id", null: false
@@ -70,7 +64,6 @@ ActiveRecord::Schema.define(version: 2020_02_01_225147) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
->>>>>>> b9a1549ddcef8da69f8023362684cb6efdf1accc
   create_table "rooms", force: :cascade do |t|
     t.string "name"
     t.string "address"
@@ -102,18 +95,6 @@ ActiveRecord::Schema.define(version: 2020_02_01_225147) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-<<<<<<< HEAD
-  create_table "users", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.boolean "is_admin?"
-    t.string "email"
-    t.string "password_digest"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-=======
   add_foreign_key "availabilities", "rooms"
   add_foreign_key "bookings", "courses"
   add_foreign_key "bookings", "rooms"
@@ -123,5 +104,4 @@ ActiveRecord::Schema.define(version: 2020_02_01_225147) do
   add_foreign_key "rooms", "users"
   add_foreign_key "searches", "features"
   add_foreign_key "searches", "rooms"
->>>>>>> b9a1549ddcef8da69f8023362684cb6efdf1accc
 end
