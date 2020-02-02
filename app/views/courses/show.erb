@@ -3,10 +3,10 @@
 <h1><%= @course.title %></h1>
 <h2>! it may be great to have images in this page !</h2>
 <p><%= @course.description %></p>
-<p><%= course.price %></p>
-<p><%= course.range_start_date %></p>
-<p><%= course.range_end_date %></p>
-<p>Posted <%= time_ago_in_words(course.created_at) %> ago</p>
+<p><%= @course.price %></p>
+<p><%= @course.range_start_date %></p>
+<p><%= @course.range_end_date %></p>
+<p>Posted <%= time_ago_in_words(@course.created_at) %> ago</p>
 
 <hr>
 

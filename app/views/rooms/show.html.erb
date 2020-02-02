@@ -18,37 +18,47 @@
     </ul>
 <% end %>
 
-<hr>
+<br>
 
-<h5>Availabilities</h5>
+<%= month_calendar events: @bookings do |date, bookings| %>
+  <%= date %>
+  <% bookings.each do |booking| %>
+    <div>
+      <%= booking.course.title %>
+    </div>
+  <% end %>
+<% end %>
 
-<ul class="availability-list">
-    <% @availabilities.each do |availability| %>
-
-    <li>
-        Start: <%= availability.start %> <br>
-        End: <%= availability.end %>
-
-        <% if can? :crud, review %>
-            <small>
-                <%= link_to(
-                    "Edit",
-                    edit_review_path(@product, review)
-                ) %> | 
-            </small>
-            <small>
-                <%= link_to(
-                    "Delete",
-                    review_path(@product, review),
-                    method: :delete,
-                    data: {
-                        confirm: "Are you sure?"
-                    }
-                ) %> | 
-            </small>
+<%= form_with(model: [@room, @booking], local: true) do |form| %>
+  <% if @booking.errors.any? %>
+    <div id=“error_explanation”>
+      <h2><%= pluralize(@booking.errors.count, “error”) %> prohibited this @booking from being saved:</h2>
+      <ul>
+        <% @booking.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
         <% end %>
-        
-    </li>
-    <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class=“field”>
+    <%= form.label :start_time %>
+    <%= form.datetime_select :start_time %>
+  </div>
+  <div class=“field”>
+    <%= form.label :end_time %>
+    <%= form.datetime_select :end_time %>
+  </div>
 
-</ul>
+    <%= form.label :course_id %>
+    <%= form.text_field :course_id %>
+
+  <div class=“actions”>
+    <%= form.submit %>
+  </div>
+<% end %>
+
+
+    <% @bookings.each do |booking| %>
+        <div><%= booking.start_time %></div>
+        <div><%= booking.end_time %></div>
+    <% end %>
