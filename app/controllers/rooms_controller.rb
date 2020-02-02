@@ -10,8 +10,11 @@ class RoomsController < ApplicationController
     def create
         @room = Room.new room_params
         @room.user = current_user
-        @room.features = params[:features].map do |feature|
-            Feature.find_or_initialize_by(name: feature)
+        
+        if params[:features]
+            @room.features = params[:features].map do |feature|
+                Feature.find_or_initialize_by(name: feature)
+            end
         end
 
         if @room.save

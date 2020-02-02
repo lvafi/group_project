@@ -11,4 +11,8 @@ module ApplicationHelper
         return date.day
     end
 
+    def user_friendly_range date
+        return date.strftime("%B %d %Y")
+    end
+
 end

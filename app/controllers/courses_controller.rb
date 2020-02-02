@@ -38,10 +38,12 @@ class CoursesController < ApplicationController
                 @enrollments = @course.enrollments.where(hidden: false).order(created_at:desc)
             end
         else #else its a student-user or room-mananger-user
-            @bookings = @course.bookings.order(created_at: :desc)  
-            @enrollments = current_user.enrollments.map{
-                |enrollment| Course.find(enrollment.course_id) 
-            }
+            @bookings = @course.bookings.order(created_at: :desc)
+            if current_user.enrollments  
+                @enrollments = current_user.enrollments.map{
+                    |enrollment| Course.find(enrollment.course_id) 
+                }
+            end
         end
     end
 

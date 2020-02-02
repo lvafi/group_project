@@ -1,6 +1,6 @@
 <% @rooms.each do |room| %>
 <div class="single_room">
-    <h5><%= link_to(room.name, room_path(room.id)) %></h5>
+    <h5 class="new user"><%= link_to(room.name.truncate(30, separator: " "), room_path(room.id)) %></h5>
     <hr />
     <p><%= link_to(
                     room.location, rooms_path(location: room.location)
