@@ -9,7 +9,10 @@ Rails.application.routes.draw do
   end
 
   resources :rooms do
-    resources :bookings
+    resources :bookings do
+      put :approving
+      put :rejecting 
+    end
   end
   
 end

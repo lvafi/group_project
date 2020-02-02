@@ -55,6 +55,7 @@ class RoomsController < ApplicationController
         @availabilities = @room.availabilities.order(created_at: :desc)
         @booking = Booking.new
         @bookings = @room.bookings.order(created_at: :desc)
+        @courses = current_user.courses
     end
 
     def destroy
