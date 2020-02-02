@@ -6,11 +6,11 @@
 </div>
 <div>
     <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <%= f.text_area :name, cols: 50, rows: 1, placeholder: "Spacious room with brand-new A/V system" %>
 </div>
 <div>
     <%= f.label :address %><br>
-    <%= f.text_area :address, cols: 50, rows:1%>
+    <%= f.text_area :address, cols: 50, rows:1 %>
 </div>
 <div>
     <%= f.label :capacity %><br>
@@ -25,77 +25,112 @@
     <%= f.text_area :description, cols: 50, rows:5%>
 </div>
 
-<div class="features-container">
+<div class="locations-container">
     <h5>Location</h5>
-    <%= check_box_tag(:arbutus_ridge) %>
+    <%= check_box_tag(:location, :arbutus_ridge) %>
     <%= label_tag(:arbutus_ridge, "Vancouver - Arbutus Ridge") %>
-    <%= check_box_tag(:downtown) %>
-    <%= label_tag(:downtown, "Vancouver - Downtown") %>
-    <%= check_box_tag(:dunbar_southlands) %>
-    <%= label_tag(:dunbar_southlands, "Vancouver - Dunbar-Southlands") %>
-    <%= check_box_tag(:fairview) %>
-    <%= label_tag(:fairview, "Vancouver - Fairview") %>
-    <%= check_box_tag(:grandview_woodland) %>
-    <%= label_tag(:grandview_woodland, "Vancouver - Grandview-Woodland") %>
-    <%= check_box_tag(:kensington_cedar_college) %>
-    <%= label_tag(:kensington_cedar_college, "Vancouver - Kensington-Cedar Cottage") %>
-    <%= check_box_tag(:kerrisdale) %>
-    <%= label_tag(:kerrisdale, "Vancouver - Kerrisdale") %>
-    <%= check_box_tag(:killarney) %>
-    <%= label_tag(:killarney, "Vancouver - Killarney") %>
-    <%= check_box_tag(:kitsilano) %>
-    <%= label_tag(:kitsilano, "Vancouver - Kitsilano") %>
-    <%= check_box_tag(:oakridge) %>
-    <%= label_tag(:oakridge, "Vancouver - Oakridge") %>
-    <%= check_box_tag(:marpole) %>
-    <%= label_tag(:marpole, "Vancouver - Marpole") %>
-    <%= check_box_tag(:mount_pleasant) %>
-    <%= label_tag(:mount_pleasant, "Vancouver - Mount Pleasant") %>
-    <%= check_box_tag(:burnaby) %>
-    <%= check_box_tag(:renfrew_collingwood) %>
-    <%= label_tag(:renfrew_collingwood, "Vancouver - Renfrew-Collingwood") %>
-    <%= check_box_tag(:riley_park) %>
-    <%= label_tag(:riley_park, "Vancouver - Riley Park") %>
-    <%= check_box_tag(:shaughnessy) %>
-    <%= label_tag(:shaughnessy, "Vancouver - Shaughnessy") %>
-    <%= check_box_tag(:south_cambie) %>
-    <%= check_box_tag(:strathcona) %>
-    <%= label_tag(:strathcona, "Vancouver - Strathcona") %>
-    <%= label_tag(:south_cambie, "Vancouver - South Cambie") %>
-    <%= check_box_tag(:sunset) %>
-    <%= label_tag(:sunset, "Vancouver - Sunset") %>
-    <%= check_box_tag(:west_end) %>
-    <%= label_tag(:west_end, "Vancouver - West End") %>
-    <%= check_box_tag(:west_point_grey) %>
-    <%= label_tag(:west_point_grey, "Vancouver - West Point Grey") %>
-    <%= label_tag(:burnaby, "Burnaby") %>
-    <%= check_box_tag(:coquitlam) %>
-    <%= label_tag(:coquitlam, "Coquitlam") %>
-    <%= check_box_tag(:new_westminster) %>
-    <%= label_tag(:new_westminster, "New Westminster") %>
-    <%= check_box_tag(:richmond) %>
-    <%= label_tag(:richmond, "Richmond") %>
 
+    <%= check_box_tag(:location, :downtown) %>
+    <%= label_tag(:downtown, "Vancouver - Downtown") %>
+
+    <%= check_box_tag(:location, :dunbar_southlands) %>
+    <%= label_tag(:dunbar_southlands, "Vancouver - Dunbar-Southlands") %>
+
+    <%= check_box_tag(:location, :fairview) %>
+    <%= label_tag(:fairview, "Vancouver - Fairview") %>
+
+    <%= check_box_tag(:location, :grandview_woodland) %>
+    <%= label_tag(:grandview_woodland, "Vancouver - Grandview-Woodland") %>
+
+    <%= check_box_tag(:location, :kensington_cedar_college) %>
+    <%= label_tag(:kensington_cedar_college, "Vancouver - Kensington-Cedar Cottage") %>
+
+    <%= check_box_tag(:location, :kerrisdale) %>
+    <%= label_tag(:kerrisdale, "Vancouver - Kerrisdale") %>
+
+    <%= check_box_tag(:location, :killarney) %>
+    <%= label_tag(:killarney, "Vancouver - Killarney") %>
+
+    <%= check_box_tag(:location, :kitsilano) %>
+    <%= label_tag(:kitsilano, "Vancouver - Kitsilano") %>
+
+    <%= check_box_tag(:location, :oakridge) %>
+    <%= label_tag(:oakridge, "Vancouver - Oakridge") %>
+
+    <%= check_box_tag(:location, :marpole) %>
+    <%= label_tag(:marpole, "Vancouver - Marpole") %>
+
+    <%= check_box_tag(:location, :mount_pleasant) %>
+    <%= label_tag(:mount_pleasant, "Vancouver - Mount Pleasant") %>
+
+    <%= check_box_tag(:location, :renfrew_collingwood) %>
+    <%= label_tag(:renfrew_collingwood, "Vancouver - Renfrew-Collingwood") %>
+
+    <%= check_box_tag(:location, :riley_park) %>
+    <%= label_tag(:riley_park, "Vancouver - Riley Park") %>
+
+    <%= check_box_tag(:location, :shaughnessy) %>
+    <%= label_tag(:shaughnessy, "Vancouver - Shaughnessy") %>
+
+    <%= check_box_tag(:location, :south_cambie) %>
+    <%= label_tag(:shaughnessy, "Vancouver - Shaughnessy") %>
+
+    <%= check_box_tag(:location, :strathcona) %>
+    <%= label_tag(:strathcona, "Vancouver - Strathcona") %>
+
+    <%= check_box_tag(:location, :south_cambie) %>
+    <%= label_tag(:south_cambie, "Vancouver - South Cambie") %>
+
+    <%= check_box_tag(:location, :sunset) %>
+    <%= label_tag(:sunset, "Vancouver - Sunset") %>
+
+    <%= check_box_tag(:location, :west_end) %>
+    <%= label_tag(:west_end, "Vancouver - West End") %>
+
+    <%= check_box_tag(:location, :west_point_grey) %>
+    <%= label_tag(:west_point_grey, "Vancouver - West Point Grey") %>
+
+    <%= check_box_tag(:location, :burnaby) %>
+    <%= label_tag(:burnaby, "Burnaby") %>
+
+    <%= check_box_tag(:location, :coquitlam) %>
+    <%= label_tag(:coquitlam, "Coquitlam") %>
+
+    <%= check_box_tag(:location, :new_westminster) %>
+    <%= label_tag(:new_westminster, "New Westminster") %>
+
+    <%= check_box_tag(:location, :richmond) %>
+    <%= label_tag(:richmond, "Richmond") %>
+</div>
+
+<div class="features-container">
     <h5>Features</h5>
-    <%= check_box_tag(:free_parking) %>
+    <%= check_box_tag("features[]", :free_parking) %>
     <%= label_tag(:free_parking) %>
-    <%= check_box_tag(:paid_parking) %>
+
+    <%= check_box_tag("features[]", :paid_parking) %>
     <%= label_tag(:paid_parking) %>
-    <%= check_box_tag(:ada_accessible) %>
+
+    <%= check_box_tag("features[]", :ada_accessible) %>
     <%= label_tag(:ada_accessible, "ADA Accessible") %>
-    <%= check_box_tag(:audio_visual_equipment) %>
+
+    <%= check_box_tag("features[]", :audio_visual_equipment) %>
     <%= label_tag(:audio_visual_equipment, "Audio/Visual Equipment") %>
-    <%= check_box_tag(:wifi) %>
-    <%= label_tag(:wifi), "WiFi" %>
-    <%= check_box_tag(:open_floor_plan) %>
+
+    <%= check_box_tag("features[]", :wifi) %>
+    <%= label_tag(:wifi, "WiFi") %>
+
+    <%= check_box_tag("features[]", :open_floor_plan) %>
     <%= label_tag(:open_floor_plan) %>
-    <%= check_box_tag(:desks) %>
+
+    <%= check_box_tag("features[]", :desks) %>
     <%= label_tag(:desks) %>
-    <%= check_box_tag(:whiteboard) %>
+
+    <%= check_box_tag("features[]", :whiteboard) %>
     <%= label_tag(:whiteboard) %>
 </div>
 
 <br>
-<%= form.submit "Submit" %>
+<%= f.submit "Submit" %>
 
 <% end %>
