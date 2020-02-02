@@ -1,18 +1,24 @@
 <div class="container">
-    <%= @user.full_name %>
-    <div>
-        Pendding lists
-        (as a owner)
-        <%= render 'shared/rooms_index' %>
-    </div>
-    <div>
-        Pendding lists
-        (as a teacher)
-        <%= render 'shared/courses_index' %>
-    </div>
-    <div>
-        Pendding lists
-        (as a student)
-        <%#=  %>
-    </div>
+    <h1><%= @user.full_name %></h1>
+
+    <% if current_user.rooms.length > 0 %>
+        <div>
+            <h2>Your Rooms</h2>
+            <%= render 'shared/rooms_index',rooms: current_user.rooms %>
+        </div>
+    <% end %>
+
+    <% if current_user.courses.length > 0 %>
+        <div>
+            <h2>Courses teaching:</h2>
+            <%= render 'shared/courses_index',courses: current_user.courses %>
+        </div>
+    <% end %>
+
+    <%# if current_user.enrolled_courses.length > 0 %>
+        <%# <div> %>
+            <%# <h2>Courses enrolled in:</h2> %>
+            <%#= render 'shared/courses_index',courses: current_user.enrolled_courses %>
+        <%# </div> %>
+    <%# end %>
 </div>
