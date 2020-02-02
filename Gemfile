@@ -29,10 +29,6 @@ gem 'cancancan'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
-<<<<<<< HEAD
-gem 'factory_bot_rails'
-=======
->>>>>>> 6500a27bc32ee765a3fa3d56e8b8d118f34e85e4
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
