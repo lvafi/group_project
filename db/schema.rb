@@ -28,7 +28,6 @@ ActiveRecord::Schema.define(version: 2020_02_02_034648) do
   create_table "bookings", force: :cascade do |t|
     t.bigint "course_id", null: false
     t.bigint "room_id", null: false
-    t.boolean "status", default: false
     t.datetime "start_time"
     t.datetime "end_time"
     t.datetime "created_at", precision: 6, null: false
