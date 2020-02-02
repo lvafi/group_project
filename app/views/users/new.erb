@@ -1,15 +1,21 @@
+<div class="hero_image">
 <% if current_user.present? === false %>
 
 
-
-
 <section class="home-hero">
-  <h1>Please sign up</h1>
-  <%= render 'users/form' %>
+    <h1>Please sign up</h1>
+    <%= render 'users/form' %>
 </section>
+  
+    <h1>Made account / Logged in / Root Page</h1>
+    <p>Populer Courses</p>
+    <%= render 'shared/courses_index', courses: Course.all.limit(8) %>
+    <p>Populer Rooms</p>
+    <%= render 'shared/rooms_index', rooms: Room.all.limit(8) %>
+  
 
 
-<% else %>
-<h1>Made account / Logged in / Root Page</h1>
+
+
 
 <% end %>
