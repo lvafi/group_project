@@ -13,12 +13,12 @@ class ApplicationController < ActionController::Base
     def user_signed_in?
         current_user.present?
     end
-    
+
     helper_method :user_signed_in?
-    
+
     def authenticate_user!
         unless user_signed_in?
-            flash[:danger] = "User must sign in"
+            flash[:danger] = "You must sign up or sign in to proceed."
             redirect_to new_session_path
         end
     end

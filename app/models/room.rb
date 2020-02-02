@@ -11,7 +11,7 @@ class Room < ApplicationRecord
 
     validates :name, presence: true, uniqueness: { scope: :user_id }
     validates :address, presence: true
-    validates :price, presence: true, numericality: { greater_than: 0 
+    validates :price, presence: true, numericality: { greater_than: 0 }
     validates :capacity, presence: true, numericality: { greater_than: 0 }
 
     # Getter
@@ -21,8 +21,8 @@ class Room < ApplicationRecord
 
     # Setter
     def features=(value)
-        self.tags = value.strip.split(/\s*,\s*/).map do |feature|
-            Tag.find_or_initialize_by(name: feature)
+        self.features = value.strip.split(/\s*,\s*/).map do |feature|
+            Feature.find_or_initialize_by(name: feature)
         end
     end
 

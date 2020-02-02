@@ -51,7 +51,6 @@ class UsersController < ApplicationController
 
     def user_params
         params.require(:user).permit(
-
             :first_name, :last_name, :email, :password, :password_confirmation
         )
     end
@@ -63,7 +62,7 @@ class UsersController < ApplicationController
     def authenticate!
         find_user
         unless session[:user_id] === @user.id
-            flash[:danger] = "You can't edit other user"
+            flash[:danger] = "Not Authorized"
             redirect_to root_path
         end
     end
