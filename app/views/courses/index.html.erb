@@ -5,11 +5,18 @@
     <div class="room_list">
         <% @courses.each do |course| %>
         <div class="single_room">
-            <h2 class="new user"><%= link_to(course.title,course_path(course.id)) %></h2>
+            <h2 class="new user"><%= link_to(course.title, course_path(course.id)) %></h2>
             <p><%= course.description %></p>
             <p><%= course.price %></p>
             <p><%= course.range_start_date %></p>
             <p><%= course.range_end_date %></p>
+            
+            <% if can? :enrollment, @course %>
+            <div class="post-enroll">
+                <%= link_to('Enroll', new_course_enrollment_path(@course.id), class:"sign_up_button") %>
+                <%= link_to("Unenroll", course_enrollment_path(@course.id, @course.enrollment.id), method: :delete, data:{confirm:'Are you sure you want stop enrolling in this course?'}, class: "sign_up_button") %>
+            </div><br />
+            <% end %>
         </div>
         <% end %>
     </div>

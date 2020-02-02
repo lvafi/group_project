@@ -26,7 +26,8 @@ class Ability
     end
 
     can(:crud, Enrollment) do |enrollment|
-      enrollment.user == user || enrollment.course.user == user
+      enrollment.user == user #only a student can enroll, not a teacher of a course
+      #|| enrollment.course.user == user
     end
 
   end
