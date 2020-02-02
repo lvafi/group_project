@@ -10,10 +10,13 @@ class Booking < ApplicationRecord
     end
 
     event :rejecting do
+      after do
+        self.destroy
+      end
       transitions from: :reserved, to: :rejected
     end
 
-    event :sleep do
+    event :reserving do
       transitions from: [:rejected, :approved], to: :reserved
     end
 
@@ -21,5 +24,5 @@ class Booking < ApplicationRecord
   
   belongs_to :course
   belongs_to :room
-  
+
 end
