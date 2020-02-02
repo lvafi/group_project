@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 2020_02_01_225147) do
     t.bigint "room_id", null: false
     t.index ["room_id"], name: "index_availabilities_on_room_id"
   end
-  
+
   create_table "bookings", force: :cascade do |t|
     t.bigint "course_id", null: false
     t.bigint "room_id", null: false
