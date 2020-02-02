@@ -1,6 +1,7 @@
 class ReviewsController < ApplicationController
   before_action :authenticate_user!
-
+  before_action :find_course,only:[:create,:destroy]
+  
   def create
     @course = Course.find params[:course_id]
     @review = Review.new review_params
@@ -21,9 +22,10 @@ class ReviewsController < ApplicationController
     @review = Review.find params[:id]
     if can? :crud, @review
         @review.destroy
-        flash[:alert] = "The review has been deleted."
+        flash[:alert] = "Review deleted successfully"
         redirect_to @review.course
     end
+    
   end
 
   private
@@ -31,5 +33,12 @@ class ReviewsController < ApplicationController
   def review_params
     params.require(:review).permit(:body, :rating)
   end
+  def find_course
+    @course = Course.find params[:id]
 
+  end
+  # //def authorize!
+  # //redirect_to root_path, alert: "access denied" unless can?:crud,@course
+  # //end
 end
+

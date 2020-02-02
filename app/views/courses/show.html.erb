@@ -17,6 +17,20 @@
     <p>Posted <%= time_ago_in_words(@course.created_at) %> ago</p>
 
     <hr>
+<!--reviewing the courses-->
+    <p>if user is a teacher, it's suppose to show a list of students</p><p>Hello <%= @owner.full_name %></p>
+<p>Someone posted a review on your course.</p>
 
-    <p>if user is a teacher, it's suppose to show a list of students</p>
-</div>
+<div class=“comment”>
+      <% @reviews.each do |review| %>
+      <div class=“comment-body”>
+        <%= review.body %> <br>
+      </div>
+      <% end %>
+    </div>
+    </div>
+
+
+
+
+

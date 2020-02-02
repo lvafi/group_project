@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_02_005528) do
+ActiveRecord::Schema.define(version: 2020_02_02_034648) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 2020_02_02_005528) do
     t.datetime "end_time"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "aasm_state"
     t.index ["course_id"], name: "index_bookings_on_course_id"
     t.index ["room_id"], name: "index_bookings_on_room_id"
   end
@@ -62,6 +63,17 @@ ActiveRecord::Schema.define(version: 2020_02_02_005528) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.integer "rating"
+    t.text "body"
+    t.bigint "course_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["course_id"], name: "index_reviews_on_course_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
   create_table "rooms", force: :cascade do |t|
@@ -102,6 +114,8 @@ ActiveRecord::Schema.define(version: 2020_02_02_005528) do
   add_foreign_key "courses", "users"
   add_foreign_key "enrollments", "courses"
   add_foreign_key "enrollments", "users"
+  add_foreign_key "reviews", "courses"
+  add_foreign_key "reviews", "users"
   add_foreign_key "rooms", "users"
   add_foreign_key "searches", "features"
   add_foreign_key "searches", "rooms"

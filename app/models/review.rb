@@ -10,6 +10,5 @@ class Review < ApplicationRecord
       greater_than_or_equal: 1,
       less_than_equal_to: 5
     }
-  end
 
 end

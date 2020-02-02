@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   
   resources :courses do
     resources :enrollments
+    resources :reviews
+    
   end
 
   resources :rooms do
@@ -13,3 +15,4 @@ Rails.application.routes.draw do
   end
   
 end
+  
