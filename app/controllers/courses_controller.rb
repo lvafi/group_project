@@ -3,7 +3,6 @@ class CoursesController < ApplicationController
     before_action :authenticate_user!, except: [:show, :index]
     before_action :find_course, only: [:show, :edit, :udpate, :destroy]
     before_action :authorize!, only: [:edit, :update, :destroy]
-
     
     def new
         @course = Course.new
@@ -39,7 +38,10 @@ class CoursesController < ApplicationController
                 @enrollments = @course.enrollments.where(hidden: false).order(created_at:desc)
             end
         else #else its a student-user or room-mananger-user
-            @bookings = @course.bookings.order(created_at: :desc)   
+            @bookings = @course.bookings.order(created_at: :desc)  
+            @enrollments = current_user.enrollments.map{
+                |enrollment| Course.find(enrollment.course_id) 
+            }
         end
     end
 
@@ -62,7 +64,7 @@ class CoursesController < ApplicationController
     private
     
     def course_params
-        params.require(:course).permit(:title, :description, :price, :range_start_date, :range_end_date, :user_id)
+        params.require(:course).permit(:title, :description, :price, :range_start_date, :range_end_date)
     end
    
     def find_course

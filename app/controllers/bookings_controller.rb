@@ -40,5 +40,4 @@ class BookingsController < ApplicationController
             redirect_to room_path(@booking.room)
         end
     end
-    
 end
