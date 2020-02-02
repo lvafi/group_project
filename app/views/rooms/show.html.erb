@@ -30,7 +30,7 @@
             <% end %>
         </div>
         <div class="booking_room">
-            <h1 class="new user">Add Booking Form</user>
+            <h1 class="new user">Add Booking Form</h1>
         </div>
     </div>
     <hr>
@@ -45,34 +45,47 @@
     <% end %>
     <% end %>
 
+<br>
 
-    <ul class="availability-list">
-        <% @availabilities.each do |availability| %>
+<%= month_calendar events: @bookings do |date, bookings| %>
+  <%= date %>
+  <% bookings.each do |booking| %>
+    <div>
+      <%= booking.course.title %>
+    </div>
+  <% end %>
+<% end %>
 
-        <li>
-            Start: <%= availability.start %> <br>
-            End: <%= availability.end %>
-
-
-            <small>
-                <%= link_to(
-                    "Edit",
-                    edit_booking_path(@room, booking)
-                ) %> |
-            </small>
-            <small>
-                <%= link_to(
-                    "Delete",
-                    booking_path(@room, booking),
-                    method: :delete,
-                    data: {
-                        confirm: "Are you sure?"
-                    }
-                ) %> |
-            </small>
-
-        </li>
+<%= form_with(model: [@room, @booking], local: true) do |form| %>
+  <% if @booking.errors.any? %>
+    <div id=“error_explanation”>
+      <h2><%= pluralize(@booking.errors.count, “error”) %> prohibited this @booking from being saved:</h2>
+      <ul>
+        <% @booking.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
         <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class=“field”>
+    <%= form.label :start_time %>
+    <%= form.datetime_select :start_time %>
+  </div>
+  <div class=“field”>
+    <%= form.label :end_time %>
+    <%= form.datetime_select :end_time %>
+  </div>
 
-    </ul>
-</div>
+    <%= form.label :course_id %>
+    <%= form.text_field :course_id %>
+
+  <div class=“actions”>
+    <%= form.submit %>
+  </div>
+<% end %>
+
+
+    <% @bookings.each do |booking| %>
+        <div><%= booking.start_time %></div>
+        <div><%= booking.end_time %></div>
+    <% end %>

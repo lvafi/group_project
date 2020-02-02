@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
   root to: 'users#new'
+  resources :users
+  resource :session, only: [:new, :create, :destroy]
   
   resources :courses do
     resources :enrollments
@@ -9,8 +11,5 @@ Rails.application.routes.draw do
   resources :rooms do
     resources :bookings
   end
-
-  resources :users
-  resource :session, only: [:new, :create, :destroy]
   
 end

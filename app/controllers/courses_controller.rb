@@ -12,7 +12,7 @@ class CoursesController < ApplicationController
         @course.user = current_user #setting the default owner of the course to be a teacher 
 
         if @course.save
-            flash[:notice] = 'course created successfully'
+            flash[:notice] = 'Congratulations! You have created a course.'
             redirect_to courses_path(@course)
         else
             render :new
@@ -20,22 +20,21 @@ class CoursesController < ApplicationController
     end
 
     def index 
-        #@courses = Course.all
-        @courses = Course.order(created_at: :DESC)
+        @courses = Course.all.order(created_at: :DESC)
     end
 
     def show
         @booking = Booking.new
         @enrollment = Enrollment.new
 
-        #if I'm a teacher (course owner that is)
+        #if I'm a teacher (course owner)
         if @course.user == current_user 
             if can? :crud, @course
                 @bookings = @course.bookings.order(created_at: :desc)
                 @enrollments = @course.enrollments.order(created_at: :desc)
             else
                 @bookings = @course.bookings.where(hidden: false).order(created_at: :desc)
-                @enrollments = @course.enrollments.where(hidden: false).order(created_at:desc)
+                @enrollments = @course.enrollments.where(hidden: false).order(created_at: :desc)
             end
         else #else its a student-user or room-mananger-user
             @bookings = @course.bookings.order(created_at: :desc)  
@@ -59,6 +58,7 @@ class CoursesController < ApplicationController
 
     def destroy
         @course.destroy
+        flash[:notice] = 'The course has been deleted.'
         redirect_to courses_path
     end
 
@@ -77,7 +77,7 @@ class CoursesController < ApplicationController
 
     def authorize!
         unless can? :crud, @course
-        redirect_to root_path, alert: "access denied" 
+            redirect_to root_path, alert: "Not Authorized" 
         end
     end
 
