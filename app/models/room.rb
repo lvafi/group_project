@@ -21,8 +21,8 @@ class Room < ApplicationRecord
 
     # Setter
     def features=(value)
-        self.tags = value.strip.split(/\s*,\s*/).map do |feature|
-            Tag.find_or_initialize_by(name: feature)
+        self.features = value.strip.split(/\s*,\s*/).map do |feature|
+            Feature.find_or_initialize_by(name: feature)
         end
     end
 
