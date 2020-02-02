@@ -7,11 +7,13 @@ class ApplicationController < ActionController::Base
             @current_user ||= User.find_by(id: session[:user_id])
         end
     end
+    
     helper_method :current_user
     
     def user_signed_in?
         current_user.present?
     end
+
     helper_method :user_signed_in?
 
     def authenticate_user!
@@ -20,6 +22,7 @@ class ApplicationController < ActionController::Base
             redirect_to new_session_path
         end
     end
+    
     helper_method :authenticate_user!
     
 end
