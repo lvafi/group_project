@@ -7,19 +7,24 @@ class ApplicationController < ActionController::Base
             @current_user ||= User.find_by(id: session[:user_id])
         end
     end
+    
     helper_method :current_user
-
-    def authenticate_user!
-        unless session[:user_id].present?
-            flash[:danger] = "User must sign in"
-            redirect_to new_session_path
-        end
-    end
-
+    
     def user_signed_in?
         current_user.present?
     end
+
     helper_method :user_signed_in?
+
+    def authenticate_user!
+
+        unless user_signed_in?
+            flash[:danger] = "You must sign up or sign in to proceed."
+
+            redirect_to new_session_path
+        end
+    end
+    
     helper_method :authenticate_user!
     
 end
