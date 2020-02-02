@@ -9,8 +9,6 @@ class User < ApplicationRecord
     has_many :courses, dependent: :nullify 
     has_many :enrolled_courses, through: :enrollment, source: :course     
 
-    private
-
     def full_name
         "#{first_name} #{last_name}".strip.squeeze       
     end

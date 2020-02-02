@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
-    before_action :authenticate!, except: [:new, :create]
-    before_action :find_user, only: [:edit, :update, :destroy, :edit_password, :update_password]
+
+    before_action :authenticate_user!, except: [:new, :create]
+    before_action :find_user, only: [:edit, :update, :destroy, :password_edit, :password_update, :show]
+
 
     def new
         @user = User.new 
@@ -30,6 +32,10 @@ class UsersController < ApplicationController
         end
     end
 
+
+    def show
+    end
+  
     def update_password
         if @user&.authenticate params[:current_password]
             user_params[:password] = params[:id][:new_password] 
@@ -44,7 +50,7 @@ class UsersController < ApplicationController
     end
     
     def edit_password
-        find_params
+#         find_params
     end
 
     private
