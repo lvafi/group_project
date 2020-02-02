@@ -1,10 +1,12 @@
-<% courses.each do |course| %>
-<div>
-    <h2><%= link_to(course.title,course_path(course.id)) %></h2>
-    <p><%= course.description %></p>
-    <p><%= course.price %></p>
-    <p><%= course.range_start_date %></p>
-    <p><%= course.range_end_date %></p>
+<div class="popular-container">
+    <% courses.each do |course| %>
+    <div class="popular-item">
+        <h2><%= link_to(course.title,course_path(course.id)) %></h2>
+        <p><%= course.description %></p>
+        <p><%= course.price %></p>
+        <p><%= course.range_start_date %></p>
+        <p><%= course.range_end_date %></p>
+    </div>
+    <% end %>
 </div>
-<% end %>
 

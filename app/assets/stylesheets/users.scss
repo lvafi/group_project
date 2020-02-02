@@ -1,11 +1,12 @@
 // Place all the styles related to the users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
-body {
-  background-image: url("group_project_hero.jpg");
-  background-size: cover;
-  background-position: center, center;
-  height: 100vh;
+
+.background-img{
+    background-image: url("group_project_hero.jpg");
+    background-size: cover;
+    background-position: center, center;
+    overflow: hidden;
 }
 
 .the-menu {
@@ -25,10 +26,11 @@ body {
   border-radius: 15px;
   box-shadow: 0 8px 15px 0 hsla(0, 0%, 48%, .1);
   line-height: 2rem;
+  margin: 3em;
   padding: 2rem 3rem;
-  position: absolute;
-  right: 10%;
-  top: 15%;
+//   position: absolute;
+//   right: 10%;
+//   top: 15%;
   width: 35%;
 }
 
@@ -199,4 +201,22 @@ div.login-menu.item {
 .day_number {
   font-size: 1em;
   font-weight: bold;
+}
+
+//root page popular 
+@media(min-width : 600px){
+    .popular-container{
+        display: grid;
+        grid-template-columns: 30% 30% 30%;
+        grid-gap: 1em;
+        padding: 1em;
+        border: 1px solid black ;
+    }
+}
+.popular-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 3));
+    grid-gap: 1em;
+    padding: 1em;
+    border: 1px solid black ;
 }
