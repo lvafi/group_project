@@ -1,0 +1,21 @@
+<h3>Rooms</h3>
+<br>
+
+<% if @feature.present? %>
+    <h6>
+        Showing rooms with: 
+        <span>
+            <%= @feature.name %>
+        </span>
+    </h6>
+
+<% elsif @location.present? %>
+    <h6>
+        Showing rooms in: 
+        <span>
+            <%= @location %>
+        </span>
+    </h6>
+<% end %>
+
+<%= render 'list' %>

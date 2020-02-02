@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   root 'users#new'
 
-  resources :users , only: [:new, :create, :edit, :update]
+  resources :users , only: [:new, :create, :edit, :update, :show]
   resource :session, only: [:new, :create, :destroy]
   
   resources :rooms do
@@ -11,7 +11,6 @@ Rails.application.routes.draw do
 
   resources :courses do
     resources :enrollments
-    resources :bookings
   end
 
 end

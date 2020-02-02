@@ -23,6 +23,10 @@ gem 'bcrypt', '~> 3.1.7'
 # Authorization
 gem 'cancancan'
 
+# Model Diagram
+gem 'rails-erd'
+gem 'erd'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
@@ -48,6 +52,8 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'cowsay'
+  gem 'faker'
+
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
