@@ -1,9 +1,7 @@
 class CoursesController < ApplicationController
-
-    before_action :authenticate_user!, except: [:show, :index]
-    before_action :find_course, only: [:show, :edit, :udpate, :destroy]
+    before_action :authenticate_user!, except: [:index, :show]
+    before_action :find_course, only: [:show, :edit, :update, :destroy]
     before_action :authorize!, only: [:edit, :update, :destroy]
-
     
     def new
         @course = Course.new
@@ -14,6 +12,7 @@ class CoursesController < ApplicationController
         @course.user = current_user #setting the default owner of the course to be a teacher 
 
         if @course.save
+            flash[:notice] = 'Congratulations! You have created a course.'
             redirect_to courses_path(@course)
         else
             render :new
@@ -21,15 +20,14 @@ class CoursesController < ApplicationController
     end
 
     def index 
-        #@courses = Course.all
-        @courses = Course.order(created_at: :DESC)
+        @courses = Course.all.order(created_at: :DESC)
     end
 
     def show
         @booking = Booking.new
         @enrollment = Enrollment.new
 
-        #if I'm a teacher (course owner that is)
+        #if I'm a teacher (course owner)
         if @course.user == current_user 
             if can? :crud, @course
                 @bookings = @course.bookings.order(created_at: :desc)
@@ -39,7 +37,10 @@ class CoursesController < ApplicationController
                 @enrollments = @course.enrollments.where(hidden: false).order(created_at: :desc)
             end
         else #else its a student-user or room-mananger-user
-            @bookings = @course.bookings.order(created_at: :desc)   
+            @bookings = @course.bookings.order(created_at: :desc)  
+            @enrollments = current_user.enrollments.map{
+                |enrollment| Course.find(enrollment.course_id) 
+            }
         end
     end
 
@@ -48,7 +49,8 @@ class CoursesController < ApplicationController
 
     def update 
         if @course.update course_params
-            redirect_to course_path(@course)
+            flash[:notice] = 'Course updated Successfully'
+            redirect_to course_path(@course.id)
         else
             render :edit
         end
@@ -56,21 +58,27 @@ class CoursesController < ApplicationController
 
     def destroy
         @course.destroy
+        flash[:notice] = 'The course has been deleted.'
         redirect_to courses_path
     end
 
     private
     
     def course_params
-        params.require(:course).permit(:title, :description, :price, :range_start_date, :range_end_date, :user_id)
+        params.require(:course).permit(:title, :description, :price, :range_start_date, :range_end_date)
     end
    
     def find_course
-        @course = Course.find params[:id]
+        @course = Course.find_by id:params[:id]
+        if @course === nil
+            redirect_to root_path, notice: "Course Does Not Exist"
+        end
     end
 
     def authorize!
-        redirect_to root_path, alert: "access denied" unless can? :crud, @course
+        unless can? :crud, @course
+            redirect_to root_path, alert: "Not Authorized" 
+        end
     end
 
 end

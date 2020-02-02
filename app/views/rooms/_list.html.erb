@@ -1,0 +1,22 @@
+<% @rooms.each do |room| %>
+<div class="single_room">
+    <h5><%= link_to(room.name, room_path(room.id)) %></h5>
+    <hr />
+    <p><%= link_to(
+                    room.location, rooms_path(location: room.location)
+                ) %>
+    </p>
+    <p><%= room.capacity %></p>
+
+    <% unless room.features.empty? %>
+    <p>Features: <% room.features.each do |feature| %>
+        <%= link_to(
+                    feature.name, rooms_path(feature: feature.name)
+                ) %>
+        <% end %>
+    </p>
+    <% end %>
+    <div class="room_create">Posted <%= remove_unwanted_words time_ago_in_words(room.created_at) %> ago </small>
+    </div>
+</div>
+<% end %>

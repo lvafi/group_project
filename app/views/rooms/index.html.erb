@@ -1,0 +1,26 @@
+<div class="container">
+    <h3 class="new user">All Rooms</h3>
+    <a href="<%= new_room_path%>" class="sign_up_button">New Room</a><hr />
+    <br>
+    <% if @feature.present? %>
+    <h6>
+        Showing rooms with:
+        <span>
+            <%= @feature.name %>
+        </span>
+    </h6>
+
+    <% elsif @location.present? %>
+    <h6>
+        Showing rooms in:
+        <span>
+            <%= @location %>
+        </span>
+    </h6>
+    <% end %>
+
+    <div class="room_list">
+    <%= render 'list' %>
+    </div>
+
+</div>

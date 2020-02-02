@@ -1,6 +1,6 @@
 class RoomsController < ApplicationController
     before_action :authenticate_user!, except: [:index, :show]
-    before_action :find_room, only: [:edit,:update,:show, :destroy]
+    before_action :find_room, only: [:show, :edit, :update, :destroy]
     before_action :authorize!, only: [:edit, :update, :destroy]
 
     def new
@@ -10,8 +10,12 @@ class RoomsController < ApplicationController
     def create
         @room = Room.new room_params
         @room.user = current_user
+        @room.features = params[:features].map do |feature|
+            Feature.find_or_initialize_by(name: feature)
+        end
+
         if @room.save
-            flash[:notice] = 'Room created successfully'
+            flash[:notice] = 'Congratulations! You have created a room.'
             redirect_to room_path(@room.id)
         else
             render :new
@@ -24,7 +28,7 @@ class RoomsController < ApplicationController
 
     def update
         if @room.update room_params
-            flash[:notice] = 'Room updated Successfully'
+            flash[:notice] = 'Room updated successfully'
             redirect_to room_path(@room.id)
         else
             render :edit
@@ -35,18 +39,24 @@ class RoomsController < ApplicationController
         if params[:feature]
             @feature = Feature.find_or_initialize_by(name: params[:feature])
             @rooms = @feature.rooms.order(created_at: :desc)
+        elsif params[:location]
+            @rooms = Room.all.filter { |room| room.location == params[:location] }
+            @location = params[:location]
         else
             @rooms = Room.all.order(created_at: :desc)
         end
     end
 
     def show
+        @availability = Availability.new
+        @availabilities = @room.availabilities.order(created_at: :desc)
         @booking = Booking.new
         @bookings = Booking.all.order(created_at: :desc)
     end
 
     def destroy
         @room.destroy
+        flash[:notice] = 'The room was successfully deleted.'
         redirect_to rooms_path
     end
 
