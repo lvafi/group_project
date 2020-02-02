@@ -10,13 +10,13 @@
 PASSWORD = "supersecret" 
 
 Course.delete_all
+Search.delete_all
 Room.delete_all
-Availability.delete_all 
-Booking.delete_all 
+Availability.delete_all
+Booking.delete_all
 Enrollment.delete_all
 Feature.delete_all
-Search.delete_all
-User.delete_all 
+User.delete_all
 
 PASSWORD = "supersecret"  
 
