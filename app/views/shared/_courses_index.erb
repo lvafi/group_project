@@ -10,7 +10,7 @@
             <% if user_signed_in? %>
                 <% enrollment = current_user.enrollments.find_by(course_id: course) %>
                 <% if enrollment.present? %>
-                    <p style="font-weight:bold">You are currently Enrolled in this course</p>
+                    <p style="font-weight:bold">You are currently enrolled in this course.</p>
                 <% end %>
             <% end %>
         </div>
