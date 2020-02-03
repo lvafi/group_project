@@ -11,6 +11,19 @@ module ApplicationHelper
         return date.day
     end
 
+    def featureCheck name
+        if name == "WiFi"
+            "wifi"
+        elsif name == "ADA Accessible"
+            "wheelchair"
+        elsif name == "Free Parking"
+            "car"
+        elsif name == "Paid Parking"
+            "dollar sign"
+        else
+            ""
+        end
+    end
     def user_friendly_range date
         return date.strftime("%B %d %Y")
     end

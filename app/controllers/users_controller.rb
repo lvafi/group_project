@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
     before_action :authenticate_user!, except: [:new, :create]
-    before_action :find_user, only: [:edit, :update, :destroy, :password_edit, :password_update, :show]
+    before_action :find_user, only: [:edit, :update, :destroy, :password_edit, :password_update]
 
 
     def new
@@ -34,6 +34,7 @@ class UsersController < ApplicationController
 
 
     def show
+        @user = current_user
     end
   
     def update_password

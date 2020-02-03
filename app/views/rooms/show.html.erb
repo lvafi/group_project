@@ -1,4 +1,13 @@
 <div class="container">
+    <div class="room_book">
+        <div class="room_info">
+            <h5 class="new user"><%= @room.name %>
+              <%= link_to(rooms_path(location: @room.location)) do %>
+                    <div class="ui blue basic label">
+                      <i class="map marker alternate icon"></i><%= @room.location %>
+                    </div>
+                <% end %>
+            </h5>
   <div class="room_book">
     <div class="room_info">
       <h5 class="new user"><%= @room.name %></h5>
@@ -82,11 +91,11 @@
 
   <% if can?(:crud, @room)%>
   <h2> Reserved Bookings </h2>
-  <% @bookings.each do |booking| %>
-  <% if booking.reserved? %>
-  <%= booking.course.title  %><br>
-  <%= button_to "Approve", room_booking_approving_path(@room, booking), method: :put %>
-  <%= button_to "Reject", room_booking_rejecting_path(@room, booking), method: :put %>
-  <% end %>
-  <% end %>
+    <% @bookings.each do |booking| %>
+      <% if booking.reserved? %>
+        <%= booking.course.title  %><br>
+        <%= button_to "Approve", room_booking_approving_path(@room, booking), method: :put %>
+        <%= button_to "Reject", room_booking_rejecting_path(@room, booking), method: :put %>
+      <% end %>
+    <% end %>
   <% end %>
