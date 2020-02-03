@@ -11,7 +11,7 @@
             <p>Price: $<%= course.price %></p>
             <p>Duration: <%= user_friendly_range course.range_start_date %> to <%= user_friendly_range course.range_end_date %></p>
       
-            <%# if can? :crud, @enrollment %>
+            <% if current_user.present? && current_user != course.user %>
                 <div class="post-enroll">
                     <% enrollment = current_user.enrollments.find_by(course_id: course)%>
                     <% if enrollment.present? %>
@@ -20,7 +20,7 @@
                         <%= link_to('Enroll', course_enrollments_path(course.id), :method => :post, class:"sign_up_button") %>
                     <% end %>
                 </div> 
-            <%# end %>
+            <% end %>
         </div>
         <% end %>
     </div>
