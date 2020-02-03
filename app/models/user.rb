@@ -7,7 +7,8 @@ class User < ApplicationRecord
 
     has_many :rooms, dependent: :nullify
     has_many :courses, dependent: :nullify 
-    has_many :enrolled_courses, through: :enrollment, source: :course     
+    has_many :enrolled_courses, through: :enrollment, source: :course   
+    has_many :enrollments, dependent: :destroy  
 
     def full_name
         "#{first_name} #{last_name}".strip.squeeze       
