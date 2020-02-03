@@ -14,6 +14,12 @@ body {
   background-size: cover;
   background-position: center, center;
   height: 100vh;
+
+.background-img{
+    background-image: url("group_project_hero.jpg");
+    background-size: cover;
+    background-position: center, center;
+    overflow: hidden;
 }
 
 .the-menu {
@@ -22,7 +28,7 @@ body {
 }
 
 .the-menu.ui.top.fixed.menu {
-  background-color: transparent;
+  // background-color: transparent;
   border: none;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -33,11 +39,13 @@ body {
   border-radius: 15px;
   box-shadow: 0 8px 15px 0 hsla(0, 0%, 48%, .1);
   line-height: 2rem;
+  margin: 3em;
   padding: 2rem 3rem;
-  position: absolute;
-  right: 10%;
-  top: 15%;
+//   position: absolute;
+//   right: 10%;
+//   top: 15%;
   width: 35%;
+  min-width: 300px;
 }
 
 .user.new {
@@ -47,8 +55,6 @@ body {
   font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif !important;
   font-weight: bold;
 }
-
-.login-menu {}
 
 .user_name {
   display: grid;
@@ -63,6 +69,27 @@ input {
   margin-bottom: 1em;
   width: 100%;
 }
+h1, h2, h3, h4, h5 {
+  margin: 2.75rem 0 1.05rem;
+  font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
+  font-weight: 600;
+  line-height: 1.15;
+}
+
+h1 {
+  margin-top: 0;
+  font-size: 3.052em;
+}
+
+h2 {font-size: 2.441em;}
+
+h3 {font-size: 1.953em;}
+
+h4 {font-size: 1.563em;}
+
+h5 {font-size: 1.25em;}
+
+small, .text_small {font-size: 0.8em;}
 
 label {
   color: #484848;
@@ -86,6 +113,9 @@ label {
 .sign_up_button:hover {
   cursor: pointer;
   color: white;
+}
+.nav{
+  background: rgba(0,0,0,0.3) !important;
 }
 
 .navbar_link {
@@ -125,9 +155,6 @@ div.login-menu.item {
   margin: 1em;
 }
 
-.single_room>h5 {
-  font-size: 2em;
-}
 
 .room_book {
   display: grid;
@@ -140,8 +167,11 @@ div.login-menu.item {
 }
 
 .booking_room {
-  background-color: green;
+  display: flex;
+  justify-content: center;
+  align-content: space-around;
   padding: 1em;
+  border: 1px solid black;
 }
 
 
@@ -177,6 +207,16 @@ div.login-menu.item {
   .current-month {}
 
   .has-events {}
+
+  a {
+    color: black !important;
+    font-size: 1.5em;
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif !important;
+  }
+
+  a:hover {
+    cursor: pointer;
+  }
 
   th {
     background-color: #FF4A5F;

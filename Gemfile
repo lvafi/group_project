@@ -26,13 +26,8 @@ gem 'semantic-ui-sass'
 # Authorization
 gem 'cancancan'
 
-# File Upload
-# gem "shrine", "~> 3.0"
-
-# Calendar
 gem 'aasm'
 gem 'simple_calendar', '~> 2.0'
-
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
