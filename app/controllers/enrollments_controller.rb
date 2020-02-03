@@ -15,7 +15,6 @@ class EnrollmentsController < ApplicationController
             end
         else
             redirect_to course, alert: "Course creators are not permitted to enroll in their own courses."
-
         end
     end
 

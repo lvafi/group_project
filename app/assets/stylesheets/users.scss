@@ -162,8 +162,11 @@ div.login-menu.item {
 }
 
 .booking_room {
-  background-color: green;
+  display: flex;
+  justify-content: center;
+  align-content: space-around;
   padding: 1em;
+  border: 1px solid black;
 }
 
 
@@ -199,6 +202,16 @@ div.login-menu.item {
   .current-month {}
 
   .has-events {}
+
+  a {
+    color: black !important;
+    font-size: 1.5em;
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif !important;
+  }
+
+  a:hover {
+    cursor: pointer;
+  }
 
   th {
     background-color: #FF4A5F;
