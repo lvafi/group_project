@@ -12,8 +12,6 @@ html * {
 body{
     background-image: url("group_project_hero.jpg");
     background-size: cover;
-    background-position: center, center;
-    background-repeat: no-repeat;
     background-attachment: fixed;
 }
 
@@ -174,7 +172,10 @@ label {
     .link_container > h3{
       font-size: calc(100vw / 40 + 0.3em);
     }
-  //
+  
+  section { 
+    min-height:100vh; 
+  }
 
   .sign_up_button {
     display: inline-block;
@@ -192,6 +193,7 @@ label {
     cursor: pointer;
     color: white;
   }
+  
   .nav{
     background: rgba(0,0,0,0.3) !important;
   }
@@ -250,7 +252,6 @@ label {
   }
 
   .single_room {
-    border: 1px solid red;
     padding: 1em;
     margin: 1em;
   }
@@ -338,6 +339,10 @@ label {
 
   .day_number {
     font-size: 1em;
+    font-weight: bold;
+  }
+
+  strong {
     font-weight: bold;
   }
 
