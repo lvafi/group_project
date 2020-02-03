@@ -28,6 +28,7 @@ class CoursesController < ApplicationController
     def show
         @booking = Booking.new
         @enrollment = Enrollment.new
+        @enrollments = @course.enrollments.order(created_at: :desc)
         @review = Review.new
         @reviews = @course.reviews.order(created_at: :desc)
 
