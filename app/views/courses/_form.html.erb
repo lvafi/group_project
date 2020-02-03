@@ -1,5 +1,5 @@
 
-<%= form_with(model: @course, local: true) do |f| %>
+<%= form_with(model: @course, local: true, class: "ui form") do |f| %>
 <div>
     <% if @course.errors.present?%>
         <%= @course.errors.full_messages.join(', ')%>
@@ -11,7 +11,7 @@
 </div>
 <div>
     <%= f.label :description %><br>
-    <%= f.text_area :description, cols: 50, rows:5%>  
+    <%= f.text_area :description, cols: 50, rows:5, style:"width:100%"%>  
 </div>
 <div>
     <%= f.label :price %><br>

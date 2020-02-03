@@ -1,6 +1,19 @@
 // Place all the styles related to the users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+html {
+  font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif
+}
+
+html * {
+  font-family: inherit;
+}
+
+body {
+  background-image: url("group_project_hero.jpg");
+  background-size: cover;
+  background-position: center, center;
+  height: 100vh;
 
 .background-img{
     background-image: url("group_project_hero.jpg");
@@ -28,11 +41,10 @@
   line-height: 2rem;
   margin: 3em;
   padding: 2rem 3rem;
-//   position: absolute;
-//   right: 10%;
-//   top: 15%;
-  width: 35%;
-  min-width: 300px;
+  position: absolute;
+  right: 10%;
+  top: 15%;
+  width: 80% !important;
 }
 
 .user.new {
@@ -49,12 +61,11 @@
   grid-column-gap: 1rem;
 }
 
-input {
-  border: 1px solid grey;
-  height: 2em;
-  padding: 1em;
+.logo {
+  display: flex;
+  flex-direction: row;
   margin-bottom: 1em;
-  width: 100%;
+  align-items: center;
 }
 h1, h2, h3, h4, h5 {
   margin: 2.75rem 0 1.05rem;
@@ -151,26 +162,10 @@ div.login-menu.item {
   padding: 2em;
 }
 
-.locations-container {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  border: 1px solid black;
-}
-
-.location-container>.div {
-  border: 1px solid brown;
-}
-
-.room_list {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 1em;
-}
-
 .single_room {
-  border: 0.5px solid black;
-  padding: 2em;
+  border: 1px solid black;
+  padding: 1em;
+  margin: 1em;
 }
 
 
@@ -185,8 +180,11 @@ div.login-menu.item {
 }
 
 .booking_room {
-  background-color: green;
+  display: flex;
+  justify-content: center;
+  align-content: space-around;
   padding: 1em;
+  border: 1px solid black;
 }
 
 
@@ -222,6 +220,17 @@ div.login-menu.item {
   .current-month {}
 
   .has-events {}
+}
+
+  a {
+    color: black !important;
+    font-size: 1.5em;
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif !important;
+  }
+
+  a:hover {
+    cursor: pointer;
+  }
 
   th {
     background-color: #FF4A5F;
@@ -259,3 +268,34 @@ div.login-menu.item {
   }
 }
 
+#dropdown-title {
+  color: black;
+}
+
+@media (min-width: 768px) {
+  .room_list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .filter {
+    float: right;
+  }
+
+  .description-text-area {
+    width: 45% !important;
+  }
+
+}
+
+@media (min-width: 1200px) {
+  .room_list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .description-text-area {
+    width: 35% !important;
+  }
+
+}
