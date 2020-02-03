@@ -5,7 +5,10 @@ Rails.application.routes.draw do
   resource :session, only: [:new, :create, :destroy]
   
   resources :courses do
-    resources :enrollments
+    resources :enrollments do
+      put :approving
+      put :rejecting
+    end
     resources :reviews, only: [:create, :destroy]
   end
 

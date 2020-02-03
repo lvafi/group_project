@@ -21,37 +21,44 @@
         <p>Posted by <%= time_ago_in_words(@course.created_at) %> ago</p>
     </div>
 
-    <% if @course.user == current_user %>
+
+    <% if can?(:crud, @course) %>
         <div class="course-section">
             <h5>Roster</h5>
             <ol>
                 <% @enrollments.each do |enrollment| %>
-                    <li><%= enrollment.user.full_name %></li>
+                        <% if enrollment.reserved? %>
+                            <%= enrollment.user.full_name  %><br>
+                                <%= link_to "Approve", course_enrollment_approving_path(@course, enrollment), method: :put, class: "sign_up_button" %>
+                                <%= link_to "Reject", course_enrollment_rejecting_path(@course, enrollment), method: :put, class: "sign_up_button" %>
+                        <% end %>
+                    <% if enrollment.approved? %>
+                        <li><%= enrollment.user.full_name %></li>
+                    <% end %>
                 <% end %>
             </ol>
         </div>
     <% end %>
 
         <div class="post-enroll">
-<<<<<<< HEAD
-        <% if current_user.present? && @course.user != current_user %>
-            <% if current_user.enrollments.present? %>
-                <% enrollment = current_user.enrollments.find_by(course_id: @course)%>
-                <%= link_to('Unenroll', course_enrollment_path(@course.id, enrollment), method: :delete, data:{confirm:'Are you sure you want to leave this course?'}, class: "sign_up_button") %>
-            <% else %>
-                <%= link_to('Enroll', course_enrollment_path(@course.id), :method => :post, class:"sign_up_button") %>
-=======
             <% if current_user.present? && @course.user != current_user%>
-                    <% if @course.enrollments.find_by(user_id: current_user.id) %>
-                        <%= link_to('Unenroll', course_enrollments_path(@course.id, @enrollment), method: :delete, data:{confirm:'Are you sure you want to leave this course?'}, class: "sign_up_button") %>
+                    <% if @course.enrollments.find_by(user_id: current_user.id)%>
+                    <% enrollment = @course.enrollments.find_by(user_id: current_user.id) %>
+                        <% if enrollment.approved? %>
+                            You got approved <%= link_to('Unenroll', course_enrollment_path(@course.id, enrollment), method: :delete, data:{confirm:'Are you sure you want to leave this course?'}, class: "sign_up_button") %>
+                        <% end %>
+                        <% if enrollment.reserved? %>
+                            Pending Your enrollment
+                        <% end %>
+                        <% if enrollment.rejected? %>
+                            Sorry you got rejected <%= link_to('Unenroll', course_enrollment_path(@course.id, enrollment), method: :delete, data:{confirm:'Are you sure you want to leave this course?'}, class: "sign_up_button") %>
+                        <% end %>
                     <% else %>
                         <%= link_to('Enroll', course_enrollments_path(@course.id), :method => :post, class:"sign_up_button") %>
                     <% end %>
                 <hr>
->>>>>>> 16226eeee94c8f8c99c13932e5187569e7296154
             <% end %>
             <hr>
-        <% end %>
         </div> 
     
 </div>
