@@ -1,3 +1,39 @@
 // Place all the styles related to the rooms controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+//root page popular 
+@media(min-width : 600px){
+    .popular-container{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-gap: 1em;
+        padding: 1em;
+        border: 1px solid black ;
+    }
+    .user-container{
+        margin: 0 auto;
+        padding: 1em;
+      }
+}
+.popular-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px));
+    grid-gap: 1em;
+    padding: 1em;
+    border: 1px solid black ;
+}
+.popular-item{
+    border: 1px solid black ;
+    padding: 1em;
+}
+.img-rooms, .img-courses{
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    width: 100%;
+}
+.root-item>h3{
+    padding: 1em;
+    margin: 0;
+}

@@ -8,12 +8,13 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
   <%= stylesheet_link_tag 'application', media: 'all' %>
   <%= javascript_pack_tag 'application' %>
+  <%= favicon_link_tag asset_path('logo.png') %>
 </head>
 
 <body>
   <nav>
     <div class="the-menu  ui top fixed menu">
-      <div class="item"><%=link_to "Book N'Roll", root_path, class:"navbar_link" %></div>
+      <div class="item"><%=link_to "Book n'Roll", root_path, class:"navbar_link" %></div>
       <div class="login-menu item">
         <% if user_signed_in? %>
           Hello, <strong> <%= current_user.full_name %>&nbsp&nbsp&nbsp</strong>
