@@ -28,6 +28,9 @@ class CoursesController < ApplicationController
     def show
         @booking = Booking.new
         @enrollment = Enrollment.new
+        @enrollments = @course.enrollments.order(created_at: :desc)
+        @review = Review.new
+        @reviews = @course.reviews.order(created_at: :desc)
 
         #if I'm a teacher (course owner)
         if @course.user == current_user 
@@ -40,7 +43,7 @@ class CoursesController < ApplicationController
             end
         else #else its a student-user or room-mananger-user
             @bookings = @course.bookings.order(created_at: :desc)
-            if current_user.enrollments  
+            if current_user && current_user.enrollments  
                 @enrollments = current_user.enrollments.map{
                     |enrollment| Course.find(enrollment.course_id) 
                 }

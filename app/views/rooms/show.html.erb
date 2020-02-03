@@ -1,69 +1,71 @@
 <div class="container">
-    <div class="room_book">
-        <div class="room_info">
-            <h5 class="new user"><%= @room.name %>
-              <%= link_to(rooms_path(location: @room.location)) do %>
-                    <div class="ui blue basic label">
-                      <i class="map marker alternate icon"></i><%= @room.location %>
-                    </div>
-                <% end %>
-            </h5>
-  <div class="room_book">
-    <div class="room_info">
-      <h5 class="new user"><%= @room.name %></h5>
 
-      <% if can? :crud, @room %>
+  <div class="room_info">
+    <div class="show_room_header">
+        <div class="new user"><%= @room.name %>
+            <%= link_to(rooms_path(location: @room.location)) do %>
+              <div class="ui blue basic label">
+                <i class="map marker alternate icon"></i><%= @room.location %>
+              </div>
+            <% end %>
+        </div>
+      </div>
+
+    <% if can? :crud, @room %>
       <div class="post-buttons">
-        <%= link_to('Edit Room', edit_room_path(@room.id), class: "sign_up_button") %>
+        <%= link_to('Edit Room', edit_room_path(@room.id), class: "") %>
         <%= link_to("Delete Room", room_path(@room), method: :delete, data:{confirm:'Are you sure?'}, class: "sign_up_button") %>
       </div>
-      <% end %>
+    <% end %>
 
-      <p>Address: <%= @room.address %></p>
-      <p>Location: <%= link_to(
-                    @room.location, rooms_path(location: @room.location)
-                ) %></p>
-      <p><%= @room.capacity %></p>
-      <p>$<%= @room.price %></p>
-      <p><%= @room.description %></p>
+    <div class="room_up">
+      <div class="room_info">
+        <p>Address: <%= @room.address %></p>
+        <p>Capacity: <%= @room.capacity %></p>
+        <p>Price: $<%= @room.price %>/hr</p>
+        <p>Description: <br><%= @room.description %></p>
 
-      <% if @room.features.count > 0 %>
-      <h6>Features</h6>
-      <ul>
+    <% if @room.features.count > 0 %>
+      <p>
         <% @room.features.each do |feature| %>
-        <li><%= link_to(
-                    feature.name, rooms_path(feature: feature.name)
-                ) %></li>
+        <%= link_to(
+                    feature.name, rooms_path(feature: feature.name), class: "ui blue basic label"
+                ) %>
         <% end %>
-      </ul>
-      <% end %>
-    </div>
-    <div class="booking_room">
-      <%= form_with(model: [@room, @booking], local: true) do |form| %>
-      <% if @booking.errors.present?%>
-      <p style="color:red;">
-        <%= @booking.errors.full_messages.join(', ') %>
       </p>
-      <% end %>
-      <div class=“field”>
-        <%= form.label :start_time %><br />
-        <%= form.datetime_select :start_time %>
-      </div>
-      <div class=“field”>
-        <%= form.label :end_time %><br />
-        <%= form.datetime_select :end_time %>
-      </div>
+    <% end %>
+      
+   </div>
 
-      <div class=“field”>
-        <%= form.label :course_id %><br />
-        <%= form.collection_select :course_id, current_user.courses , :id, :title%>
-      </div>
+  <% if current_user.present? && current_user.courses.present? %>
+      <div class="booking_room">
+        <%= form_with(model: [@room, @booking], local: true) do |form| %>
+        <% if @booking.errors.present?%>
+        <p style="color:red;">
+          <%= @booking.errors.full_messages.join(', ') %>
+        </p>
+        <% end %>
+        <div class=“field”>
+          <%= form.label :start_time %><br />
+          <%= form.datetime_select :start_time %>
+        </div>
+        <div class=“field”>
+          <%= form.label :end_time %><br />
+          <%= form.datetime_select :end_time %>
+        </div>
 
-      <div class=“actions”>
-        <%= form.submit class: "sign_up_button" %>
+        <div class=“field”>
+          <%= form.label :course_id %><br />
+          <%= form.collection_select :course_id, current_user.courses, :id, :title%>
+        </div>
+
+        <div class=“actions”>
+          <%= form.submit class: "sign_up_button" %>
+        </div>
+        <% end %>
       </div>
-      <% end %>
-    </div>
+  <% end %>
+
   </div>
   <hr>
 
@@ -99,3 +101,7 @@
       <% end %>
     <% end %>
   <% end %>
+
+  </div>
+
+</div>
