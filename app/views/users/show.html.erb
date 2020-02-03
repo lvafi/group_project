@@ -42,10 +42,8 @@
              <%= render 'shared/courses_index',courses: Course.joins(:enrollments).where("enrollments.user_id = ?", current_user.id) %>
         </div>
     <% else %>
-        <h3> Shop for a course ☞ </h3>
-        
         <div class="link_container">
-            <h3> Post Your Courses ☞ </h3>
+            <h3> Shop for a course ☞ </h3>
             <%= link_to courses_path do %>
                 <%= image_tag "example/yoga", class: "img-links" %>
             <% end %>
