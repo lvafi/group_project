@@ -33,36 +33,39 @@
                 ) %>
         <% end %>
       </p>
-        <% end %>
+    <% end %>
       
    </div>
 
-    <div class="booking_room">
-      <%= form_with(model: [@room, @booking], local: true) do |form| %>
-      <% if @booking.errors.present?%>
-      <p style="color:red;">
-        <%= @booking.errors.full_messages.join(', ') %>
-      </p>
-      <% end %>
-      <div class=“field”>
-        <%= form.label :start_time %><br />
-        <%= form.datetime_select :start_time %>
-      </div>
-      <div class=“field”>
-        <%= form.label :end_time %><br />
-        <%= form.datetime_select :end_time %>
-      </div>
+  <% if current_user.present? && current_user.courses.present? %>
+      <div class="booking_room">
+        <%= form_with(model: [@room, @booking], local: true) do |form| %>
+        <% if @booking.errors.present?%>
+        <p style="color:red;">
+          <%= @booking.errors.full_messages.join(', ') %>
+        </p>
+        <% end %>
+        <div class=“field”>
+          <%= form.label :start_time %><br />
+          <%= form.datetime_select :start_time %>
+        </div>
+        <div class=“field”>
+          <%= form.label :end_time %><br />
+          <%= form.datetime_select :end_time %>
+        </div>
 
-      <div class=“field”>
-        <%= form.label :course_id %><br />
-        <%= form.collection_select :course_id, current_user.courses , :id, :title%>
-      </div>
+        <div class=“field”>
+          <%= form.label :course_id %><br />
+          <%= form.collection_select :course_id, current_user.courses, :id, :title%>
+        </div>
 
-      <div class=“actions”>
-        <%= form.submit class: "sign_up_button" %>
+        <div class=“actions”>
+          <%= form.submit class: "sign_up_button" %>
+        </div>
+        <% end %>
       </div>
-      <% end %>
-    </div>
+  <% end %>
+
   </div>
   <hr>
 

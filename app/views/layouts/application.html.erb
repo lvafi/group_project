@@ -1,5 +1,5 @@
-  <!DOCTYPE html>
-  <html>
+<!DOCTYPE html>
+<html>
     
 <head>
   <title>Book n'Roll</title>
@@ -17,7 +17,7 @@
       <div class="item"><%=link_to "Book n'Roll", root_path, class:"navbar_link" %></div>
       <div class="login-menu item">
         <% if user_signed_in? %>
-          Hello, <strong> <%= current_user.full_name %>&nbsp&nbsp&nbsp</strong>
+          Hello, <strong> <%= current_user.first_name %>&nbsp&nbsp&nbsp</strong>
         <%= link_to "Log Out", session_path, method: :delete,
               data: {confirm: "Are you sure you want to log out?"}, class:"navbar_link"%>
         <% else %>
@@ -30,7 +30,6 @@
         <%=link_to 'Rooms', rooms_path, class:"navbar_link" %>
 
         <%=link_to 'Classes', courses_path, class:"navbar_link" %>
-        
       </div>
     </div>
   </nav>
@@ -39,6 +38,7 @@
     <%= message%>
     </div>
   <% end %>
+
   <%= yield %>
 </body>
 

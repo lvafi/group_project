@@ -3,17 +3,25 @@
     <div class="single_room ">
         <% img = "example/" + ["room1", "room2", "room3"].sample %>
         <%= image_tag img, class:"img-rooms" %>
-        <h5><%= link_to(room.name, room_path(room.id)) %></h5>
+        <h5><%= link_to(room.name, room_path(room.id)) %>
+        <%= link_to(rooms_path(location: room.location)) do %>
+            <div class="ui basic small label">
+                <i class="map marker alternate icon"></i><%= room.location %>
+            </div>
+        <% end %>
+        </h5>
         <hr />
-        <p><%= link_to(room.location, rooms_path(location: room.location)) %>
-        </p>
-        <p><%= room.capacity %></p> 
+    
+        <p><strong>Capacity:</strong> <%= room.capacity %></p> 
+        <p><strong>Price:</strong> $<%= room.price %>/hr</p> 
 
         <% unless room.features.empty? %>
-            <p>Features: <% room.features.each do |feature| %>
-                <%= link_to(feature.name, rooms_path(feature: feature.name)) %>
+            <p><strong>Features:</strong></p>
+            <% room.features.each do |feature| %>
+                <%= link_to(
+                    feature.name, rooms_path(feature: feature.name), class: "ui small basic label"
+                ) %>
             <% end %>
-            </p>
         <% end %>
             <div class="room_create">
                 <small>Posted <%= remove_unwanted_words time_ago_in_words(room.created_at) %> ago</small> 
