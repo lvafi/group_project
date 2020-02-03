@@ -82,5 +82,4 @@ class RoomsController < ApplicationController
             redirect_to root_path, alert: 'Not Authorized'
         end
     end
-
 end
