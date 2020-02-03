@@ -14,10 +14,10 @@ class EnrollmentsController < ApplicationController
                 redirect_to course_path(course)
             else
                 @courses = Course.all.order(created_at: :DESC)
-                render 'courses/index'
+                render 'courses/show'
             end
         else
-            redirect_to course, notice: "Course creators are not permitted to enroll in their own courses."
+            redirect_to course
         end
     end
 
@@ -32,7 +32,7 @@ class EnrollmentsController < ApplicationController
             redirect_to course_path(course)
         else
             flash[:alert] = "Enrollment deletion failed."
-            redirect_to course
+            render 'courses/show'
         end
     end
 
