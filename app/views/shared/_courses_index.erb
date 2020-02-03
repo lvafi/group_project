@@ -1,14 +1,18 @@
-<div class="popular-container">
-    <% courses.each do |course| %>
-    <div class="popular-item">
-        <% img = "example/" + ["yoga", "courses"].sample %>
-        <%= image_tag img, class:"img-courses" %>
-        <h5><%= link_to(course.title,course_path(course.id)) %></h5>
-        <p><%= course.description %></p>
-        <p><%= course.price %></p>
-        <p><%= course.range_start_date %></p>
-        <p><%= course.range_end_date %></p>
+    <div class="popular-container">
+        <% courses.each do |course| %>
+        <div class="popular-item">
+            <% img = "example/" + ["yoga", "courses"].sample %>
+            <%= image_tag img, class:"img-courses" %>
+            <h5><%= link_to(course.title,course_path(course.id)) %></h5>
+            <p><%= course.description.truncate(30, separator: " ") %></p>
+            <p>Price: $<%= course.price %></p>
+            <p>Duration: <%= user_friendly_range course.range_start_date %> to <%= user_friendly_range course.range_end_date %></p>
+            <% if user_signed_in? %>
+                <% enrollment = current_user.enrollments.find_by(course_id: course) %>
+                <% if enrollment.present? %>
+                    <p style="font-weight:bold">You are currently enrolled in this course.</p>
+                <% end %>
+            <% end %>
+        </div>
+        <% end %>
     </div>
-    <% end %>
-</div>
-

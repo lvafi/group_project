@@ -7,13 +7,14 @@ class BookingsController < ApplicationController
     def create
         @room = Room.find(params[:room_id])
         @booking = Booking.new booking_params
+        @booking.course.user = current_user
         @booking.room = @room
         if @booking.save
             flash[:success] = "Congratulations! You have booked a room."
             redirect_to room_path(@room)
         else
             @bookings = @room.bookings.order(created_at: :desc)
-            redirect_to root_path
+            render 'rooms/show'
         end
     end
 

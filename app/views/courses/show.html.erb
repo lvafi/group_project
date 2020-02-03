@@ -1,25 +1,95 @@
 <div class="container">
-    <h1 class="new user"><%= @course.title %></h1>
-    <% if can? :crud, @course %>
-    <div class="post-buttons">
-        <%= link_to('Edit Class', edit_course_path(@course.id), class:"sign_up_button") %>
-        <%= link_to("Delete Class", course_path(@course), method: :delete, data:{confirm:'Are you sure?'}, class: "sign_up_button") %>
+    
+    <div class="course-section">
+        <h1 class="new user"><%= @course.title %></h1>
+        <% if can? :crud, @course %>
+            <div class="post-buttons">
+                <%= link_to('Edit', edit_course_path(@course.id), class:"sign_up_button") %>
+                <%= link_to("Delete", course_path(@course), method: :delete, data:{confirm:'Are you sure?'}, class: "sign_up_button") %>
+            </div>
+        <% end %>
+
+        <br><hr><br>
+
+        <h1><strong>Class Description:</strong></h1>
+        <p><%= @course.description %></p>
+        <br />
+        <p>Price $<%= @course.price %></p>
+        <p>Duration:
+        <%= user_friendly_range @course.range_start_date %> - 
+        <%= user_friendly_range @course.range_end_date %></p>
+        <br />
+        <p>Posted <%= time_ago_in_words(@course.created_at) %> ago</p>
     </div>
+
+    <% if can? :crud, @enrollment %>
+        <div class="course-section">
+            <h5>Roster</h5>
+            <ul>
+                <% @enrollments.each do |enrollment| %>
+                    <%= enrollment.user.full_name %>
+                <% end %>
+            </ul>
+        </div>
     <% end %>
 
-    <!-- <h2>! it may be great to have images in this page !</h2> -->
-    <hr>
-    <h1><strong>Class Description :</strong></h1>
-    <p><%= @course.description %></p>
-    <br />
-    <p>Price $<%= @course.price %></p>
-    <p>Duration :
-    <%= user_friendly_range @course.range_start_date %> - 
-    <%= user_friendly_range @course.range_end_date %></p>
-    <br />
-    <p>Posted <%= time_ago_in_words(@course.created_at) %> ago</p>
-
+        <div class="post-enroll">
+            <% enrollment = current_user.enrollments.find_by(course_id: @course)%>
+            <% if enrollment.present? %>
+                <%= link_to('Unenroll', course_enrollment_path(@course.id, enrollment), method: :delete, data:{confirm:'Are you sure you want stop enrolling in this course?'}, class: "sign_up_button") %>
+            <% else %>
+                <%= link_to('Enroll', course_enrollments_path(@course.id), :method => :post, class:"sign_up_button") %>
+            <% end %>
+        </div> 
     <hr>
 
-    <p>if user is a teacher, it's suppose to show a list of students</p>
+</div>
+    <div class="course-section">
+        <h5>Leave a Review</h5>
+
+        <%= form_with(model: [@course, @review], local: true, class: "ui form") do |f| %>
+            <% if @review.errors.present? %>
+            <p class="form-errors">
+                <%= @review.errors.full_messages.join(", ") %>
+            </p>
+            <% end %>
+
+            <div class="field">
+                <%= f.text_area(
+                    :body,
+                    cols: 50,
+                    rows: 3,
+                    placeholder: "Did you like the class?"
+                    ) %>
+            </div>
+            <div class="field">
+                <%= f.label :rating, "How many stars would you give this class?" %>
+                <%= f.select :rating, [1, 2, 3, 4, 5] %>
+            </div>
+
+            <%= f.submit "Review" %>
+
+        <% end %>
+    </div>
+
+    <div class="course-section">
+        <h5>Reviews (<%= @course.reviews.count %>)</h5>
+
+        <ul class="review-list">
+            <% @reviews.each do |review| %>
+
+            <li>
+                <%= review.body %> <br>
+                <small>Added by <%= review.user.full_name %> <%= time_ago_in_words(review.created_at) %> ago</small><br>
+                <br>
+                Rating: <% review.rating.times { %> ⭐ <% }%>
+                <br>
+            </li>
+
+            <% end %>
+
+        
+        </ul>
+    </div>
+
 </div>
