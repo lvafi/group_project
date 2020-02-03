@@ -22,6 +22,7 @@ class CoursesController < ApplicationController
 
     def index 
         @courses = Course.all.order(created_at: :DESC)
+        @enrollment = Enrollment.new
     end
 
     def show
