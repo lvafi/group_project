@@ -13,17 +13,17 @@
 
     <% if can? :crud, @room %>
       <div class="post-buttons">
-        <%= link_to('Edit', edit_room_path(@room.id)) %>
+        <%= link_to('Edit', edit_room_path(@room.id), class: "sign_up_button") %>
         <%= link_to("Delete", room_path(@room), method: :delete, data:{confirm:'Are you sure?'}, class: "sign_up_button") %>
       </div>
     <% end %>
-
+    <br>
     <div class="room_up">
       <div class="room_info">
-        <p>Address: <%= @room.address %></p>
-        <p>Capacity: <%= @room.capacity %></p>
-        <p>Price: $<%= @room.price %>/hr</p>
-        <p>Description: <br><%= @room.description %></p>
+        <p><strong>Address:</strong> <%= @room.address %></p>
+        <p><strong>Capacity:</strong> <%= @room.capacity %></p>
+        <p><strong>Price:</strong> $<%= @room.price %>/hr</p>
+        <p><strong>Description:</strong> <br><%= @room.description %></p>
 
     <% if @room.features.count > 0 %>
       <p>
@@ -48,19 +48,19 @@
         <div class=“field”>
           <%= form.label :start_time %><br />
           <%= form.datetime_select :start_time %>
-        </div>
+        </div><br>
         <div class=“field”>
           <%= form.label :end_time %><br />
           <%= form.datetime_select :end_time %>
-        </div>
+        </div><br>
 
         <div class=“field”>
           <%= form.label :course_id %><br />
           <%= form.collection_select :course_id, current_user.courses, :id, :title%>
         </div>
-
+        <br>
         <div class=“actions”>
-          <%= form.submit class: "sign_up_button" %>
+          <%= form.submit "Request Room", class: "sign_up_button" %>
         </div>
         <% end %>
       </div>
@@ -92,12 +92,12 @@
   <% end %>
 
   <% if can?(:crud, @room)%>
-  <h2> Reserved Bookings </h2>
+  <h2> Pending Bookings </h2>
     <% @bookings.each do |booking| %>
       <% if booking.reserved? %>
-        <%= booking.course.title  %><br>
-        <%= button_to "Approve", room_booking_approving_path(@room, booking), method: :put %>
-        <%= button_to "Reject", room_booking_rejecting_path(@room, booking), method: :put %>
+        <%= booking.course.title  %><br><br>
+        <%= link_to "Approve", room_booking_approving_path(@room, booking), method: :put, class: "sign_up_button" %>
+        <%= link_to "Reject", room_booking_rejecting_path(@room, booking), method: :put, class: "sign_up_button" %>
       <% end %>
     <% end %>
   <% end %>
