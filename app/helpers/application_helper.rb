@@ -24,4 +24,9 @@ module ApplicationHelper
             ""
         end
     end
+
+    def find_feature room, feature
+        room.features.find_by(name: feature).present?
+    end
+
 end
