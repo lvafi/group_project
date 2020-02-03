@@ -28,6 +28,7 @@ class CoursesController < ApplicationController
         @enrollment = Enrollment.new
         @owner = @course.user
         @reviews = @course.reviews
+        @review = Review.new
 
         #if I'm a teacher (course owner)
         if @course.user == current_user 

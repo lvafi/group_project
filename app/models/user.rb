@@ -11,6 +11,6 @@ class User < ApplicationRecord
     has_many :reviews, dependent: :nullify   
 
     def full_name
-        "#{first_name} #{last_name}".strip.squeeze       
+        "#{first_name} #{last_name}".strip.squeeze()       
     end
 end

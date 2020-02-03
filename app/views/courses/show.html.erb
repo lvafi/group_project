@@ -18,17 +18,54 @@
 
     <hr>
 <!--reviewing the courses-->
-    <p>if user is a teacher, it's suppose to show a list of students</p><p>Hello <%= @owner.full_name %></p>
+    <p>if user is a teacher, it's suppose to show a list of students</p>
 <p>Someone posted a review on your course.</p>
 
-<div class=“comment”>
+<section>
+    <%= form_with(model: [@course, @review], local: true) do |f| %>
+    <h4 class=“comment-header”><strong>Review this Idea</strong></h4>
+    <% if @review.errors.present? %>
+    <p class=“form-errors”>
+      <%= @review.errors.full_messages.join(' ,') %>
+    </p>
+    <% end %>
+    <div class=“form-group”>
+    <div>
+    <%= f.label :rating%><br>
+    <%= f.number_field :rating %>
+    </div>
+      <%= f.text_area(
+            :body,
+            cols: 50,
+            rows: 3,
+            placeholder:"What are your thoughts?",
+            class: "form-control"
+        ) %>
+    </div>
+    <%= f.submit 'Write a user review', class: "comment-button"%>
+    <% end %>
+    <hr class=“board”>
+    <div class=“comment”>
       <% @reviews.each do |review| %>
+      <div class=“comment-head”>
+        <div class=“image-user”>
+          <strong>&nbsp;&nbsp;<%= review.user&.full_name || ‘DELETED’ %> </strong>
+        </div>
+      </div>
+      <small>Reviewed in <%= review.created_at.strftime("%b %d, %Y") %></small>
       <div class=“comment-body”>
+      <%= review.rating %> <br>
         <%= review.body %> <br>
       </div>
+      <small>
+        <% if can? :crud, review %>
+        <%= link_to 'Delete', course_review_path(@course, review), method: :delete, data: { confirm: 'Are you sure that you want to delete this review?' } %>
+        <% end %>
+      </small>
       <% end %>
     </div>
-    </div>
+  </section>
+
 
 
 

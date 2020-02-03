@@ -3,7 +3,6 @@ class ReviewsController < ApplicationController
   before_action :find_course,only:[:create,:destroy]
   
   def create
-    @course = Course.find params[:course_id]
     @review = Review.new review_params
     @review.course = @course
     @review.user = current_user
@@ -25,7 +24,6 @@ class ReviewsController < ApplicationController
         flash[:alert] = "Review deleted successfully"
         redirect_to @review.course
     end
-    
   end
 
   private
@@ -34,7 +32,7 @@ class ReviewsController < ApplicationController
     params.require(:review).permit(:body, :rating)
   end
   def find_course
-    @course = Course.find params[:id]
+    @course = Course.find params[:course_id]
 
   end
   # //def authorize!

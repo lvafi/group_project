@@ -16,6 +16,10 @@ class Ability
     can(:crud, Course) do |course|
       course.user == user
     end
+
+    can(:crud, Review) do |review|
+      review.user == user
+    end
     
     can(:crud, Room) do |room|
       room.user == user 
