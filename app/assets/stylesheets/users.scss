@@ -9,12 +9,6 @@ html * {
   font-family: inherit;
 }
 
-body {
-  background-image: url("group_project_hero.jpg");
-  background-size: cover;
-  background-position: center, center;
-  height: 100vh;
-
 .background-img{
     background-image: url("group_project_hero.jpg");
     background-size: cover;
@@ -238,7 +232,6 @@ div.login-menu.item {
     justify-items: center;
     ;
   }
-}
 
 .day_number {
   font-size: 1em;
