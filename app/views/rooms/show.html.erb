@@ -8,92 +8,94 @@
                     </div>
                 <% end %>
             </h5>
+  <div class="room_book">
+    <div class="room_info">
+      <h5 class="new user"><%= @room.name %></h5>
 
-            <% if can? :crud, @room %>
-            <div class="post-buttons">
-                <%= link_to('Edit Room', edit_room_path(@room.id), class: "sign_up_button") %>
-                <%= link_to("Delete Room", room_path(@room), method: :delete, data:{confirm:'Are you sure?'}, class: "sign_up_button") %>
-            </div>
-            <% end %>
+      <% if can? :crud, @room %>
+      <div class="post-buttons">
+        <%= link_to('Edit Room', edit_room_path(@room.id), class: "sign_up_button") %>
+        <%= link_to("Delete Room", room_path(@room), method: :delete, data:{confirm:'Are you sure?'}, class: "sign_up_button") %>
+      </div>
+      <% end %>
 
-            <p>Address: <%= @room.address %></p>
-            <p>Capacity: <%= @room.capacity %></p>
-            <p>Rental Price: $<%= @room.price %>/hr</p>
-            <p>Description:<br><%= @room.description %></p>
+      <p>Address: <%= @room.address %></p>
+      <p>Location: <%= link_to(
+                    @room.location, rooms_path(location: @room.location)
+                ) %></p>
+      <p><%= @room.capacity %></p>
+      <p>$<%= @room.price %></p>
+      <p><%= @room.description %></p>
 
-            <% if @room.features.count > 0 %>
-              <ul>
-                  <% @room.features.each do |feature| %>
-                  <li><%= link_to(rooms_path(feature: feature.name)) do %>
-                      <div class="ui blue basic label">
-                        <%= feature.name %> 
-                        <i class="<%= featureCheck feature.name %> icon"></i>
-                      </div>
-                      <%end%>
-                  </li>
-                  <% end %>
-              </ul>
-            <% end %>
-        </div>
-        <div class="booking_room">
-            <h1 class="new user">Add Booking Form</h1>
-        </div>
-    </div>
-    <hr>
-
-    <h5>Availabilities</h5>
-    <%= month_calendar events: @bookings do |date, bookings| %>
-    <span class="day_number"><%= use_day_only date %></span class="day_number">
-    <% bookings.each do |booking| %>
-    <div>
-        <%= booking.title %>
-    </div>
-    <% end %>
-    <% end %>
-
-<br>
-
-<%= month_calendar events: @bookings do |date, bookings| %>
-  <%= date %>
-  <% bookings.each do |booking| %>
-    <div>
-      <%= booking.course.title %>
-    </div>
-  <% end %>
-<% end %>
-
-<%= form_with(model: [@room, @booking], local: true) do |form| %>
-  <% if @booking.errors.any? %>
-    <div id=“error_explanation”>
-      <h2><%= pluralize(@booking.errors.count, “error”) %> prohibited this @booking from being saved:</h2>
+      <% if @room.features.count > 0 %>
+      <h6>Features</h6>
       <ul>
-        <% @booking.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
+        <% @room.features.each do |feature| %>
+        <li><%= link_to(
+                    feature.name, rooms_path(feature: feature.name)
+                ) %></li>
         <% end %>
       </ul>
+      <% end %>
     </div>
-  <% end %>
-  <div class=“field”>
-    <%= form.label :start_time %>
-    <%= form.datetime_select :start_time %>
+    <div class="booking_room">
+      <%= form_with(model: [@room, @booking], local: true) do |form| %>
+      <% if @booking.errors.present?%>
+      <p style="color:red;">
+        <%= @booking.errors.full_messages.join(', ') %>
+      </p>
+      <% end %>
+      <div class=“field”>
+        <%= form.label :start_time %><br />
+        <%= form.datetime_select :start_time %>
+      </div>
+      <div class=“field”>
+        <%= form.label :end_time %><br />
+        <%= form.datetime_select :end_time %>
+      </div>
+
+      <div class=“field”>
+        <%= form.label :course_id %><br />
+        <%= form.collection_select :course_id, current_user.courses , :id, :title%>
+      </div>
+
+      <div class=“actions”>
+        <%= form.submit class: "sign_up_button" %>
+      </div>
+      <% end %>
+    </div>
   </div>
-  <div class=“field”>
-    <%= form.label :end_time %>
-    <%= form.datetime_select :end_time %>
-  </div>
-
-    <%= form.label :course_id %>
-    <%= form.text_field :course_id %>
-
-  <div class=“actions”>
-    <%= form.submit %>
-  </div>
-<% end %>
-
- 
+  <hr>
 
 
-    <% @bookings.each do |booking| %>
-        <div><%= booking.start_time %></div>
-        <div><%= booking.end_time %></div>
+  <%= month_calendar events: @bookings do |date, bookings| %>
+  <span class="day_number"><%= use_day_only date %></span class="day_number">
+  <% bookings.each do |booking| %>
+  <div>
+    <div>
+      <%= booking.start_time.strftime("%I:%M%p") %>
+    </div>
+    <% if booking.approved? %>
+    <%= booking.course.title %>
+    by <%= booking.course.user.first_name %>
+    <% else %>
+    <small> Pending </small>
+    <%= link_to booking.course.title, edit_room_booking_path(@room, booking) %>
     <% end %>
+    <div>
+      <%= booking.end_time.strftime("%I:%M%p") %>
+    </div>
+  </div><br>
+  <% end %>
+  <% end %>
+
+  <% if can?(:crud, @room)%>
+  <h2> Reserved Bookings </h2>
+    <% @bookings.each do |booking| %>
+      <% if booking.reserved? %>
+        <%= booking.course.title  %><br>
+        <%= button_to "Approve", room_booking_approving_path(@room, booking), method: :put %>
+        <%= button_to "Reject", room_booking_rejecting_path(@room, booking), method: :put %>
+      <% end %>
+    <% end %>
+  <% end %>

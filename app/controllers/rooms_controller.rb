@@ -10,7 +10,7 @@ class RoomsController < ApplicationController
     def create
         @room = Room.new room_params
         @room.user = current_user
-
+        
         if params[:features]
             @room.features = params[:features].map do |feature|
                 Feature.find_or_initialize_by(name: feature)
@@ -61,7 +61,8 @@ class RoomsController < ApplicationController
         @availability = Availability.new
         @availabilities = @room.availabilities.order(created_at: :desc)
         @booking = Booking.new
-        @bookings = Booking.all.order(created_at: :desc)
+        @bookings = @room.bookings.order(created_at: :desc)
+        @courses = current_user.courses
     end
 
     def destroy
@@ -88,5 +89,4 @@ class RoomsController < ApplicationController
             redirect_to root_path, alert: 'Not Authorized'
         end
     end
-
 end

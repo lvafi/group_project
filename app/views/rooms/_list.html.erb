@@ -4,6 +4,8 @@
     <%= link_to(rooms_path(location: room.location)) do %>
             <i class="map marker alternate icon"></i><%= room.location %>
         <% end %>
+    </h5>
+    <h5 class="new user"><%= link_to(room.name.truncate(30, separator: " "), room_path(room.id)) %></h5>
     <hr />
     <p>Capacity: <%= room.capacity %></p>
     <p><%= room.description %></p>
