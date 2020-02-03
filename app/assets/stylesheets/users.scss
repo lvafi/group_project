@@ -41,11 +41,10 @@ body {
   line-height: 2rem;
   margin: 3em;
   padding: 2rem 3rem;
-//   position: absolute;
-//   right: 10%;
-//   top: 15%;
-  width: 35%;
-  min-width: 300px;
+  position: absolute;
+  right: 10%;
+  top: 15%;
+  width: 80% !important;
 }
 
 .user.new {
@@ -62,12 +61,11 @@ body {
   grid-column-gap: 1rem;
 }
 
-input {
-  border: 1px solid grey;
-  height: 2em;
-  padding: 1em;
+.logo {
+  display: flex;
+  flex-direction: row;
   margin-bottom: 1em;
-  width: 100%;
+  align-items: center;
 }
 h1, h2, h3, h4, h5 {
   margin: 2.75rem 0 1.05rem;
@@ -136,17 +134,6 @@ div.login-menu.item {
   margin: 10% 10%;
   background-color: white;
   padding: 2em;
-}
-
-.locations-container {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  border: 1px solid black;
-}
-
-.location-container>.div {
-  border: 1px solid brown;
 }
 
 .single_room {
@@ -259,6 +246,10 @@ div.login-menu.item {
     float: right;
   }
 
+  .description-text-area {
+    width: 45% !important;
+  }
+
 }
 
 @media (min-width: 1200px) {
@@ -266,4 +257,9 @@ div.login-menu.item {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
   }
+
+  .description-text-area {
+    width: 35% !important;
+  }
+
 }

@@ -2,7 +2,7 @@ class Room < ApplicationRecord
     belongs_to :user
     
     has_many :bookings, dependent: :destroy
-    has_many :courses, dependent: :nullify
+    has_many :courses, through: :bookings
 
     has_many :searches, dependent: :destroy
     has_many :features, through: :searches
