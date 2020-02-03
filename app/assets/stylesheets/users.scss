@@ -1,6 +1,19 @@
 // Place all the styles related to the users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+html {
+  font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif
+}
+
+html * {
+  font-family: inherit;
+}
+
+body {
+  background-image: url("group_project_hero.jpg");
+  background-size: cover;
+  background-position: center, center;
+  height: 100vh;
 
 .background-img{
     background-image: url("group_project_hero.jpg");
@@ -136,15 +149,10 @@ div.login-menu.item {
   border: 1px solid brown;
 }
 
-.room_list {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 1em;
-}
-
 .single_room {
-  border: 0.5px solid black;
-  padding: 2em;
+  border: 1px solid black;
+  padding: 1em;
+  margin: 1em;
 }
 
 
@@ -236,3 +244,25 @@ div.login-menu.item {
   font-weight: bold;
 }
 
+#dropdown-title {
+  color: black;
+}
+
+@media (min-width: 768px) {
+  .room_list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .filter {
+    float: right;
+  }
+
+}
+
+@media (min-width: 1200px) {
+  .room_list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
