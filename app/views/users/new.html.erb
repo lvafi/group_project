@@ -1,20 +1,18 @@
-<section class="home-hero transparent">
-<% if current_user.present? === false %>
-    <div class="description-text-area">
-      <div class="logo">
-        <h1 class="user new">Book, teach, enroll...</h1>
-        <%= image_tag 'logo.png', width: "100"%>
-      </div>
+  <div class = "root-container background-img">
 
-      <%= render 'users/form' %>
-    <% end %>
+    <section class="home-hero transparent root-item">
+      <% if current_user.present? === false %>
+        <div class="description-text-area">
+          <h1 class="user new">Book, teach, enroll... <br />Book n'Roll</h1>
+          <%= render 'users/form' %>
+        </div>
+      <% end %>
+    </section>
+  </div>
+
+  <section class = "root-item">
+    <h3>Populer Courses</h3>
+      <%= render 'shared/courses_index', courses: Course.all.limit(8) %>
+    <h3>Populer Rooms</h3>
+      <%= render 'shared/rooms_index', rooms: Room.all.limit(8) %>
   </section>
-</div>
-
-
-<section class = "root-item">
-  <h3>Popular Courses</h3>
-    <%= render 'shared/courses_index', courses: Course.all.limit(8) %>
-  <h3>Popular Rooms</h3>
-    <%= render 'shared/rooms_index', rooms: Room.all.limit(8) %>
-</section>

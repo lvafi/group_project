@@ -51,7 +51,6 @@ body {
   font-size: 2em;
   margin-bottom: 0.5em;
   color: #484848;
-  font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif !important;
   font-weight: bold;
 }
 
@@ -69,7 +68,6 @@ body {
 }
 h1, h2, h3, h4, h5 {
   margin: 2.75rem 0 1.05rem;
-  font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
   font-weight: 600;
   line-height: 1.15;
 }
@@ -91,7 +89,6 @@ small, .text_small {font-size: 0.8em;}
 
 label {
   color: #484848;
-  font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif !important;
   font-weight: bold;
 }
 
@@ -115,56 +112,83 @@ label {
   .link_container{
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr fr fr;
-    grid-gap: 2em;
-    padding: 1em;
+    grid-column-gap: 1rem;
   }
-  
+
   .link_container > h3{
     font-size: calc(100vw / 40 + 0.3em);
   }
-//
 
-.sign_up_button {
-  display: inline-block;
-  height: 40px;
-  border: 0px !important;
-  background-color: #FF4A5F;
-  padding: 10px 22px;
-  font-size: 16px;
-  font-weight: bold;
-  color: white;
-  border-radius: 4px;
-  font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
-}
+  h1 {
+    margin-top: 0;
+    font-size: 3.052em;
+  }
 
-.sign_up_button:hover {
-  cursor: pointer;
-  color: white;
-}
-.nav{
-  background: rgba(0,0,0,0.3) !important;
-}
+  h2 {font-size: 2.441em;}
 
-.navbar_link {
-  color: white;
-  margin-right: 30px;
-}
+  h3 {font-size: 1.953em;}
 
-.item {
-  color: white !important;
-}
+  h4 {font-size: 1.563em;}
 
-div.login-menu.item {
-  display: flex;
-  justify-content: flex-end;
-}
+  h5 {font-size: 1.25em;}
 
-.container {
-  margin: 10% 10%;
-  background-color: white;
-  padding: 2em;
-}
+  small, .text_small {font-size: 0.8em;}
+
+  label {
+    color: #484848;
+    font-weight: bold;
+  }
+
+  //for image link in user show
+    .user-container{
+      margin: 0 auto;
+      padding: 1em;
+    }
+    .img-links:hover {
+      box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+    }
+    .img-links{
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 5px;
+      width: 100%;
+    }
+    .link_container{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr fr fr;
+      grid-gap: 2em;
+      padding: 1em;
+    }
+    .link_container > h3{
+      font-size: calc(100vw / 40 + 0.3em);
+    }
+  //
+
+  .sign_up_button {
+    display: inline-block;
+    height: 40px;
+    border: 0px !important;
+    background-color: #FF4A5F;
+    padding: 10px 22px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    border-radius: 4px;
+  }
+
+  .sign_up_button:hover {
+    cursor: pointer;
+    color: white;
+  }
+  .nav{
+    background: rgba(0,0,0,0.3) !important;
+  }
+
+  .navbar_link {
+    color: white;
+    margin-right: 30px;
+  }
 
 .single_room {
   border: 1px solid black;
@@ -172,16 +196,27 @@ div.login-menu.item {
   margin: 1em;
 }
 
+  .item {
+    color: white !important;
+  }
 
-.room_book {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  border: 1px solid black;
-}
+  div.login-menu.item {
+    display: flex;
+    justify-content: flex-end;
+  }
 
-.room_info {
-  padding: 1em;
-}
+  .container {
+    margin: 10% 10%;
+    background-color: white;
+    padding: 2em;
+  }
+
+  .locations-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    border: 1px solid black;
+  }
 
 .booking_room {
   display: flex;
@@ -191,37 +226,56 @@ div.login-menu.item {
   border: 1px solid black;
 }
 
+  .location-container>.div {
+    border: 1px solid brown;
+  }
 
-.simple-calendar {
-  .day {}
+  .room_list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 1em;
+  }
 
-  .wday-0 {}
+  .single_room {
+    border: 0.5px solid black;
+    padding: 2em;
+  }
 
-  .wday-1 {}
 
-  .wday-2 {}
+  .room_book {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border: 1px solid black;
+  }
 
-  .wday-3 {}
+  .room_info {
+    padding: 1em;
+  }
 
-  .wday-4 {}
+  .booking_room {
+    background-color: green;
+    padding: 1em;
+  }
 
-  .wday-5 {}
 
-  .wday-6 {}
+  .simple-calendar {
+    .day {}
 
-  .today {}
+    .wday-0 {}
 
-  .past {}
+    .wday-1 {}
 
-  .future {}
+    .wday-2 {}
 
-  .start-date {}
+    .wday-3 {}
 
-  .prev-month {}
+    .wday-4 {}
 
-  .next-month {}
+    .wday-5 {}
 
-  .current-month {}
+    .wday-6 {}
+
+    .today {}
 
   .has-events {}
 }
@@ -229,48 +283,59 @@ div.login-menu.item {
   a {
     color: black !important;
     font-size: 1.5em;
-    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif !important;
   }
 
   a:hover {
     cursor: pointer;
   }
 
-  th {
-    background-color: #FF4A5F;
-    color: white;
-    text-align: center;
-    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif !important;
+    .past {}
+
+    .future {}
+
+    .start-date {}
+
+    .prev-month {}
+
+    .next-month {}
+
+    .current-month {}
+
+    .has-events {}
+
+    th {
+      background-color: #FF4A5F;
+      color: white;
+      text-align: center;
+    }
+
+    span.calendar-title {
+      font-size: 2em;
+    }
+
+    div.calendar-heading {
+      display: grid;
+      grid-template-columns: 1fr 8fr 1fr;
+      align-items: center;
+      justify-items: center;
+      ;
+    }
   }
 
-  span.calendar-title {
-    font-size: 2em;
-    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif !important;
+  .day_number {
+    font-size: 1em;
+    font-weight: bold;
   }
 
-  div.calendar-heading {
-    display: grid;
-    grid-template-columns: 1fr 8fr 1fr;
-    align-items: center;
-    justify-items: center;
-    ;
+  @media(min-width : 600px){
+    .img-links{
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 5px;
+      width: 40%;
+      margin: auto 0;
+    }
   }
-}
-
-.day_number {
-  font-size: 1em;
-  font-weight: bold;
-}
-
-@media(min-width : 600px){
-  .img-links{
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    padding: 5px;
-    width: 40%;
-    margin: auto 0;
-  }
-}
 
 #dropdown-title {
   color: black;

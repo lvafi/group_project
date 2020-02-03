@@ -4,37 +4,37 @@
     <p>
         <%= @user.errors.full_messages.join(',')%>
     </p>
-    <%end%>
+    <% end %>
 
-    <div class="user_name">
-        <div>
-            <%= f.label :first_name %><br />
-            <%= f.text_field :first_name, style:"width:100%", placeholder: "Spider" %>
+        <div class="user_name">
+            <div>
+                <%= f.label :first_name %><br />
+                <%= f.text_field :first_name, style:"width:100%", placeholder: "Spider" %>
+            </div>
+            <div>
+                <%= f.label :last_name %><br />
+                <%= f.text_field :last_name, style:"width:100%", placeholder: "Man" %>
+            </div>
         </div>
         <div>
-            <%= f.label :last_name %><br />
-            <%= f.text_field :last_name, style:"width:100%", placeholder: "Man" %>
+            <%= f.label :email %><br />
+            <%= f.email_field :email, style:"width:100%", placeholder: "hello@booknroll.com" %>
         </div>
-    </div>
-    <div>
-        <%= f.label :email %><br />
-        <%= f.email_field :email, style:"width:100%", placeholder: "hello@booknroll.com" %>
-    </div>
 
-    <div>
-        <%= f.label :password %><br />
-        <%= f.password_field :password, style:"width:100%" %>
-    </div>
+        <div>
+            <%= f.label :password %><br />
+            <%= f.password_field :password, style:"width:100%" %>
+        </div>
 
-    <div>
-        <%= f.label :password_confirmation %><br />
-        <%= f.password_field :password_confirmation, style:"width:100%" %>
-    </div>
+        <div>
+            <%= f.label :password_confirmation %><br />
+            <%= f.password_field :password_confirmation, style:"width:100%" %>
+        </div>
 
     <br>
     <div>
     <%= f.submit "Create Your Account", class:"sign_up_button", style:"width:100%"%>
     </div>
 
-    <%end%>
-</div>
+        <%end%>
+    </div>
