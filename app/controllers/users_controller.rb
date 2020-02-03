@@ -26,7 +26,7 @@ class UsersController < ApplicationController
     def update
         if @user.update user_params
             flash[:success] = "User info updated"
-            sessions[:user_id] = @user.id
+            session[:user_id] = @user.id
             redirect_to root_path
         else
             render :edit
