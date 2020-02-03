@@ -21,7 +21,7 @@ User.delete_all
 PASSWORD = "supersecret"  
 
 super_user = User.create( 
-    first_name: "", 
+    first_name: "Arya", 
     last_name: "Stark", 
     email: "noone@winterfell.gov", 
     password: PASSWORD,

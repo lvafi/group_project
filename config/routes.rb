@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   
   resources :courses do
     resources :enrollments
+    resources :reviews, only: [:create, :destroy]
   end
 
   resources :rooms do
