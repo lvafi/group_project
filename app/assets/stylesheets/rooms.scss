@@ -16,6 +16,7 @@
         padding: 1em;
       }
 }
+
 .popular-container{
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px));
@@ -23,6 +24,7 @@
     padding: 1em;
     border: 1px solid black ;
 }
+
 .popular-item{
     border: 1px solid black ;
     padding: 1em;
@@ -33,6 +35,7 @@
     padding: 5px;
     width: 100%;
 }
+
 .root-item>h3{
     padding: 1em;
     margin: 0;
