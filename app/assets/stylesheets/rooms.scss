@@ -10,8 +10,18 @@
         padding: 1em;
     }
     .popular-item{
-        border: 1px solid black ;
+        border: 1px solid black;
+        border-radius: 10px;
         padding: 1em;
+        background: white;
+        max-width: 100%;
+    }
+
+    .popular-title{
+        margin: 0 1em;
+        padding: 1em;
+        border-radius: 10px;
+        border: 1px solid black;
         background: white;
     }
     .img-rooms, .img-courses{
@@ -27,10 +37,7 @@
 
     @media(min-width : 600px){
         .popular-container{
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            grid-gap: 1em;
-            padding: 1em;
+            grid-template-columns: repeat(3, 1fr);
         }
         .user-container{
             margin: 0 auto;

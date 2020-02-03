@@ -4,19 +4,24 @@
     <% if current_user.present? === false %>
       <div class="description-text-area">
         <div class="logo">
-          <h1 class="user new">Book, teach, enroll... <br />Book n'Roll</h1>
+          <h1 class="user new">Book, teach, enroll...</h1>
           <%= image_tag "logo.png", width: "100px"%>
         </div>
         <%= render 'users/form' %>
+        
       </div>
     <% end %>
   </section>
 </div>
-
+<br><br><br>
 <section class = "root-item">
+<div class="popular-title">
   <h3>Popular Courses</h3>
+</div>
     <%= render 'shared/courses_index', courses: Course.all.limit(8) %>
-  <hr>
+
+<div class="popular-title">
   <h3>Popular Rooms</h3>
+</div>
     <%= render 'shared/rooms_index', rooms: Room.all.limit(8) %>
 </section>

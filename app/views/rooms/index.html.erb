@@ -77,9 +77,6 @@
             </span>
         </h6>
     <% end %>
-
-    <div class="room_list">
-        <%= render 'list' %>
-    </div>
-
+    
+    <%= render 'shared/rooms_index', rooms: @rooms %>
 </div>

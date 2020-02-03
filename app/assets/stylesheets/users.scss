@@ -20,6 +20,12 @@ body{
   justify-content: flex-end;
 }
 
+.logo {
+  display: flex;
+  flex-direction: row;
+  padding-bottom: 1em;
+}
+
 .the-menu.ui.top.fixed.menu {
   // background-color: transparent;
   border: none;
@@ -34,9 +40,9 @@ body{
   line-height: 2rem;
   margin: 3em;
   padding: 2rem 3rem;
-//   position: absolute;
-//   right: 10%;
-//   top: 15%;
+  position: absolute;
+  right: 10%;
+  top: 15%;
   width: 35%;
   min-width: 300px;
 }
@@ -216,34 +222,39 @@ label {
   border: 1px solid brown;
 }
 
+div.item{
+  font-size: 0.75em;
+}
+
 .single_room {
   border: 1px solid black;
+  border-radius: 10px;
   padding: 1em;
   margin: 1em;
   background-color: white;
 }
 
-  .item {
-    color: white !important;
-  }
+.item {
+  color: white !important;
+}
 
-  div.login-menu.item {
-    display: flex;
-    justify-content: flex-end;
-  }
+div.login-menu.item {
+  display: flex;
+  justify-content: flex-end;
+}
 
-  .container {
-    margin: 10% 10%;
-    background-color: white;
-    padding: 2em;
-  }
+.container {
+  margin: 10% 10%;
+  background-color: white;
+  padding: 2em;
+}
 
-  .locations-container {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    border: 1px solid black;
-  }
+.locations-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  border: 1px solid black;
+}
 
 .booking_room {
   display: flex;
@@ -285,6 +296,11 @@ label {
     border: 1px solid grey;
     margin-right: 1em;
     border-radius: 10px;
+  }
+
+  ol {
+    list-style-type: decimal;
+    padding-left: 1em;
   }
 
   .simple-calendar {
