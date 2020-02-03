@@ -1,0 +1,67 @@
+<%= form_with(model: @room, local: true, class: "ui form") do |f|%>
+    <div class="field">
+        <% if @room.errors.present?%>
+        <%= @room.errors.full_messages.join(', ')%>
+        <% end %>
+    </div>
+    <div class="field">
+        <%= f.label :name %><br>
+        <%= f.text_field :name, placeholder: "Spacious room with brand-new A/V system" %>
+    </div>
+    <div class="field">
+        <%= f.label :address %><br>
+        <%= f.text_area :address, rows: 2, placeholder: "123 Book n'Roll Road, New Westminster, BC" %>
+    </div>
+    <div class="field">
+        <%= f.label :capacity %><br>
+        <%= f.number_field :capacity %>
+    </div>
+    <div class="field">
+        <%= f.label :price %><br>
+        <%= f.number_field :price %>
+    </div>
+    <div class="field">
+        <%= f.label :description %><br>
+        <%= f.text_area :description, rows:5 %>
+    </div>
+
+    <div class="locations field">
+        <%= f.label :location %>
+        <%= select("@room", "location", ["Arbutus Ridge", "Downtown", "Dunbar-Southlands", "Fairview",
+        "Grandview-Woodland", "Kensington-Cedar Cottage", "Kerrisdale", "Killarney", "Kitsilano", 
+        "Oakridge", "Marpole", "Mount Pleasant", "Renfrew-Collingwood", "Riley Park", "Shaughnessy", 
+        "South Cambie", "Strathcona", "Sunset", "West End", "West Point Grey", "Burnaby", "Coquitlam", 
+        "New Westminster", "Richmond"]) %>
+    </div><br>
+
+    <div class="features field">
+        <h3 class="ui header">Features</h3>
+        <%= check_box_tag("features[]", "Free Parking") %>
+        <%= label_tag(:free_parking) %>
+
+        <%= check_box_tag("features[]", "Paid Parking") %>
+        <%= label_tag(:paid_parking) %>
+
+        <%= check_box_tag("features[]", "ADA Accessible") %>
+        <%= label_tag(:ada_accessible, "ADA Accessible") %>
+
+        <%= check_box_tag("features[]", "Audio/Visual Equipment") %>
+        <%= label_tag(:audio_visual_equipment, "Audio/Visual Equipment") %>
+
+        <%= check_box_tag("features[]", "WiFi") %>
+        <%= label_tag(:wifi, "WiFi") %>
+
+        <%= check_box_tag("features[]", "Open Floor Plan") %>
+        <%= label_tag(:open_floor_plan) %>
+
+        <%= check_box_tag("features[]", "Desks") %>
+        <%= label_tag(:desks) %>
+
+        <%= check_box_tag("features[]", "Whiteboard") %>
+        <%= label_tag(:whiteboard) %>
+    </div>
+
+    <br>
+    <%= f.submit "Submit", class:"sign_up_button"%>
+
+<% end %>

@@ -1,15 +1,44 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>GroupProject</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all' %>
-    <%= javascript_pack_tag 'application' %>
-  </head>
+<head>
+  <title>GroupProject</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= javascript_pack_tag 'application' %>
+  <%= favicon_link_tag asset_path('logo.png') %>
+</head>
 
-  <body>
-    <%= yield %>
-  </body>
+<body>
+  <nav>
+    <div class="the-menu  ui top fixed menu">
+      <div class="item"><%=link_to "Book N'Roll", root_path, class:"navbar_link" %></div>
+      <div class="login-menu item">
+        <% if user_signed_in? %>
+          Hello, <strong> <%= current_user.full_name %>&nbsp&nbsp&nbsp</strong>
+        <%= link_to "Log Out", session_path, method: :delete,
+              data: {confirm: "Are you sure you want to log out?"}, class:"navbar_link"%>
+        <% else %>
+          <%= link_to "Log In", new_session_path, class:"navbar_link" %>
+          <%= link_to "Sign Up", new_user_path, class:"navbar_link" %>
+        <% end %>
+      <% if user_signed_in?%>
+        <%=link_to 'Home', root_path, class:"navbar_link" %>
+      <% end %>
+        <%=link_to 'Rooms', rooms_path, class:"navbar_link" %>
+
+        <%=link_to 'Classes', courses_path, class:"navbar_link" %>
+
+        
+      </div>
+    </div>
+  </nav>
+  <%= yield %>
+</body>
+<script>
+  https: //cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js
+</script>
+
 </html>

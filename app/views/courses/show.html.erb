@@ -1,0 +1,25 @@
+<div class="container">
+    <h1 class="new user"><%= @course.title %></h1>
+    <% if can? :crud, @course %>
+    <div class="post-buttons">
+        <%= link_to('Edit Class', edit_course_path(@course.id), class:"sign_up_button") %>
+        <%= link_to("Delete Class", course_path(@course), method: :delete, data:{confirm:'Are you sure?'}, class: "sign_up_button") %>
+    </div>
+    <% end %>
+
+    <!-- <h2>! it may be great to have images in this page !</h2> -->
+    <hr>
+    <h1><strong>Class Description :</strong></h1>
+    <p><%= @course.description %></p>
+    <br />
+    <p>Price $<%= @course.price %></p>
+    <p>Duration :
+    <%= user_friendly_range @course.range_start_date %> - 
+    <%= user_friendly_range @course.range_end_date %></p>
+    <br />
+    <p>Posted <%= time_ago_in_words(@course.created_at) %> ago</p>
+
+    <hr>
+
+    <p>if user is a teacher, it's suppose to show a list of students</p>
+</div>

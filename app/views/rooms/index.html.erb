@@ -1,0 +1,85 @@
+<div class="container">
+    <h3 class="new user">Rooms Available</h3>
+    <a href="<%= new_room_path%>" class="sign_up_button">New Room</a>
+    
+    <div class="filter">
+        Filter rooms by:
+        <div class="ui compact small menu">
+            <div class="ui simple dropdown item">
+                <p id="dropdown-title">Location</p>
+            <i class="dropdown icon"></i>
+                <div class="menu">
+                    <div class="item"><%= link_to("Arbutus Ridge", rooms_path(location: "Arbutus Ridge")) %></div>
+                    <div class="item"><%= link_to("Downtown", rooms_path(location: "Downtown")) %></div>
+                    <div class="item"><%= link_to("Dunbar-Southlands", rooms_path(location: "Dunbar-Southlands")) %></div>
+                    <div class="item"><%= link_to("Fairview", rooms_path(location: "Fairview")) %></div>
+                    <div class="item"><%= link_to("Grandview-Woodland", rooms_path(location: "Grandview-Woodland")) %></div>
+                    <div class="item"><%= link_to("Kensington-Cedar Cottage", rooms_path(location: "Kensington-Cedar Cottage")) %></div>
+                    <div class="item"><%= link_to("Kerrisdale", rooms_path(location: "Kerrisdale")) %></div>
+                    <div class="item"><%= link_to("Killarney", rooms_path(location: "Killarney")) %></div>
+                    <div class="item"><%= link_to("Kitsilano", rooms_path(location: "Kitsilano")) %></div>
+                    <div class="item"><%= link_to("Oakridge", rooms_path(location: "Oakridge")) %></div>
+                    <div class="item"><%= link_to("Marpole", rooms_path(location: "Marpole")) %></div>
+                    <div class="item"><%= link_to("Mount Pleasant", rooms_path(location: "Mount Pleasant")) %></div>
+                    <div class="item"><%= link_to("Renfrew-Collingwood", rooms_path(location: "Renfrew-Collingwood")) %></div>
+                    <div class="item"><%= link_to("Riley Park", rooms_path(location: "Riley Park")) %></div>
+                    <div class="item"><%= link_to("Shaughnessy", rooms_path(location: "Shaughnessy")) %></div>
+                    <div class="item"><%= link_to("Strathcona", rooms_path(location: "Strathcona")) %></div>
+                    <div class="item"><%= link_to("Sunset", rooms_path(location: "Sunset")) %></div>
+                    <div class="item"><%= link_to("West End", rooms_path(location: "West End")) %></div>
+                    <div class="item"><%= link_to("West Point Grey", rooms_path(location: "West Point Grey")) %></div>
+                    <div class="item"><%= link_to("Burnaby", rooms_path(location: "Burnaby")) %></div>
+                    <div class="item"><%= link_to("Coquitlam", rooms_path(location: "Coquitlam")) %></div>
+                    <div class="item"><%= link_to("New Westminster", rooms_path(location: "New Westminster")) %></div>
+                    <div class="item"><%= link_to("Richmond", rooms_path(location: "Richmond")) %></div>
+                    <div class="item"><%= link_to("Other", rooms_path(location: "Other")) %></div>
+                </div>
+            </div>
+        </div>
+                    
+
+        <div class="ui compact small menu">
+            <div class="ui simple dropdown item">
+                <p id="dropdown-title">Feature</p>
+                <i class="dropdown icon"></i>
+                <div class="menu">
+                    <div class="item"><%= link_to("Free Parking", rooms_path(feature: "Free Parking")) %></div>
+                    <div class="item"><%= link_to("Paid Parking", rooms_path(feature: "Paid Parking")) %></div>
+                    <div class="item"><%= link_to("ADA Accessible", rooms_path(feature: "ADA Accessible")) %></div>
+                    <div class="item"><%= link_to("WiFi", rooms_path(feature: "WiFi")) %></div>
+                    <div class="item"><%= link_to("Open Floor Plan", rooms_path(feature: "Open Floor Plan")) %></div>
+                    <div class="item"><%= link_to("Audio/Visual Equipment", rooms_path(feature: "Audio/Visual Equipment")) %></div>
+                    <div class="item"><%= link_to("Whiteboard", rooms_path(feature: "Whiteboard")) %></div>
+                    <div class="item"><%= link_to("Desks", rooms_path(feature: "Desks")) %></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <br><br>
+    <hr />
+    <br><br>
+
+    <% if @feature.present? %>
+        <h6>
+            Showing rooms with:
+            <span class="ui label">
+                <%= @feature.name %>
+            </span>
+        </h6>
+
+    <% elsif @location.present? %>
+        <h6>
+            Showing rooms in:
+            <span class="ui label">
+                <%= @location %>
+            </span>
+        </h6>
+    <% end %>
+
+    <div class="room_list">
+        <%= render 'list' %>
+    </div>
+
+</div>

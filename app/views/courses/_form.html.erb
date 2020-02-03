@@ -1,0 +1,30 @@
+
+<%= form_with(model: @course, local: true) do |f| %>
+<div>
+    <% if @course.errors.present?%>
+        <%= @course.errors.full_messages.join(', ')%>
+    <% end %>
+</div>
+<div>
+    <%= f.label :title%><br>
+    <%= f.text_field :title %>
+</div>
+<div>
+    <%= f.label :description %><br>
+    <%= f.text_area :description, cols: 50, rows:5, style:"width:100%"%>  
+</div>
+<div>
+    <%= f.label :price %><br>
+    <%= f.number_field :price %>
+</div>
+<div>
+    <%= f.label :range_start_date %><br>
+    <%= f.date_field :range_start_date %>
+</div>
+<div>
+    <%= f.label :range_end_date %><br>
+    <%= f.date_field :range_end_date %>
+</div>
+<br>
+    <%= f.submit "Submit", class:"sign_up_button" %>
+<% end %>
