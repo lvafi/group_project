@@ -3,36 +3,13 @@
      <% flash.each do |type, message| %>
         <div>
         <%= message%>
-    <a href="<%= new_course_path%>" class="sign_up_button">New Class</a>
-    <hr />
-    <div class="room_list">
-        <% @courses.each do |course| %>
-        <div class="single_room">           
-            <h2 class="new user"><%= link_to(course.title.truncate(30, separator: " "),course_path(course.id)) %></h2>
-            <p style="font-weight:bold">Description</p>
-            <p><%= course.description.truncate(30, separator: " ") %></p><br />
-            <p>Price: $<%= course.price %></p>
-            <p>Duration: <%= user_friendly_range course.range_start_date %> to <%= user_friendly_range course.range_end_date %></p>
-      
-            <% if current_user.present? && current_user != course.user %>
-                <div class="post-enroll">
-                    <% enrollment = current_user.enrollments.find_by(course_id: course)%>
-                    <% if enrollment.present? %>
-                        <%= link_to('Unenroll', course_enrollment_path(course.id, enrollment), method: :delete, data:{confirm:'Are you sure you want stop enrolling in this course?'}, class: "sign_up_button") %>
-                    <% else %>
-                        <%= link_to('Enroll', course_enrollments_path(course.id), :method => :post, class:"sign_up_button") %>
-                    <% end %>
-                </div> 
-            <% end %>
         </div>
     <% end %>
     <% if user_signed_in? %>
         <a href="<%= new_course_path%>" class="sign_up_button">New Class</a>
         <hr />
-
         <div class="room_list">
         <% @courses.each do |course| %>
-
             <div class="single_room">           
                 <h2 class="new user"><%= link_to(course.title.truncate(30, separator: " "),course_path(course.id)) %></h2>
                 <p style="font-weight:bold">Description</p>
@@ -56,7 +33,6 @@
         <% end %>
         </div>
     <% else %> <!-- user is not signed in -->
-
         <div class="single_room">
             <% @courses.each do |course| %>
                 <div class="single_room">           
@@ -68,6 +44,5 @@
                 </div>
             <% end %>
         </div>
-
     <% end %>
 </div>
