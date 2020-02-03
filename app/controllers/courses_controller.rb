@@ -31,7 +31,7 @@ class CoursesController < ApplicationController
         @enrollments = @course.enrollments.order(created_at: :desc)
         @review = Review.new
         @reviews = @course.reviews.order(created_at: :desc)
-
+        
         #if I'm a teacher (course owner)
         if @course.user == current_user 
             if can? :crud, @course
