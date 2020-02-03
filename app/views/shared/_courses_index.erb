@@ -1,7 +1,7 @@
     <div class="popular-container">
         <% courses.each do |course| %>
         <div class="popular-item">
-            <% img = "example/" + ["yoga", "courses"].sample %>
+            <% img = ["https://i.ibb.co/qpR25vS/yoga.jpg", "https://i.ibb.co/YZTpbr5/courses.png"].sample %>
             <%= image_tag img, class:"img-courses" %>
             <h5><%= link_to(course.title,course_path(course.id)) %></h5>
             <p><strong>Description:</strong> <%= course.description.truncate(30, separator: " ") %></p>

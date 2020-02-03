@@ -1,7 +1,10 @@
 <div class="root-container background-img">
     <section class="home-hero transparent root-item">
         <div class="description-text-area">
-            <h1 class="user new">Ready to Book n'Roll? <br />Log In</h1>
+            <div class="logo">
+                <h1 class="user new">Log in to book, teach, and enroll...</h1>
+                <%= image_tag "https://i.ibb.co/7Q46BDP/logo.png", width: "100px"%>
+            </div>
             <%= form_with url: session_path, local: true, class: "ui form" do |f|%>
             <div>
                 <%= f.label :email %><br />
