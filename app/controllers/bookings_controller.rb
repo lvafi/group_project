@@ -12,19 +12,38 @@ class BookingsController < ApplicationController
             flash[:success] = "Congratulations! You have booked a room."
             redirect_to room_path(@room)
         else
-            puts @booking.errors.full_messages 
-            redirect_to room_path(@room)
+            @bookings = @room.bookings.order(created_at: :desc)
+            redirect_to root_path
         end
     end
 
+    def edit
+        @room = Room.find params[:room_id]
+        @booking = Booking.find params[:id]
+        @bookings = @room.bookings.order(created_at: :desc)
+        @courses  = current_user.courses
+    end
+
     def update
-        @booking.update params[:status]
+        @booking.update booking_params
         redirect_to room_path(@booking.room)
     end
 
     def destroy
         @booking.destroy
         flash[:notice] = 'The booking has been deleted.'
+        redirect_to room_path(@booking.room)
+    end
+
+    def approving
+        @booking = Booking.find(params[:booking_id])
+        @booking.approving!
+        redirect_to room_path(@booking.room)
+    end
+
+    def rejecting
+        @booking = Booking.find(params[:booking_id])
+        @booking.rejecting!
         redirect_to room_path(@booking.room)
     end
 

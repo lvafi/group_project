@@ -14,7 +14,9 @@ class EnrollmentsController < ApplicationController
                 redirect_to course, flash[:alert]=  'Enrollment failed. Please try again.'
             end
         else
-            redirect_to course, flash[:alert] =  "Course creators are not permitted to enroll in their own courses."
+
+
+            redirect_to course, alert: "Course creators are not permitted to enroll in their own courses."
 
         end
     end
