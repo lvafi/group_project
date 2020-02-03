@@ -9,9 +9,12 @@ class EnrollmentsController < ApplicationController
             # if !can?(:enroll, course)
             #     redirect_to course
             if enroll.save
-                redirect_to course, notice:  'Congratulations! You are now enrolled in the course.'
+                flash[:notice] = 'Congratulations! You are now enrolled in the course.'
+                @courses = Course.all.order(created_at: :DESC)
+                render 'courses/index'
             else
-                redirect_to course, notice: 'Enrollment failed. Please try again.'
+                @courses = Course.all.order(created_at: :DESC)
+                render 'courses/index'
             end
         else
             redirect_to course, notice: "Course creators are not permitted to enroll in their own courses."
@@ -25,11 +28,17 @@ class EnrollmentsController < ApplicationController
         if enroll.user == current_user
             enroll.destroy
             flash[:notice] = "You are no longer enrolled in the course."
-            redirect_to course
+            @courses = Course.all.order(created_at: :DESC)
+            render 'courses/index'
         else
             flash[:alert] = "Enrollment deletion failed."
             redirect_to course
         end
+    end
+
+    def enrolled_courses
+        @courses = current_user.enrolled_courses 
+        #render 'courses/index'
     end
 
 end
