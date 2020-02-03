@@ -1,5 +1,7 @@
 <div class="container">
-    <h1 class="new user">All Courses</h1><br />
+    <h1 class="new user">All Courses</h1>
+    <a href="<%= new_course_path%>" class="sign_up_button">New</a>
+
      <% flash.each do |type, message| %>
         <div>
         <%= message%>
