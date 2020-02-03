@@ -22,11 +22,12 @@ class Ability
     end
 
     can(:crud, Booking) do |booking|
-      booking.user == user || booking.room.user == user
+      booking.course.user == user || booking.room.user == user
     end
 
     can(:crud, Enrollment) do |enrollment|
-      enrollment.user == user || enrollment.course.user == user
+      enrollment.user == user #only a student can enroll, not a teacher of a course
+      #|| enrollment.course.user == user
     end
 
   end

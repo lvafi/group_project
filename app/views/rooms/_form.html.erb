@@ -1,157 +1,68 @@
-<%= form_with(model: @room, local: true) do |f|%>
-<div>
-    <% if @room.errors.present?%>
-    <%= @room.errors.full_messages.join(', ')%>
-    <% end %>
-</div>
-<div>
-    <%= f.label :name %><br>
-    <%= f.text_area :name, cols: 50, rows: 1, placeholder: "Spacious room with brand-new A/V system" %>
-</div>
-<div>
-    <%= f.label :address %><br>
-    <%= f.text_area :address, cols: 50, rows:1 %>
-</div>
-<div>
-    <%= f.label :capacity %><br>
-    <%= f.number_field :capacity %>
-</div>
-<div>
-    <%= f.label :price %><br>
-    <%= f.number_field :price %>
-</div>
-<div>
-    <%= f.label :description %><br>
-    <%= f.text_area :description, cols: 50, rows:5%>
-</div>
+<%= form_with(model: @room, local: true, class: "ui form") do |f|%>
+    <div class="field">
+        <% if @room.errors.present?%>
+        <%= @room.errors.full_messages.join(', ')%>
+        <% end %>
+    </div>
+    <div class="field">
+        <%= f.label :name %><br>
+        <%= f.text_field :name, placeholder: "Spacious room with brand-new A/V system" %>
+    </div>
+    <div class="field">
+        <%= f.label :address %><br>
+        <%= f.text_area :address, rows: 2, placeholder: "123 Book n'Roll Road, New Westminster, BC" %>
+    </div>
+    <div class="field">
+        <%= f.label :capacity %><br>
+        <%= f.number_field :capacity %>
+    </div>
+    <div class="field">
+        <%= f.label :price %><br>
+        <%= f.number_field :price %>
+    </div>
+    <div class="field">
+        <%= f.label :description %><br>
+        <%= f.text_area :description, rows:5 %>
+    </div>
 
-<div class="locations-container">
-    <h3>Location</h3>
+    <div class="locations field">
+        <%= f.label :location %>
+        <%= select(:room, :location, ["Arbutus Ridge", "Downtown", "Dunbar-Southlands", "Fairview",
+        "Grandview-Woodland", "Kensington-Cedar Cottage", "Kerrisdale", "Killarney", "Kitsilano", 
+        "Oakridge", "Marpole", "Mount Pleasant", "Renfrew-Collingwood", "Riley Park", "Shaughnessy", 
+        "South Cambie", "Strathcona", "Sunset", "West End", "West Point Grey", "Burnaby", "Coquitlam", 
+        "New Westminster", "Richmond"]) %>
+    </div><br>
 
-    <h5>Vancouver</h5>
-    <div>
-        <%= check_box_tag(:location, "Arbutus Ridge") %>
-        <%= label_tag(:arbutus_ridge, "Arbutus Ridge") %>
-    </div>
-    <div>
-        <%= check_box_tag(:location, "Downtown") %>
-        <%= label_tag(:downtown, "Downtown") %>
-    </div>
-    <div>
-        <%= check_box_tag(:location, "Dunbar-Southlands") %>
-        <%= label_tag(:dunbar_southlands, "Dunbar-Southlands") %>
-    </div>
-    <div>
-        <%= check_box_tag(:location, "Fairview") %>
-        <%= label_tag(:fairview, "Fairview") %>
-    </div>
-    <div>
-        <%= check_box_tag(:location, "Grandview-Woodland") %>
-        <%= label_tag(:grandview_woodland, "Grandview-Woodland") %>
-    </div>
-    <div>
-        <%= check_box_tag(:location, "Kensington-Cedar Cottage") %>
-        <%= label_tag(:kensington_cedar_college, "Kensington-Cedar Cottage") %>
-    </div>
-    <div>
-        <%= check_box_tag(:location, "Kerrisdale") %>
-        <%= label_tag(:kerrisdale, "Kerrisdale") %>
-    </div>
-    <div>
-        <%= check_box_tag(:location, "Killarney") %>
-        <%= label_tag(:killarney, "Killarney") %>
-    </div>
-    <div>
-        <%= check_box_tag(:location, "Kitsilano") %>
-        <%= label_tag(:kitsilano, "Kitsilano") %>
-    </div>
-    <div>
-        <%= check_box_tag(:location, "Oakridge") %>
-        <%= label_tag(:oakridge, "Oakridge") %>
-    </div>
-    <div>
-        <%= check_box_tag(:location, "Marpole") %>
-        <%= label_tag(:marpole, "Marpole") %>
-    </div>
-    <div>
-        <%= check_box_tag(:location, "Mount Pleasant") %>
-        <%= label_tag(:mount_pleasant, "Mount Pleasant") %>
-    </div>
-    <div>
-        <%= check_box_tag(:location, "Renfrew-Collingwood") %>
-        <%= label_tag(:renfrew_collingwood, "Renfrew-Collingwood") %>
-    </div>
-    <div>
-        <%= check_box_tag(:location, "Riley Park") %>
-        <%= label_tag(:riley_park, "Riley Park") %>
-    </div>
-    <div>
-        <%= check_box_tag(:location, "Shaughnessy") %>
-        <%= label_tag(:shaughnessy, "Shaughnessy") %>
-    </div>
-    <div>
-        <%= check_box_tag(:location, "South Cambie") %>
-        <%= label_tag(:shaughnessy, "Shaughnessy") %>
-    </div>
-    <div>
-        <%= check_box_tag(:location, "Strathcona") %>
-        <%= label_tag(:strathcona, "Strathcona") %>
-    </div>
-    <div>
-        <%= check_box_tag(:location, "Sunset") %>
-        <%= label_tag(:sunset, "Sunset") %>
-    </div>
-    <div>
-        <%= check_box_tag(:location, "West End") %>
-        <%= label_tag(:west_end, "West End") %>
-    </div>
-    <div>
-        <%= check_box_tag(:location, "West Point Grey") %>
-        <%= label_tag(:west_point_grey, "West Point Grey") %>
-    </div>
-    <h5>Other</h5>
+    <div class="features field">
+        <h3 class="ui header">Features</h3>
 
-    <%= check_box_tag(:location, "Burnaby") %>
-    <%= label_tag(:burnaby, "Burnaby") %>
+        <%= check_box_tag("features[]", "Free Parking", find_feature(@room, "Free Parking")) %>
+        <%= label_tag(:free_parking) %>
 
-    <%= check_box_tag(:location, "Coquitlam") %>
-    <%= label_tag(:coquitlam, "Coquitlam") %>
+        <%= check_box_tag("features[]", "Paid Parking", find_feature(@room, "Paid Parking")) %>
+        <%= label_tag(:paid_parking) %>
 
-    <%= check_box_tag(:location, "New Westminster") %>
-    <%= label_tag(:new_westminster, "New Westminster") %>
+        <%= check_box_tag("features[]", "ADA Accessible", find_feature(@room, "ADA Accessible")) %>
+        <%= label_tag(:ada_accessible, "ADA Accessible") %>
 
-    <%= check_box_tag(:location, "Richmond") %>
-    <%= label_tag(:richmond, "Richmond") %>
-</div>
+        <%= check_box_tag("features[]", "Audio/Visual Equipment", find_feature(@room, "Audio/Visual Equipment")) %>
+        <%= label_tag(:audio_visual_equipment, "Audio/Visual Equipment") %>
 
-<div class="features-container">
-    <h5>Features</h5>
-    <%= check_box_tag("features[]", "Free Parking") %>
-    <%= label_tag(:free_parking) %>
+        <%= check_box_tag("features[]", "WiFi", find_feature(@room, "WiFi")) %>
+        <%= label_tag(:wifi, "WiFi") %>
 
-    <%= check_box_tag("features[]", "Paid Parking") %>
-    <%= label_tag(:paid_parking) %>
+        <%= check_box_tag("features[]", "Open Floor Plan", find_feature(@room, "Open Floor Plan")) %>
+        <%= label_tag(:open_floor_plan) %>
 
-    <%= check_box_tag("features[]", "ADA Accessible") %>
-    <%= label_tag(:ada_accessible, "ADA Accessible") %>
+        <%= check_box_tag("features[]", "Desks", find_feature(@room, "Desks")) %>
+        <%= label_tag(:desks) %>
 
-    <%= check_box_tag("features[]", "Audio/Visual Equipment") %>
-    <%= label_tag(:audio_visual_equipment, "Audio/Visual Equipment") %>
+        <%= check_box_tag("features[]", "Whiteboard", find_feature(@room, "Whiteboard")) %>
+        <%= label_tag(:whiteboard) %>
+    </div>
 
-    <%= check_box_tag("features[]", "WiFi") %>
-    <%= label_tag(:wifi, "WiFi") %>
-
-    <%= check_box_tag("features[]", "Open Floor Plan") %>
-    <%= label_tag(:open_floor_plan) %>
-
-    <%= check_box_tag("features[]", "Desks") %>
-    <%= label_tag(:desks) %>
-
-    <%= check_box_tag("features[]", "Whiteboard") %>
-    <%= label_tag(:whiteboard) %>
-</div>
-
-<br>
-<%= f.submit "Submit", class:"sign_up_button"%>
+    <br>
+    <%= f.submit "Submit", class:"sign_up_button"%>
 
 <% end %>

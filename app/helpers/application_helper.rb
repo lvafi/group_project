@@ -24,4 +24,12 @@ module ApplicationHelper
             ""
         end
     end
+
+    def find_feature room, feature
+        room.features.find_by(name: feature).present?
+    end
+    def user_friendly_range date
+        return date.strftime("%B %d %Y")
+    end
+
 end

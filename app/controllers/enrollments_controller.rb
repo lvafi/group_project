@@ -9,11 +9,13 @@ class EnrollmentsController < ApplicationController
             if !can?(:enroll, course)
                 redirect_to course
             elsif enroll.save
-                redirect_to course, notice: 'Congratulations! You are now enrolled in the course.'
+                redirect_to course, notice:  'Congratulations! You are now enrolled in the course.'
             else
-                redirect_to course, alert: 'Enrollment failed. Please try again.'
+                redirect_to course, flash[:alert]=  'Enrollment failed. Please try again.'
             end
         else
+
+
             redirect_to course, alert: "Course creators are not permitted to enroll in their own courses."
 
         end
@@ -21,11 +23,13 @@ class EnrollmentsController < ApplicationController
 
     def destroy
         enroll = Enrollment.find params[:id]
+        course = enroll.course
         if can? :destory, enroll
             enroll.destroy
-            redirect_to enroll.course, notice: 'You are no longer enrolled in the course.'
+            flash[:notice] = "You are no longer enrolled in the course."
+            redirect_to course
         else
-            redirect_to enroll.course, alert: "Enrollment deletion failed."
+            redirect_to course, flash[:alert] = "Enrollment deletion failed."
         end
     end
 

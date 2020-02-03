@@ -1,12 +1,12 @@
-    <div class="root-container background-img">
-        <section class="home-hero transparent root-item">
-            <div class="description-text-area">
-                <h1 class="user new">Ready to Book N' Roll? <br />Log In</h1>
-                <%= form_with url: session_path, local: true do |f|%>
-                <div>
-                    <%= f.label :email %><br />
-                    <%= f.email_field :email %>
-                </div>
+<div class="root-container background-img">
+    <section class="home-hero transparent root-item">
+        <div class="description-text-area">
+            <h1 class="user new">Ready to Book n'Roll? <br />Log In</h1>
+            <%= form_with url: session_path, local: true, class: "ui form" do |f|%>
+            <div>
+                <%= f.label :email %><br />
+                <%= f.email_field :email %>
+            </div>
 
                 <div>
                     <%= f.label :password %><br />
@@ -18,11 +18,10 @@
             </div>
         </section>
 
-
-    </div>
-        <section class="root-item">
-            <h3>Populer Courses</h3>
-            <%= render 'shared/courses_index', courses: Course.all.limit(8) %>
-            <h3>Populer Rooms</h3>
-            <%= render 'shared/rooms_index', rooms: Room.all.limit(8) %>
-        </section>
+</div>
+    <section class="root-item">
+        <h3>Popular Courses</h3>
+        <%= render 'shared/courses_index', courses: Course.all.limit(8) %>
+        <h3>Popular Rooms</h3>
+        <%= render 'shared/rooms_index', rooms: Room.all.limit(8) %>
+    </section>
