@@ -39,13 +39,13 @@
                     <% if @course.enrollments.find_by(user_id: current_user.id)%>
                     <% enrollment = @course.enrollments.find_by(user_id: current_user.id) %>
                         <% if enrollment.approved? %>
-                            You have been added to the course roster.<%= link_to('Unenroll', course_enrollment_path(@course.id, enrollment), method: :delete, data:{confirm:'Are you sure you want to leave this course?'}, class: "sign_up_button") %>
+                            You have been added to the course roster. <%= link_to('Unenroll', course_enrollment_path(@course.id, enrollment), method: :delete, data:{confirm:'Are you sure you want to leave this course?'}, class: "sign_up_button") %>
                         <% end %>
                         <% if enrollment.reserved? %>
                             A space on the roster has been saved for you while the course instructor reviews your enrollment.
                         <% end %>
                         <% if enrollment.rejected? %>
-                            Your enrollment has been rejected by the course instructor.<%= link_to('Unenroll', course_enrollment_path(@course.id, enrollment), method: :delete, data:{confirm:'Are you sure you want to leave this course?'}, class: "sign_up_button") %>
+                            Your enrollment has been rejected by the course instructor. <%= link_to('Unenroll', course_enrollment_path(@course.id, enrollment), method: :delete, data:{confirm:'Are you sure you want to leave this course?'}, class: "sign_up_button") %>
                         <% end %>
                     <% else %>
                         <%= link_to('Enroll', course_enrollments_path(@course.id), :method => :post, class:"sign_up_button") %>
@@ -84,7 +84,7 @@
                 <%= review.body %> <br>
                 <small>Added by <%= review.user.full_name %> <%= time_ago_in_words(review.created_at) %> ago</small><br>
                 <br>
-                Rating: <% review.rating.times { %> :star: <% }%>
+                Rating: <% review.rating.times { %> <%= image_tag "https://cdn2.iconfinder.com/data/icons/flat-game-ui-buttons-icons-1/512/10-512.png", width: "20px" %> <% }%>
                 <br>
             </li>
             <% end %>
