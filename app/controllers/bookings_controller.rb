@@ -17,8 +17,15 @@ class BookingsController < ApplicationController
         end
     end
 
+    def edit
+        @room = Room.find params[:room_id]
+        @booking = Booking.find params[:id]
+        @bookings = @room.bookings.order(created_at: :desc)
+        @courses  = current_user.courses
+    end
+
     def update
-        @booking.update params[:status]
+        @booking.update booking_params
         redirect_to room_path(@booking.room)
     end
 
