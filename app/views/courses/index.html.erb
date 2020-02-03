@@ -1,13 +1,10 @@
 <div class="container">
     <h1 class="new user">All Courses</h1><br />
-<<<<<<< HEAD
-=======
      <% flash.each do |type, message| %>
         <div>
         <%= message%>
         </div>
     <% end %>
->>>>>>> 47a46b8720d9d0a3e6f639e2f71d218d28ea4e17
     <% if user_signed_in? %>
         <a href="<%= new_course_path%>" class="sign_up_button">New Class</a>
         <hr />

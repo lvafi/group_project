@@ -1,6 +1,11 @@
     <div class="container">
 
         <h1><%= @user.full_name %></h1>
+        <button>
+            <%= link_to "Edit", edit_user_path(@user)%>
+        </button>
+        
+        
 
         <div class="user-container">
         <% if current_user.rooms.length > 0 %>
