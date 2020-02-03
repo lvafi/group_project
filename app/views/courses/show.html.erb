@@ -33,6 +33,17 @@
         </div>
     <% end %>
 
+        <div class="post-enroll">
+            <% enrollment = current_user.enrollments.find_by(course_id: @course)%>
+            <% if enrollment.present? %>
+                <%= link_to('Unenroll', course_enrollment_path(@course.id, enrollment), method: :delete, data:{confirm:'Are you sure you want stop enrolling in this course?'}, class: "sign_up_button") %>
+            <% else %>
+                <%= link_to('Enroll', course_enrollments_path(@course.id), :method => :post, class:"sign_up_button") %>
+            <% end %>
+        </div> 
+    <hr>
+
+</div>
     <div class="course-section">
         <h5>Leave a Review</h5>
 

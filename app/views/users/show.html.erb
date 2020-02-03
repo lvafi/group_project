@@ -35,20 +35,20 @@
             </div>
         <% end %>
 
-        <%# if current_user.enrolled_courses.length > 0 %>
-            <%# <div> %>
-                <%# <h2>Courses enrolled in:</h2> %>
-                <%#= render 'shared/courses_index',courses: current_user.enrolled_courses %>
-            <%# </div> %>
-        <%# else %>
-            <%# <h3> Find Courses ☞ </h3> %>
-            <div class="link_container">
-                <h3> Post Your Courses ☞ </h3>
-                <%= link_to courses_path do %>
-                    <%= image_tag "example/yoga", class: "img-links" %>
-                <% end %>
-            </div>
-        <%# end %>
-
+    <% if current_user.enrollments.length > 0 %>
+          <div>
+             <h2>Courses enrolled in:</h2>
+             <%= render 'shared/courses_index',courses: Course.joins(:enrollments).where("enrollments.user_id = ?", current_user.id) %>
         </div>
+    <% else %>
+        <h3> Find Courses ☞ </h3>
+        
+        <div class="link_container">
+            <h3> Post Your Courses ☞ </h3>
+            <%= link_to courses_path do %>
+                <%= image_tag "example/yoga", class: "img-links" %>
+            <% end %>
+        </div>
+    <% end %>
     </div>
+</div>
