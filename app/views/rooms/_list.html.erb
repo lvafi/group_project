@@ -1,27 +1,12 @@
 <% @rooms.each do |room| %>
 <div class="single_room">
-    <h5><%= link_to(room.name, room_path(room.id)) %>
+    <h5><%= link_to(room.name, room_path(room.id)) %></h5>
     <%= link_to(rooms_path(location: room.location)) do %>
-            <div class="ui blue basic small label">
-                <i class="map marker alternate icon"></i><%= room.location %>
-            </div>
+            <i class="map marker alternate icon"></i><%= room.location %>
         <% end %>
-    </h5>
     <hr />
-    <p><%= room.capacity %></p>
-
-    <% unless room.features.empty? %>
-        <p><% room.features.each do |feature| %>
-            <%= link_to(rooms_path(feature: feature.name)) do %>
-                <div class="ui blue basic small label">
-                    <%= feature.name %> 
-                    <i class="<%= featureCheck feature.name %> icon"></i>
-                </div>
-            <%end%>
-        <% end %>
-    </p>
-    <% end %>
-    <div class="room_create">Posted <%= remove_unwanted_words time_ago_in_words(room.created_at) %> ago </small>
-    </div>
+    <p>Capacity: <%= room.capacity %></p>
+    <p><%= room.description %></p>
+    
 </div>
 <% end %>
