@@ -29,9 +29,9 @@
                 
                 <% @enrollments.each do |enrollment| %>
                     <% if enrollment.reserved? %>
-                        <%= enrollment.user.full_name  %>
                         <%= link_to "Approve", course_enrollment_approving_path(@course, enrollment), method: :put, class: "sign_up_button" %>
                         <%= link_to "Reject", course_enrollment_rejecting_path(@course, enrollment), method: :put, class: "sign_up_button" %>
+                        <%= enrollment.user.full_name  %>
                     <% end %>
                     <br>
                 <% end %>
