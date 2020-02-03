@@ -26,10 +26,17 @@ class RoomsController < ApplicationController
     end
 
     def edit
-        
+
     end
 
     def update
+
+        if params[:features]
+            @room.features = params[:features].map do |feature|
+                Feature.find_or_initialize_by(name: feature)
+            end
+        end
+        
         if @room.update room_params
             flash[:notice] = 'Room updated successfully'
             redirect_to room_path(@room.id)
@@ -55,7 +62,7 @@ class RoomsController < ApplicationController
         @availabilities = @room.availabilities.order(created_at: :desc)
         @booking = Booking.new
         @bookings = @room.bookings.order(created_at: :desc)
-        @courses = current_user.courses
+        @courses = current_user.courses if current_user
     end
 
     def destroy
@@ -71,7 +78,7 @@ class RoomsController < ApplicationController
     end
     
     def room_params
-        params.require(:room).permit(:name, :address, :capacity, :price, :description, :features)
+        params.require(:room).permit(:name, :location, :address, :capacity, :price, :description, :features)
     end
 
     def new_params
@@ -82,5 +89,4 @@ class RoomsController < ApplicationController
             redirect_to root_path, alert: 'Not Authorized'
         end
     end
-
 end

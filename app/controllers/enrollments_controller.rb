@@ -6,26 +6,39 @@ class EnrollmentsController < ApplicationController
         course = Course.find params[:course_id]
         enroll = Enrollment.new user: current_user, course: course
         if course.user != current_user
-            if !can?(:enroll, course)
-                redirect_to course
-            elsif enroll.save
-                redirect_to course, notice: 'Congratulations! You are now enrolled in the course.'
+            # if !can?(:enroll, course)
+            #     redirect_to course
+            if enroll.save
+                flash[:notice] = 'Congratulations! You are now enrolled in the course.'
+                @courses = Course.all.order(created_at: :DESC)
+                render 'courses/index'
             else
-                redirect_to course, alert: 'Enrollment failed. Please try again.'
+                @courses = Course.all.order(created_at: :DESC)
+                render 'courses/index'
             end
         else
-            redirect_to course, alert: "Course creators are not permitted to enroll in their own courses."
+            redirect_to course, notice: "Course creators are not permitted to enroll in their own courses."
         end
     end
 
     def destroy
         enroll = Enrollment.find params[:id]
-        if can? :destory, enroll
+        course = enroll.course
+        # if can? :destory, enroll
+        if enroll.user == current_user
             enroll.destroy
-            redirect_to enroll.course, notice: 'You are no longer enrolled in the course.'
+            flash[:notice] = "You are no longer enrolled in the course."
+            @courses = Course.all.order(created_at: :DESC)
+            render 'courses/index'
         else
-            redirect_to enroll.course, alert: "Enrollment deletion failed."
+            flash[:alert] = "Enrollment deletion failed."
+            redirect_to course
         end
+    end
+
+    def enrolled_courses
+        @courses = current_user.enrolled_courses 
+        #render 'courses/index'
     end
 
 end
