@@ -1,11 +1,12 @@
-<div class = "root-container background-img">
-
-  <section class="home-hero transparent root-item">
-    <% if current_user.present? === false %>
-      <div class="description-text-area">
-        <h1 class="user new">Book rooms, teach,and <br /> more on Book N'Roll</h1>
-        <%= render 'users/form' %>
+<section class="home-hero transparent">
+<% if current_user.present? === false %>
+    <div class="description-text-area">
+      <div class="logo">
+        <h1 class="user new">Book, teach, enroll...</h1>
+        <%= image_tag 'logo.png', width: "100"%>
       </div>
+
+      <%= render 'users/form' %>
     <% end %>
   </section>
 </div>

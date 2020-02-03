@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root to: 'users#show'
+  root to: 'users#new'
   resources :users
   resource :session, only: [:new, :create, :destroy]
   
@@ -9,7 +9,10 @@ Rails.application.routes.draw do
   end
 
   resources :rooms do
-    resources :bookings
+    resources :bookings do
+      put :approving
+      put :rejecting 
+    end
   end
   
 end
