@@ -23,6 +23,7 @@ class Booking < ApplicationRecord
   
   validates :start_time, :end_time, presence: true  
   validate :end_time_after_start_time
+  validate :available
 
   private
 
@@ -31,6 +32,22 @@ class Booking < ApplicationRecord
       if end_time < start_time      
         errors.add(:end_time, "must be after the start time")    
       end 
+  end
+
+  def available
+    conflicts = Booking.where(room_id: room_id)
+      .where("start_time < ? AND end_time > ?", start_time, start_time)
+      .or(Booking.where("start_time < ? AND end_time > ?", end_time, end_time))
+      .or(Booking.where("start_time > ? AND end_time < ?", start_time, end_time))
+
+    # puts "HERE IS A LIST OF OUR CONFLICTS"
+    # p conflicts
+    # puts "number of conflicts: " + conflicts.length.to_s
+    # puts conflicts.exists?
+    # puts !conflicts.exists?
+    if conflicts.exists?
+      errors.add(:start_time, "Unavailable Time Selected. Please Try Other Time")
+    end
   end
 
 end
