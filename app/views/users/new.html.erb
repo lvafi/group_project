@@ -1,7 +1,11 @@
 <section class="home-hero transparent">
 <% if current_user.present? === false %>
     <div class="description-text-area">
-      <h1 class="user new">Book rooms, teach,and <br /> more on Book N'Roll</h1>
+      <div class="logo">
+        <h1 class="user new">Book, teach, enroll...</h1>
+        <%= image_tag 'logo.png', width: "100"%>
+      </div>
+
       <%= render 'users/form' %>
 
     </div>
@@ -9,9 +13,9 @@
     <% else %>
 
     <!-- <h1>Made account / Logged in / Root Page</h1>
-    <p>Populer Courses</p>
+    <p>Popular Courses</p>
     <%= render 'shared/courses_index', courses: Course.all.limit(8) %>
-    <p>Populer Rooms</p>
+    <p>Popular Rooms</p>
     <%= render 'shared/rooms_index', rooms: Room.all.limit(8) %>
  -->
 
