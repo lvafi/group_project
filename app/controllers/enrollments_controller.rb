@@ -36,6 +36,17 @@ class EnrollmentsController < ApplicationController
         end
     end
 
+    def approving
+        @enrollment = Enrollment.find(params[:enrollment_id])
+        @enrollment.approving!
+        redirect_to course_path(@enrollment.course)
+    end
+    def rejecting
+        @enrollment = Enrollment.find(params[:enrollment_id])
+        @enrollment.rejecting!
+        redirect_to course_path(@enrollment.course)
+    end
+
     def enrolled_courses
         @courses = current_user.enrolled_courses 
         #render 'courses/index'

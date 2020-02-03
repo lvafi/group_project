@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_02_034648) do
+ActiveRecord::Schema.define(version: 2020_02_03_110825) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(version: 2020_02_02_034648) do
     t.bigint "course_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "aasm_state"
     t.index ["course_id"], name: "index_enrollments_on_course_id"
     t.index ["user_id"], name: "index_enrollments_on_user_id"
   end

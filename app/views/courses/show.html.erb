@@ -1,5 +1,4 @@
 <div class="container">
-    
     <div class="course-section">
         <h1 class="new user"><%= @course.title %></h1>
         <% if can? :crud, @course %>
@@ -8,63 +7,60 @@
                 <%= link_to("Delete", course_path(@course), method: :delete, data:{confirm:'Are you sure?'}, class: "sign_up_button") %>
             </div>
         <% end %>
-
         <br><hr><br>
-
         <p><strong>Instructor:</strong> <%= @course.user.full_name %></p>
         <p><strong>Description:</strong> <%= @course.description %></p>
         <p><strong>Price:</strong> $<%= @course.price %></p>
         <p><strong>Duration:</strong>
-        <%= user_friendly_range @course.range_start_date %> - 
+        <%= user_friendly_range @course.range_start_date %> -
         <%= user_friendly_range @course.range_end_date %></p>
         <br />
         <p>Posted by <%= time_ago_in_words(@course.created_at) %> ago</p>
     </div>
-
-    <% if @course.user == current_user %>
+    <% if can?(:crud, @course) %>
         <div class="course-section">
             <h5>Roster</h5>
             <ol>
                 <% @enrollments.each do |enrollment| %>
-                    <li><%= enrollment.user.full_name %></li>
+                        <% if enrollment.reserved? %>
+                            <%= enrollment.user.full_name  %><br>
+                                <%= link_to "Approve", course_enrollment_approving_path(@course, enrollment), method: :put, class: "sign_up_button" %>
+                                <%= link_to "Reject", course_enrollment_rejecting_path(@course, enrollment), method: :put, class: "sign_up_button" %>
+                        <% end %>
+                    <% if enrollment.approved? %>
+                        <li><%= enrollment.user.full_name %></li>
+                    <% end %>
                 <% end %>
             </ol>
         </div>
     <% end %>
-
         <div class="post-enroll">
-<<<<<<< HEAD
-        <% if current_user.present? && @course.user != current_user %>
-            <% if current_user.enrollments.present? %>
-                <% enrollment = current_user.enrollments.find_by(course_id: @course)%>
-                <%= link_to('Unenroll', course_enrollment_path(@course.id, enrollment), method: :delete, data:{confirm:'Are you sure you want to leave this course?'}, class: "sign_up_button") %>
-            <% else %>
-                <%= link_to('Enroll', course_enrollment_path(@course.id), :method => :post, class:"sign_up_button") %>
-=======
             <% if current_user.present? && @course.user != current_user%>
-                    <% if @course.enrollments.find_by(user_id: current_user.id) %>
-                        <%= link_to('Unenroll', course_enrollments_path(@course.id, @enrollment), method: :delete, data:{confirm:'Are you sure you want to leave this course?'}, class: "sign_up_button") %>
+                    <% if @course.enrollments.find_by(user_id: current_user.id)%>
+                    <% enrollment = @course.enrollments.find_by(user_id: current_user.id) %>
+                        <% if enrollment.approved? %>
+                            You have been added to the course roster.<%= link_to('Unenroll', course_enrollment_path(@course.id, enrollment), method: :delete, data:{confirm:'Are you sure you want to leave this course?'}, class: "sign_up_button") %>
+                        <% end %>
+                        <% if enrollment.reserved? %>
+                            A space on the roster has been saved for you while the course instructor reviews your enrollment.
+                        <% end %>
+                        <% if enrollment.rejected? %>
+                            Your enrollment has been rejected by the course instructor.<%= link_to('Unenroll', course_enrollment_path(@course.id, enrollment), method: :delete, data:{confirm:'Are you sure you want to leave this course?'}, class: "sign_up_button") %>
+                        <% end %>
                     <% else %>
                         <%= link_to('Enroll', course_enrollments_path(@course.id), :method => :post, class:"sign_up_button") %>
                     <% end %>
-                <hr>
->>>>>>> 16226eeee94c8f8c99c13932e5187569e7296154
             <% end %>
-            <hr>
-        <% end %>
-        </div> 
-    
-</div>
+        </div>
+
     <div class="course-section">
         <h5>Leave a Review</h5>
-
         <%= form_with(model: [@course, @review], local: true, class: "ui form") do |f| %>
             <% if @review.errors.present? %>
             <p class="form-errors">
                 <%= @review.errors.full_messages.join(", ") %>
             </p>
             <% end %>
-
             <div class="field">
                 <%= f.text_area(
                     :body,
@@ -77,30 +73,22 @@
                 <%= f.label :rating, "How many stars would you give this class?" %>
                 <%= f.select :rating, [1, 2, 3, 4, 5] %>
             </div>
-
             <%= f.submit "Review" %>
-
         <% end %>
     </div>
-
     <div class="course-section">
         <h5>Reviews (<%= @course.reviews.count %>)</h5>
-
         <ul class="review-list">
             <% @reviews.each do |review| %>
-
             <li>
                 <%= review.body %> <br>
                 <small>Added by <%= review.user.full_name %> <%= time_ago_in_words(review.created_at) %> ago</small><br>
                 <br>
-                Rating: <% review.rating.times { %> ⭐ <% }%>
+                Rating: <% review.rating.times { %> :star: <% }%>
                 <br>
             </li>
-
             <% end %>
-
-        
         </ul>
     </div>
-
+</div>
 </div>
