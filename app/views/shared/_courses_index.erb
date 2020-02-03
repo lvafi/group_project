@@ -1,5 +1,7 @@
     <div class="popular-container">
         <% courses.each do |course| %>
+        <% course.bookings.each do |booking| %>
+        <% if booking.approved? %>
         <div class="popular-item">
             <% img = ["https://i.ibb.co/qpR25vS/yoga.jpg", "https://i.ibb.co/YZTpbr5/courses.png"].sample %>
             <%= image_tag img, class:"img-courses" %>
@@ -8,11 +10,14 @@
             <p><strong>Price:</strong> $<%= course.price %></p>
             <p><strong>Duration:</strong> <%= user_friendly_range course.range_start_date %> to <%= user_friendly_range course.range_end_date %></p>
             <% if user_signed_in? %>
-                <% enrollment = current_user.enrollments.find_by(course_id: course) %>
-                <% if enrollment.present? %>
-                    <p style="font-weight:bold">You are currently enrolled in this course.</p>
+                <% current_user.enrollments.each do |enrollment|%>
+                    <% if enrollment.approved? %>
+                        <p style="font-weight:bold">You are currently enrolled in this course.</p>
+                    <% end %>
                 <% end %>
             <% end %>
         </div>
+        <% end %>
+        <% end %>
         <% end %>
     </div>
