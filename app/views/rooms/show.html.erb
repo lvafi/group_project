@@ -95,10 +95,11 @@
   <h2> Pending Bookings </h2>
     <% @bookings.each do |booking| %>
       <% if booking.reserved? %>
-        <%= booking.course.title  %><br><br>
         <%= link_to "Approve", room_booking_approving_path(@room, booking), method: :put, class: "sign_up_button" %>
         <%= link_to "Reject", room_booking_rejecting_path(@room, booking), method: :put, class: "sign_up_button" %>
+        <%= booking.course.title  %>
       <% end %>
+      <br>
     <% end %>
   <% end %>
 
