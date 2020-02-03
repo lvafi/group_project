@@ -21,4 +21,15 @@
 }
 .popular-item{
     border: 1px solid black ;
+    padding: 1em;
+}
+.img-rooms, .img-courses{
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    width: 100%;
+}
+.root-item>h3{
+    padding: 1em;
+    margin: 0;
 }

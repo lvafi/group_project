@@ -1,7 +1,9 @@
 <div class="popular-container">
     <% courses.each do |course| %>
     <div class="popular-item">
-        <h2><%= link_to(course.title,course_path(course.id)) %></h2>
+        <% img = "example/" + ["yoga", "courses"].sample %>
+        <%= image_tag img, class:"img-courses" %>
+        <h5><%= link_to(course.title,course_path(course.id)) %></h5>
         <p><%= course.description %></p>
         <p><%= course.price %></p>
         <p><%= course.range_start_date %></p>

@@ -1,6 +1,8 @@
 <div class="popular-container">
 <% rooms.each do |room| %>
 <div class="single_room ">
+    <% img = "example/" + ["room1", "room2", "room3"].sample %>
+    <%= image_tag img, class:"img-rooms" %>
     <h5><%= link_to(room.name, room_path(room.id)) %></h5>
     <hr />
     <p><%= link_to(room.location, rooms_path(location: room.location)) %>
