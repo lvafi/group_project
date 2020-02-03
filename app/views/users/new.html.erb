@@ -12,8 +12,8 @@
 
 
 <section class = "root-item">
-  <h3>Populer Courses</h3>
+  <h3>Popular Courses</h3>
     <%= render 'shared/courses_index', courses: Course.all.limit(8) %>
-  <h3>Populer Rooms</h3>
+  <h3>Popular Rooms</h3>
     <%= render 'shared/rooms_index', rooms: Room.all.limit(8) %>
 </section>
