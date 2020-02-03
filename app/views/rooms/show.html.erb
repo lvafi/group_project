@@ -13,8 +13,8 @@
 
     <% if can? :crud, @room %>
       <div class="post-buttons">
-        <%= link_to('Edit Room', edit_room_path(@room.id), class: "") %>
-        <%= link_to("Delete Room", room_path(@room), method: :delete, data:{confirm:'Are you sure?'}, class: "sign_up_button") %>
+        <%= link_to('Edit', edit_room_path(@room.id)) %>
+        <%= link_to("Delete", room_path(@room), method: :delete, data:{confirm:'Are you sure?'}, class: "sign_up_button") %>
       </div>
     <% end %>
 

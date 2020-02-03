@@ -30,7 +30,7 @@ class Booking < ApplicationRecord
   def end_time_after_start_time    
     return if end_time.blank? || start_time.blank?
       if end_time < start_time      
-        errors.add(:end_time, "must be after the start time")    
+        errors.add(:end_time, "Your end time must be after the start time.")    
       end 
   end
 
@@ -46,7 +46,7 @@ class Booking < ApplicationRecord
     # puts conflicts.exists?
     # puts !conflicts.exists?
     if conflicts.exists?
-      errors.add(:start_time, "Unavailable Time Selected. Please Try Other Time")
+      errors.add(:start_time, "The time you have selected is unavailable. Please select another time slot.")
     end
   end
 
