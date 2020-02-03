@@ -1,7 +1,7 @@
 <div class="popular-container">
     <% courses.each do |course| %>
             <div class="popular-item">
-                <% img = ["https://i.ibb.co/qpR25vS/yoga.jpg", "https://i.ibb.co/YZTpbr5/courses.png"].sample %>
+                <% img = ['https://www.verywellmind.com/thmb/jbJ5PlWXRyO6NW_TbKuYqELvpFI=/3866x2580/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-470803747-56a8d18d5f9b58b7d0f56bd0.jpg','https://i.ytimg.com/vi/hEsofW-h6zA/maxresdefault.jpg','https://bostonglobe-prod.cdn.arcpublishing.com/resizer/b_oj-WJoJ-zmsjBx0tv6fkTyDOg=/1440x0/arc-anglerfish-arc2-prod-bostonglobe.s3.amazonaws.com/public/K22YAGGPFAI6TNAROU6WI4YVUA.jpg','https://i.ytimg.com/vi/l7T1CiARqxM/maxresdefault.jpg','https://i.ytimg.com/vi/VB7qRpQBR4U/maxresdefault.jpg','https://www.myjewishlearning.com/wp-content/uploads/2008/10/magic-1424x900.jpg','https://www.hyperlinkinfosystem.com/assets/uploads/blog/1547765076.jpg'].sample %>
                 <%= image_tag img, class:"img-courses" %>
                 <h5><%= link_to(course.title,course_path(course.id)) %></h5>
                 <p><strong>Description:</strong> <%= course.description.truncate(30, separator: " ") %></p>
