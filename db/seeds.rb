@@ -9,11 +9,11 @@
 
 PASSWORD = "supersecret" 
 
+Booking.delete_all
 Course.delete_all
 Search.delete_all
 Room.delete_all
 Availability.delete_all
-Booking.delete_all
 Enrollment.delete_all
 Feature.delete_all
 User.delete_all
@@ -104,7 +104,7 @@ rooms = Room.all
     b = Booking.create(
         course_id: courses.map{|course|course.id}.sample,
         room_id: rooms.map{|room|room.id}.sample,
-        status: false,
+        aasm_state: "reserved",
         start_time: start_date,
         end_time: end_date,
         created_at: random_date,
