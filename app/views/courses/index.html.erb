@@ -1,12 +1,18 @@
 <div class="container">
     <h1 class="new user">All Courses</h1><br />
+<<<<<<< HEAD
+=======
+     <% flash.each do |type, message| %>
+        <div>
+        <%= message%>
+        </div>
+    <% end %>
+>>>>>>> 47a46b8720d9d0a3e6f639e2f71d218d28ea4e17
     <% if user_signed_in? %>
         <a href="<%= new_course_path%>" class="sign_up_button">New Class</a>
         <hr />
-
         <div class="room_list">
         <% @courses.each do |course| %>
-
             <div class="single_room">           
                 <h2 class="new user"><%= link_to(course.title.truncate(30, separator: " "),course_path(course.id)) %></h2>
                 <p style="font-weight:bold">Description</p>
@@ -30,7 +36,6 @@
         <% end %>
         </div>
     <% else %> <!-- user is not signed in -->
-
         <div class="single_room">
             <% @courses.each do |course| %>
                 <div class="single_room">           
@@ -42,6 +47,5 @@
                 </div>
             <% end %>
         </div>
-
     <% end %>
 </div>

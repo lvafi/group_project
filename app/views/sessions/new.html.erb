@@ -12,9 +12,10 @@
                     <%= f.label :password %><br />
                     <%= f.password_field :password %>
                 </div>
-
+                <br>
                 <%= f.submit "Sign In", class:"sign_up_button" %>
                 <% end %>
+                <small>Don't have an account? <small><%= link_to "Sign up for an account.", new_user_path %></small></small>
             </div>
         </section>
 
