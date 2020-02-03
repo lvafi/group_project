@@ -1,32 +1,27 @@
+
 <div class="popular-container">
     <% courses.each do |course| %>
-            <div class="popular-item">
-                <% img = ['https://www.verywellmind.com/thmb/jbJ5PlWXRyO6NW_TbKuYqELvpFI=/3866x2580/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-470803747-56a8d18d5f9b58b7d0f56bd0.jpg','https://i.ytimg.com/vi/hEsofW-h6zA/maxresdefault.jpg','https://bostonglobe-prod.cdn.arcpublishing.com/resizer/b_oj-WJoJ-zmsjBx0tv6fkTyDOg=/1440x0/arc-anglerfish-arc2-prod-bostonglobe.s3.amazonaws.com/public/K22YAGGPFAI6TNAROU6WI4YVUA.jpg','https://i.ytimg.com/vi/l7T1CiARqxM/maxresdefault.jpg','https://i.ytimg.com/vi/VB7qRpQBR4U/maxresdefault.jpg','https://www.myjewishlearning.com/wp-content/uploads/2008/10/magic-1424x900.jpg','https://www.hyperlinkinfosystem.com/assets/uploads/blog/1547765076.jpg'].sample %>
-                <%#img = ["https://i.ibb.co/qpR25vS/yoga.jpg", "https://i.ibb.co/YZTpbr5/courses.png"].sample %>
-                <%= image_tag img, class:"img-courses" %>
-                <h5><%= link_to(course.title,course_path(course.id)) %></h5>
-                <p><strong>Description:</strong> <%= course.description.truncate(30, separator: " ") %></p>
-                <p><strong>Price:</strong> $<%= course.price %></p>
-                <p><strong>Duration:</strong> <%= user_friendly_range course.range_start_date %> to <%= user_friendly_range course.range_end_date %></p>
-            
-                <% if user_signed_in? %>
-                    <% course.bookings.each do |booking| %>
-                        <% if booking.course.user == current_user && booking.aasm_state == "approved" %>
-                            <p style="font-weight:bold; color:darkred;">Your booking has been confirmed for this course.</p>
-                        <% elsif booking.course.user == current_user && booking.aasm_state == "reserved" %>
-                            <p style="font-weight:bold; color:darkred;">Your booking is pending for this course.</p>
-                        <% end %>
-                    <% end %>
-
-                    <% course.enrollments.each do |enrollment| %>
-                        <% if enrollment.user == current_user && enrollment.aasm_state == "approved" %>
-                            <p style="font-weight:bold; color:darkred;">You are currently enrolled in this course.</p>
-                        <% elsif enrollment.user == current_user && enrollment.aasm_state == "reserved" %>
-                            <p style="font-weight:bold; color:darkred;">Your enrollment status for this course is pending.</p>
-                        <% end %>
-                    <% end %>
+    <% course.bookings.each do |booking| %>
+    <% if booking.approved? %>
+    <div class="popular-item">
+        <% img = ['https://www.verywellmind.com/thmb/jbJ5PlWXRyO6NW_TbKuYqELvpFI=/3866x2580/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-470803747-56a8d18d5f9b58b7d0f56bd0.jpg','https://i.ytimg.com/vi/hEsofW-h6zA/maxresdefault.jpg','https://bostonglobe-prod.cdn.arcpublishing.com/resizer/b_oj-WJoJ-zmsjBx0tv6fkTyDOg=/1440x0/arc-anglerfish-arc2-prod-bostonglobe.s3.amazonaws.com/public/K22YAGGPFAI6TNAROU6WI4YVUA.jpg','https://i.ytimg.com/vi/l7T1CiARqxM/maxresdefault.jpg','https://i.ytimg.com/vi/VB7qRpQBR4U/maxresdefault.jpg','https://www.myjewishlearning.com/wp-content/uploads/2008/10/magic-1424x900.jpg','https://www.hyperlinkinfosystem.com/assets/uploads/blog/1547765076.jpg'].sample %>
+        <%# img = ["https://i.ibb.co/qpR25vS/yoga.jpg", "https://i.ibb.co/YZTpbr5/courses.png"].sample %>
+        <%= image_tag img, class:"img-courses" %>
+        <h5><%= link_to(course.title,course_path(course.id)) %></h5>
+        <p><strong>Description:</strong> <%= course.description.truncate(30, separator: " ") %></p>
+        <p><strong>Price:</strong> $<%= course.price %></p>
+        <p><strong>Duration:</strong> <%= user_friendly_range course.range_start_date %> to <%= user_friendly_range course.range_end_date %></p>
+        <% if user_signed_in? %>
+            <% course.enrollments.each do |enrollment| %>
+                <% if enrollment.user == current_user && enrollment.aasm_state == "approved" %>
+                    <p style="font-weight:bold">You are currently enrolled in this course.</p>
+                <% elsif enrollment.user == current_user && enrollment.aasm_state == "reserved" %>
+                    <p style="font-weight:bold">Your enrollment status is pending.</p>
                 <% end %>
-            </div>
-    
+            <% end %>
+        <% end %>
+    </div>
+    <% end %>
+    <% end %>
     <% end %>
 </div>

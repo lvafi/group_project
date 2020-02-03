@@ -11,6 +11,12 @@
         <p><strong>Instructor:</strong> <%= @course.user.full_name %></p>
         <p><strong>Description:</strong> <%= @course.description %></p>
         <p><strong>Price:</strong> $<%= @course.price %></p>
+        <% @course.bookings.each do |booking| %>
+        <% if booking.approved? %>
+        <p><strong>Location:</strong> <%= booking.room.address %></p>
+        <p><strong>Location:</strong> <%= booking.room.capacity %></p>
+        <% end %>
+        <% end %>
         <p><strong>Duration:</strong>
         <%= user_friendly_range @course.range_start_date %> -
         <%= user_friendly_range @course.range_end_date %></p>
