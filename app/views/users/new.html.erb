@@ -13,11 +13,15 @@
     <% end %>
   </section>
 </div>
-
+<br><br><br>
 <section class = "root-item">
+<div class="popular-title">
   <h3>Popular Courses</h3>
+</div>
     <%= render 'shared/courses_index', courses: Course.all.limit(8) %>
-  <hr>
+
+<div class="popular-title">
   <h3>Popular Rooms</h3>
+</div>
     <%= render 'shared/rooms_index', rooms: Room.all.limit(8) %>
 </section>
