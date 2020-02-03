@@ -11,7 +11,7 @@ class EnrollmentsController < ApplicationController
             if enroll.save
                 flash[:notice] = 'Congratulations! You are now enrolled in the course.'
                 @courses = Course.all.order(created_at: :DESC)
-                render 'courses/index'
+                redirect_to course_path(course)
             else
                 @courses = Course.all.order(created_at: :DESC)
                 render 'courses/index'
@@ -29,7 +29,7 @@ class EnrollmentsController < ApplicationController
             enroll.destroy
             flash[:notice] = "You are no longer enrolled in the course."
             @courses = Course.all.order(created_at: :DESC)
-            render 'courses/index'
+            redirect_to course_path(course)
         else
             flash[:alert] = "Enrollment deletion failed."
             redirect_to course

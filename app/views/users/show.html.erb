@@ -1,8 +1,9 @@
-    <div class="container">
+<div class="container">
 
-        <h1><%= @user.full_name %></h1>
+    <h1><%= @user.full_name %></h1>
+    <button class="sign_up_button"><%= link_to "Edit Profile", edit_user_path(@user) %></button>
 
-        <div class="user-container">
+    <div class="user-container">
         <% if current_user.rooms.length > 0 %>
             <div>
                 <h2>Your Rooms</h2>
@@ -10,38 +11,38 @@
             </div>
         <% else %>
             <div class="link_container">
-                <h3> Post Your Room ☞ </h3>
+                <h3>Add a room ☞</h3>
                 <div>
-                <%= link_to rooms_path do %>
+                <%= link_to new_room_path do %>
                     <%= image_tag "example/room3", class: "img-links" %>
                 <% end %>
                 </div>
-            </div>
         <% end %>
+    </div>
 
-        <% if current_user.courses.length > 0 %>
+    <% if current_user.courses.length > 0 %>
+        <div>
+            <h2>Your courses:</h2>
+            <%= render 'shared/courses_index',courses: current_user.courses %>
+        </div>
+    <% else %>
+        <div class="link_container">
+            <h3> Add a course ☞ </h3>
             <div>
-                <h2>Courses teaching:</h2>
-                <%= render 'shared/courses_index',courses: current_user.courses %>
+            <%= link_to new_course_path do %>
+                <%= image_tag "example/yoga", class: "img-links" %>
+            <% end %>
             </div>
-        <% else %>
-            <div class="link_container">
-                <h3> Post Your Courses ☞ </h3>
-                <div>
-                <%= link_to courses_path do %>
-                    <%= image_tag "example/yoga", class: "img-links" %>
-                <% end %>
-                </div>
-            </div>
-        <% end %>
+        </div>
+    <% end %>
 
     <% if current_user.enrollments.length > 0 %>
-          <div>
-             <h2>Courses enrolled in:</h2>
+        <div>
+             <h2>Courses you are enrolled in:</h2>
              <%= render 'shared/courses_index',courses: Course.joins(:enrollments).where("enrollments.user_id = ?", current_user.id) %>
         </div>
     <% else %>
-        <h3> Find Courses ☞ </h3>
+        <h3> Shop for a course ☞ </h3>
         
         <div class="link_container">
             <h3> Post Your Courses ☞ </h3>
@@ -50,5 +51,6 @@
             <% end %>
         </div>
     <% end %>
+
     </div>
 </div>

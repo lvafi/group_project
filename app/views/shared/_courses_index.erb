@@ -6,8 +6,8 @@
             <h5><%= link_to(course.title,course_path(course.id)) %></h5>
             <p><%= course.description %></p>
             <p><%= course.price %></p>
-            <p><%= course.range_start_date %></p>
-            <p><%= course.range_end_date %></p>
+            <p>Start: <%= user_friendly_range course.range_start_date %></p>
+            <p>End: <%= user_friendly_range course.range_end_date %></p>
         </div>
         <% end %>
     </div>
