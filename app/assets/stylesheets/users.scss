@@ -223,27 +223,27 @@ label {
   background-color: white;
 }
 
-  .item {
-    color: white !important;
-  }
+.item {
+  color: white !important;
+}
 
-  div.login-menu.item {
-    display: flex;
-    justify-content: flex-end;
-  }
+div.login-menu.item {
+  display: flex;
+  justify-content: flex-end;
+}
 
-  .container {
-    margin: 10% 10%;
-    background-color: white;
-    padding: 2em;
-  }
+.container {
+  margin: 10% 10%;
+  background-color: white;
+  padding: 2em;
+}
 
-  .locations-container {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    border: 1px solid black;
-  }
+.locations-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  border: 1px solid black;
+}
 
 .booking_room {
   display: flex;
