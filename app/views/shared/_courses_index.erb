@@ -1,21 +1,31 @@
-    <div class="popular-container">
-        <% courses.each do |course| %>
-        <div class="popular-item">
-            <% img = ["https://i.ibb.co/qpR25vS/yoga.jpg", "https://i.ibb.co/YZTpbr5/courses.png"].sample %>
-            <%= image_tag img, class:"img-courses" %>
-            <h5><%= link_to(course.title,course_path(course.id)) %></h5>
-            <p><strong>Description:</strong> <%= course.description.truncate(30, separator: " ") %></p>
-            <p><strong>Price:</strong> $<%= course.price %></p>
-            <p><strong>Duration:</strong> <%= user_friendly_range course.range_start_date %> to <%= user_friendly_range course.range_end_date %></p>
-            <% if user_signed_in? %>
-                <% course.enrollments.each do |enrollment| %>
-                    <% if enrollment.user == current_user && enrollment.aasm_state == "approved" %>
-                        <p style="font-weight:bold">You are currently enrolled in this course.</p>
-                    <% elsif enrollment.user == current_user && enrollment.aasm_state == "reserved" %>
-                        <p style="font-weight:bold">Your enrollment status is pending.</p>
+<div class="popular-container">
+    <% courses.each do |course| %>
+            <div class="popular-item">
+                <% img = ["https://i.ibb.co/qpR25vS/yoga.jpg", "https://i.ibb.co/YZTpbr5/courses.png"].sample %>
+                <%= image_tag img, class:"img-courses" %>
+                <h5><%= link_to(course.title,course_path(course.id)) %></h5>
+                <p><strong>Description:</strong> <%= course.description.truncate(30, separator: " ") %></p>
+                <p><strong>Price:</strong> $<%= course.price %></p>
+                <p><strong>Duration:</strong> <%= user_friendly_range course.range_start_date %> to <%= user_friendly_range course.range_end_date %></p>
+            
+                <% if user_signed_in? %>
+                    <% course.bookings.each do |booking| %>
+                        <% if booking.course.user == current_user && booking.aasm_state == "approved" %>
+                            <p style="font-weight:bold; color:darkred;">Your booking has been confirmed for this course.</p>
+                        <% elsif booking.course.user == current_user && booking.aasm_state == "reserved" %>
+                            <p style="font-weight:bold; color:darkred;">Your booking is pending for this course.</p>
+                        <% end %>
+                    <% end %>
+
+                    <% course.enrollments.each do |enrollment| %>
+                        <% if enrollment.user == current_user && enrollment.aasm_state == "approved" %>
+                            <p style="font-weight:bold; color:darkred;">You are currently enrolled in this course.</p>
+                        <% elsif enrollment.user == current_user && enrollment.aasm_state == "reserved" %>
+                            <p style="font-weight:bold; color:darkred;">Your enrollment status for this course is pending.</p>
+                        <% end %>
                     <% end %>
                 <% end %>
-            <% end %>
-        </div>
-        <% end %>
-    </div>
+            </div>
+    
+    <% end %>
+</div>
