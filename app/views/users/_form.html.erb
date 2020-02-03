@@ -33,8 +33,13 @@
 
     <br>
     <div>
-    <%= f.submit :Submit, class:"sign_up_button", style:"width:100%"%>
+
+    <% if !user_signed_in? %>
+    <%= f.submit "Create Account", class:"sign_up_button", style:"width:100%"%>
     <small>Already have an account? <small><%= link_to "Log in here.", new_session_path %></small></small>
+    <% else %>
+    <%= f.submit "Update Account", class:"sign_up_button", style:"width:100%"%>
+    <% end %>
     </div>
 
         <%end%>

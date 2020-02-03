@@ -4,10 +4,11 @@
     <% if current_user.present? === false %>
       <div class="description-text-area">
         <div class="logo">
-          <h1 class="user new">Book, teach, enroll... <br />Book n'Roll</h1>
+          <h1 class="user new">Book, teach, enroll...</h1>
           <%= image_tag "logo.png", width: "100px"%>
         </div>
         <%= render 'users/form' %>
+        
       </div>
     <% end %>
   </section>
