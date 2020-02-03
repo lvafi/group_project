@@ -52,7 +52,7 @@
                     <% end %>
             <% end %>
         </div>
-
+<br>
     <div class="course-section">
         <h5>Leave a Review</h5>
         <%= form_with(model: [@course, @review], local: true, class: "ui form") do |f| %>
@@ -73,7 +73,7 @@
                 <%= f.label :rating, "How many stars would you give this class?" %>
                 <%= f.select :rating, [1, 2, 3, 4, 5] %>
             </div>
-            <%= f.submit "Review" %>
+            <%= f.submit "Review", class: "sign_up_button" %>
         <% end %>
     </div>
     <div class="course-section">
